@@ -1,0 +1,181 @@
+age_group,gender,year,estimate
+1 year,N,2017,1303
+2 to 3 years,N,2017,1367
+4 to 5 years,N,2017,1409
+6 to 8 years,N,2017,1992
+9 to 11 years,N,2017,2145
+12 to 13 years,M,2017,2463
+14 to 18 years,M,2017,2502
+19 to 50 years,M,2017,2487
+51 to 70 years,M,2017,2347
+71 plus years,M,2017,2317
+12 to 13 years,F,2017,2122
+14 to 18 years,F,2017,2118
+19 to 50 years,F,2017,2154
+51 to 70 years,F,2017,2097
+71 plus years,F,2017,2073
+1 year,N,2016,1297
+2 to 3 years,N,2016,1359
+4 to 5 years,N,2016,1401
+6 to 8 years,N,2016,1989
+9 to 11 years,N,2016,2132
+12 to 13 years,M,2016,2455
+14 to 18 years,M,2016,2495
+19 to 50 years,M,2016,2475
+51 to 70 years,M,2016,2334
+71 plus years,M,2016,2307
+12 to 13 years,F,2016,2112
+14 to 18 years,F,2016,2114
+19 to 50 years,F,2016,2142
+51 to 70 years,F,2016,2087
+71 plus years,F,2016,2060
+1 year,N,2015,1310
+2 to 3 years,N,2015,1368
+4 to 5 years,N,2015,1412
+6 to 8 years,N,2015,2029
+9 to 11 years,N,2015,2143
+12 to 13 years,M,2015,2478
+14 to 18 years,M,2015,2514
+19 to 50 years,M,2015,2500
+51 to 70 years,M,2015,2355
+71 plus years,M,2015,2341
+12 to 13 years,F,2015,2128
+14 to 18 years,F,2015,2136
+19 to 50 years,F,2015,2167
+51 to 70 years,F,2015,2110
+71 plus years,F,2015,2093
+1 year,N,2014,1318
+2 to 3 years,N,2014,1383
+4 to 5 years,N,2014,1428
+6 to 8 years,N,2014,2009
+9 to 11 years,N,2014,2172
+12 to 13 years,M,2014,2481
+14 to 18 years,M,2014,2519
+19 to 50 years,M,2014,2510
+51 to 70 years,M,2014,2371
+71 plus years,M,2014,2354
+12 to 13 years,F,2014,2145
+14 to 18 years,F,2014,2142
+19 to 50 years,F,2014,2179
+51 to 70 years,F,2014,2126
+71 plus years,F,2014,2108
+1 year,N,2013,1289
+2 to 3 years,N,2013,1338
+4 to 5 years,N,2013,1388
+6 to 8 years,N,2013,1930
+9 to 11 years,N,2013,2102
+12 to 13 years,M,2013,2421
+14 to 18 years,M,2013,2466
+19 to 50 years,M,2013,2446
+51 to 70 years,M,2013,2310
+71 plus years,M,2013,2294
+12 to 13 years,F,2013,2089
+14 to 18 years,F,2013,2093
+19 to 50 years,F,2013,2121
+51 to 70 years,F,2013,2075
+71 plus years,F,2013,2060
+1 year,N,2012,1268
+2 to 3 years,N,2012,1317
+4 to 5 years,N,2012,1371
+6 to 8 years,N,2012,1910
+9 to 11 years,N,2012,2079
+12 to 13 years,M,2012,2393
+14 to 18 years,M,2012,2444
+19 to 50 years,M,2012,2419
+51 to 70 years,M,2012,2283
+71 plus years,M,2012,2274
+12 to 13 years,F,2012,2067
+14 to 18 years,F,2012,2075
+19 to 50 years,F,2012,2099
+51 to 70 years,F,2012,2053
+71 plus years,F,2012,2044
+1 year,N,2011,1255
+2 to 3 years,N,2011,1300
+4 to 5 years,N,2011,1349
+6 to 8 years,N,2011,1848
+9 to 11 years,N,2011,2036
+12 to 13 years,M,2011,2334
+14 to 18 years,M,2011,2396
+19 to 50 years,M,2011,2365
+51 to 70 years,M,2011,2244
+71 plus years,M,2011,2220
+12 to 13 years,F,2011,2025
+14 to 18 years,F,2011,2024
+19 to 50 years,F,2011,2055
+51 to 70 years,F,2011,2008
+71 plus years,F,2011,1991
+1 year,N,2010,1186
+2 to 3 years,N,2010,1220
+4 to 5 years,N,2010,1268
+6 to 8 years,N,2010,1748
+9 to 11 years,N,2010,1915
+12 to 13 years,M,2010,2207
+14 to 18 years,M,2010,2264
+19 to 50 years,M,2010,2232
+51 to 70 years,M,2010,2111
+71 plus years,M,2010,2091
+12 to 13 years,F,2010,1905
+14 to 18 years,F,2010,1914
+19 to 50 years,F,2010,1935
+51 to 70 years,F,2010,1890
+71 plus years,F,2010,1873
+1 year,N,2009,1182
+2 to 3 years,N,2009,1218
+4 to 5 years,N,2009,1272
+6 to 8 years,N,2009,1731
+9 to 11 years,N,2009,1930
+12 to 13 years,M,2009,2201
+14 to 18 years,M,2009,2279
+19 to 50 years,M,2009,2237
+51 to 70 years,M,2009,2124
+71 plus years,M,2009,2101
+12 to 13 years,F,2009,1919
+14 to 18 years,F,2009,1922
+19 to 50 years,F,2009,1941
+51 to 70 years,F,2009,1897
+71 plus years,F,2009,1874
+1 year,N,2008,1230
+2 to 3 years,N,2008,1243
+4 to 5 years,N,2008,1304
+6 to 8 years,N,2008,1752
+9 to 11 years,N,2008,1975
+12 to 13 years,M,2008,2235
+14 to 18 years,M,2008,2319
+19 to 50 years,M,2008,2286
+51 to 70 years,M,2008,2177
+71 plus years,M,2008,2156
+12 to 13 years,F,2008,1961
+14 to 18 years,F,2008,1966
+19 to 50 years,F,2008,1998
+51 to 70 years,F,2008,1952
+71 plus years,F,2008,1938
+1 year,N,2007,1230
+2 to 3 years,N,2007,1243
+4 to 5 years,N,2007,1304
+6 to 8 years,N,2007,1752
+9 to 11 years,N,2007,1975
+12 to 13 years,M,2007,2235
+14 to 18 years,M,2007,2319
+19 to 50 years,M,2007,2286
+51 to 70 years,M,2007,2177
+71 plus years,M,2007,2156
+12 to 13 years,F,2007,1961
+14 to 18 years,F,2007,1966
+19 to 50 years,F,2007,1998
+51 to 70 years,F,2007,1952
+71 plus years,F,2007,1938
+1 year,N,2006,1230
+2 to 3 years,N,2006,1243
+4 to 5 years,N,2006,1304
+6 to 8 years,N,2006,1752
+9 to 11 years,N,2006,1975
+12 to 13 years,M,2006,2235
+14 to 18 years,M,2006,2319
+19 to 50 years,M,2006,2286
+51 to 70 years,M,2006,2177
+71 plus years,M,2006,2156
+12 to 13 years,F,2006,1961
+14 to 18 years,F,2006,1966
+19 to 50 years,F,2006,1998
+51 to 70 years,F,2006,1952
+71 plus years,F,2006,1938
