@@ -190,7 +190,8 @@ create_economic_units <- function(con, year, state) {
                 # relationship to reference person; variable name changed in 2010
                 ifelse(year < 2010, 'REL', 'RELP'),
                 'PINCP', # total personal income
-                'AGEP', #age
+                'AGEP', # age
+                'SEX', # sex
                 'ESR' # employment status
   )
   
@@ -272,7 +273,9 @@ rent <- function(pop) {
     group_by(SERIALNO, economic_unit) %>%
     mutate(ecnonomic_unit_rent = ifelse(economic_unit == TRUE,
                                         sum(ind_rent),
-                                        ind_rent)) %>%
+                                        ind_rent),
+           # multiply rent by 12 to get yearly amount
+           economic_unit_rent = economic_unit_rent * 12) %>%
     select(-bedrooms:-ind_rent) %>%
     ungroup()
 }
