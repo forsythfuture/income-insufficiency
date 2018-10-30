@@ -21,7 +21,7 @@ source('../income_ins_functions.R')
 
 ## Consumer Expenditure Survey data
 
-All Consumer Expenditure Survey (CES) data was gathered from the BLS's CES website. The following expenses were collected from CES data: health insurance (by household size annd age), transportation, appareal and services, housekeeping supplies personal care products and services, reading, and misc.
+All Consumer Expenditure Survey (CES) data was gathered from the BLS's CES website. The following expenses were collected from CES data: health insurance (by household size and age), transportation, appareal and services, housekeeping supplies personal care products and services, reading, and misc.
 
 The one screen data source application was used (https://data.bls.gov/PDQWeb/cx) for all CES expenses except for health insurance by age. From the one screen data source page, we selected the following items from boxes:
 
@@ -314,22 +314,12 @@ fmr$pop <- rowSums(fmr[, c('pop2000', 'pop2010')], na.rm = TRUE)
 fmr <- select(fmr, -pop2000, -pop2010)
 ```
 
-Now, we will create one dataset that contains rents for our counties of interest: Forsyth, Guilford, Durham. Then, we will create another dataset with weighted average rents for NC.
+We need an additional dataset with weighted average rents for NC.
 
 ```{r}
-### create counties dataset
-
-counties <- c('Forsyth County', 'Guilford County', 'Durham County')
-
-# filter and only keep counties of interest
-fmr_counties <- fmr %>%
-  filter(countyname %in% counties) %>%
-  # do not need population for counties
-  select(-pop)
-
 ### create NC dataset with rents weighted by population
 
-# create dtaset that is the yearly NC population;
+# create dataset that is the yearly NC population;
 # this will be used to calculate each county's percentage of the population
 nc_pop <- fmr %>%
   group_by(year) %>%
@@ -340,7 +330,14 @@ fmr_nc <- fmr %>%
   # create an additional column in the fmr datset showing yearly NC population
   left_join(nc_pop, by='year') %>%
   # calculate each county' percentage of the NC population
-  mutate(perc_pop = pop / nc_pop) %>%
+  mutate(perc_pop = pop / nc_pop)
+
+# write out dataset with county populations and precentage of populatio nfor use with other expenses
+fmr_nc %>%
+  select(countyname, year, pop, perc_pop) %>%
+  write_csv('county_perc_pop.csv')
+
+fmr_nc <- fmr_nc %>%
   # multiply each rent value by the county's percentage of the population
   mutate_at(c('fmr1', 'fmr2', 'fmr3', 'fmr4'),
             funs(. * perc_pop)) %>%
@@ -353,10 +350,13 @@ fmr <- fmr_nc %>%
   # add a column to state df called countyname to match county df
   mutate(countyname = 'NC') %>%
   # bind state and county dataframes
-  bind_rows(fmr_counties) %>%
+  bind_rows(fmr) %>%
+  # remove word 'county' from county names
+  mutate(countyname = str_replace_all(countyname, ' County', '')) %>%
   # round all rent values to a whole number
   mutate_at(c('fmr1', 'fmr2', 'fmr3', 'fmr4'),
-            funs(round(., 0)))
+            funs(round(., 0))) %>%
+  select(-pop)
 
 # write out fmr dataset
 #write_csv(fmr, 'cleaned_data/fmr.csv')
