@@ -101,6 +101,74 @@ ff_clean_ces <- function(data_file, header_file) {
   return(df)
 }
 
+ff_inflation_adjust <- function(df, wages_col, se_col, year_adjust, error = FALSE) {
+  
+  library(xts)
+  library(lubridate)
+  #########################################################################
+  # This function takes as input a dataframe that contains dollar amounts
+  # that must be adjusted for inflation and returns the same dataframe, 
+  # but with an additional column for inflation ajusted dollar amounts
+  #
+  # Input:
+  #   df: name of dataframe that contains dollar amounts
+  #   wages_col: column name of column in dataframe containing dollar amounts
+  #              entered as object name (no quotes), not string 
+  #              (example: as wages and not "wages")
+  #   se_col: column that contains standard error
+  #   year_adjust: adjust all dollar amounts to this year
+  #   errors: whether dataset contains standard errors that also need to be adjusted
+  #
+  # Output:
+  #   The same dataframe, but with an additional column called 'estimate_adj'
+  #
+  #   !!!! Important Note: the column that contains years must be called 'year'
+  #
+  # Reference: US Census Bureau, A Compass for Understanding and Using ACS Data, 
+  #             October 2008, A-22 
+  #
+  #########################################################################
+  
+  wages_col <- enquo(wages_col)
+  
+  if (error == TRUE) {
+    se_col <- enquo(se_col)
+  }
+  
+  # import CPI All items index data
+  monthly_cpi <- read.table("http://research.stlouisfed.org/fred2/data/CPIAUCSL.txt",
+                            skip = 53, header = TRUE)
+  
+  # extract year and place in its own column
+  monthly_cpi$year <- year(monthly_cpi$DATE)
+  
+  # calculate mean CPI for the year
+  yearly_cpi <- monthly_cpi %>% 
+    group_by(year) %>% 
+    summarize(cpi = mean(VALUE))
+  
+  # calculate inflation rate compared to adjustment year
+  yearly_cpi$adj_factor <- yearly_cpi$cpi[yearly_cpi$year == year_adjust]/yearly_cpi$cpi
+  
+  # combine inflation adjusted wages to wages dataset
+  df <- left_join(df, yearly_cpi, by = 'year') %>%
+    # adjust income in the given year for inflation since the base year
+    # multiply the wage amount in the current year by the adjustment factor
+    mutate(estimate_adj = round( !! wages_col * adj_factor, 0 ))
+  # recalculate adjusted se, moe , and cv only if needed
+  if (error == TRUE) {
+    df <- df %>%
+      mutate(se_adj = round( !! se_col / adj_factor), 0 ) %>%
+      mutate(moe_adj = round( se_adj*1.96, 0),
+             cv_adj = round( (se_adj / estimate_adj)*100, 2 ))
+  }
+  
+  df <- df %>%
+    select(-cpi, -adj_factor)
+  
+  return(df)
+}
+
 ff_inflation_adj_table <- function(year_adjust) {
   
   # This function takes as input a base year to adjust for inflation.
@@ -222,6 +290,29 @@ create_economic_units <- function(con, year, state) {
   
 }
 
+post_tax_income <- function(pop, tax_liabilities) {
+  
+  # This function calculates income for each economic unit
+  # it incorporates, and subtracts, taxes
+  
+  # merge taxes with population dataset
+  pop %>%
+    left_join(tax_liabilities, by = c('year', 'SERIALNO', 'SPORDER')) %>%
+    # replace NA for taxes with zero
+    mutate(taxes = replace_na(taxes, 0),
+           # subtract taxes from income
+           income = PINCP - taxes) %>%
+    # create group to calculate economic unit post-tax income
+    group_by(year, SERIALNO, economic_unit) %>%
+    # if part of economic unit, add incomes, otherwise use individual's income
+    mutate(ecnonomic_unit_income = ifelse(economic_unit == TRUE,
+                                                  sum(income),
+                                                  income)) %>%
+    ungroup() %>%
+    select(-PINCP, -taxes, -income)
+
+}
+
 rent <- function(pop) {
   
   ###############################################################
@@ -270,13 +361,99 @@ rent <- function(pop) {
     # calculate each individual's proportion of rent
     mutate(ind_rent = rent * rent_prop) %>%
     # calculate each economic unit's proportion of rent
-    group_by(SERIALNO, economic_unit) %>%
-    mutate(ecnonomic_unit_rent = ifelse(economic_unit == TRUE,
+    group_by(year, SERIALNO, economic_unit) %>%
+    mutate(economic_unit_rent = ifelse(economic_unit == TRUE,
                                         sum(ind_rent),
                                         ind_rent),
            # multiply rent by 12 to get yearly amount
-           economic_unit_rent = economic_unit_rent * 12) %>%
+           economic_unit_rent = as.integer(economic_unit_rent * 12)) %>%
     select(-bedrooms:-ind_rent) %>%
     ungroup()
+}
+
+food <- function(pop) {
+  
+  # import and clean food costs dataset
+  food <- read_csv('data/cleaned_data/food.csv') %>%
+    # Convert sex to 1 for male, 2 for female, and 0 for neither
+    # This matches population dataset
+    mutate(gender = ifelse(gender == 'N', 0,
+                           ifelse(gender == 'M', 1, 2))) %>%
+    select(-age_group) %>%
+    rename(food_costs = estimate)
+  
+  # create a new object that age breaks for the cut function
+  age_breaks <- food %>%
+    select(start_age, end_age) %>%
+    distinct() %>%
+    .[[1]] %>%
+    append(., 150)
+  
+  # create labels for bins; these are the start ages
+  age_labels <- age_breaks[-(length(age_breaks))]
+  
+  pop <- pop %>%
+    # need to convert the gender of people 11 and under to 0,
+    # because food costs do not differ by gender at these ages
+    mutate(gender = ifelse(AGEP < 12, 0, SEX)) %>%
+    # create age labels based on food costs age bins
+    mutate(start_age = cut(AGEP, breaks = !!age_breaks, 
+                           labels = !!age_labels, 
+                           include.lowest = TRUE, right = FALSE),
+           # convert to integer so it can be merged with population dataset
+           start_age = as.integer(as.character(start_age))) %>%
+    # merge in food costs, based on year, sex, and age
+    left_join(food, by = c('year', 'start_age', 'gender')) %>%
+    select(-gender:-end_age) %>%
+    # group by economic unit and sum across units
+    group_by(year, SERIALNO, economic_unit) %>%
+    mutate(economic_unit_food = ifelse(economic_unit == TRUE,
+                                       sum(food_costs),
+                                       food_costs)) %>%
+    select(-food_costs) %>%
+    ungroup()
+  
+  return(pop)
+    
+}
+
+child_care <- function(pop) {
+  
+  child_costs <- read_csv('data/cleaned_data/child_care.csv') %>%
+    # rename child care costs column to ensure it does not conflict with the name
+    # of another column
+    rename(child_care_costs = estimate)
+  
+  # create age breaks for differing costs of childcare
+  age_breaks <- child_costs %>%
+    select(start_age) %>%
+    distinct() %>%
+    .[[1]] %>%
+    append(., 13) %>%
+    append(., 150)
+  
+  # create labels for bins; these are the start ages
+  age_labels <- age_breaks[-(length(age_breaks))]
+  
+  popA <- pop %>% 
+    filter(year == 2017,
+           cntyname == 'Forsyth') %>%
+    # create age labels based on food costs age bins
+    mutate(start_age = cut(AGEP, breaks = !!age_breaks, 
+                           labels = !!age_labels, 
+                           include.lowest = TRUE, right = FALSE),
+           # convert to integer so it can be merged with population dataset
+           start_age = as.integer(as.character(start_age))) %>%
+    # merge in child care costs, based on year, age, and county
+    left_join(child_costs, by = c('start_age')) %>%
+    #select(-gender:-end_age) %>%
+    # group by economic unit and sum across units
+    group_by(year, SERIALNO, economic_unit) %>%
+    mutate(economic_unit_child_care = ifelse(economic_unit == TRUE,
+                                              sum(child_care_costs),
+                                             child_care_costs)) %>%
+    select(-start_age, -child_care_costs) %>%
+    ungroup()
+  
 }
   

@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.xls
+*.xlsx
+*.Rproj
+pums_db.db
