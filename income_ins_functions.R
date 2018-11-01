@@ -571,7 +571,7 @@ meps <- function(pop) {
     left_join(meps, by = c('year', 'start_age')) %>%
     # group by economic unit and sum across units
     group_by(year, SERIALNO, economic_unit) %>%
-    # missing values represent no child care costs
+    # missing values represent no costs
     mutate(expense = replace_na(expense, 0),
            expense = ifelse(economic_unit == TRUE,
                             sum(expense, na.rm = TRUE),
