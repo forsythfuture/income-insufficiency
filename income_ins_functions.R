@@ -435,7 +435,7 @@ child_care <- function(pop) {
   # create labels for bins; these are the start ages
   age_labels <- age_breaks[-(length(age_breaks))]
   
-  popA <- pop %>% 
+  pop <- pop %>% 
     filter(year == 2017,
            cntyname == 'Forsyth') %>%
     # create age labels based on food costs age bins
@@ -445,12 +445,14 @@ child_care <- function(pop) {
            # convert to integer so it can be merged with population dataset
            start_age = as.integer(as.character(start_age))) %>%
     # merge in child care costs, based on year, age, and county
-    left_join(child_costs, by = c('start_age')) %>%
+    left_join(child_costs, by = c('year', c('cntyname' = 'county'), 'start_age')) %>%
     #select(-gender:-end_age) %>%
     # group by economic unit and sum across units
     group_by(year, SERIALNO, economic_unit) %>%
-    mutate(economic_unit_child_care = ifelse(economic_unit == TRUE,
-                                              sum(child_care_costs),
+    # missing values represent no child care costs
+    mutate(child_care_costs = replace_na(child_care_costs, 0),
+           economic_unit_child_care = ifelse(economic_unit == TRUE,
+                                             sum(child_care_costs, na.rm = TRUE),
                                              child_care_costs)) %>%
     select(-start_age, -child_care_costs) %>%
     ungroup()

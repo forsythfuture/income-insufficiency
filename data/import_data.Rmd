@@ -51,7 +51,7 @@ The one screen data source application was used (https://data.bls.gov/PDQWeb/cx)
     + click 'Retrieve data'.
 * Like with the raw data, we then copy and pasted all output into a .txt file.
 
-We used cross-tabulated tables for healthin insurance expenses by age and consumer unit size (https://www.bls.gov/cex/csxcross.htm). From this page we selected the excel file for each year under size of consumer unit by age of reference person > One person.
+We used cross-tabulated tables for health insurance expenses by age and consumer unit size (https://www.bls.gov/cex/csxcross.htm). From this page we selected the excel file for each year under size of consumer unit by age of reference person > One person.
 
 ### Import and clean CES data (minus health insurance by age and consumer unit size)
 
@@ -83,6 +83,31 @@ for (i in seq_along(data_files)) {
   # add to data frame containing all ces expenses
   df_ces <- bind_rows(df_ces, df_ces_single)
 }
+
+# we want to replace string describing consumer unit size with integer
+# create replacement values; must use character to replace other characters
+unit_size_int <- as.character(1:length(unique(df_ces$Characteristics)))
+# ad descriptions as names; these are the values we want to replace
+names(unit_size_int) <- unique(df_ces$Characteristics)
+
+df_ces <- df_ces %>%
+  select(Year, region_ratio, Characteristics, Item, Subcategory, Expense) %>%
+  # rename column names to lover case
+  rename_all(funs(tolower(.))) %>%
+  rename(consumer_unit_size = characteristics) %>%
+  # replace strings of consumer unit size with integer
+  mutate(consumer_unit_size = str_replace_all(consumer_unit_size, unit_size_int),
+         consumer_unit_size = as.integer(consumer_unit_size)) %>%
+  # some of the columns, but not all, have start and end years
+  # extract these years and place in start_age and end_age columns
+  mutate(start_age = ifelse(str_detect(item, 'under 2'), 0, 
+                            ifelse(str_detect(item, '2 to 15'), 2,
+                                   ifelse(str_detect(item, '16 and over'), 16,
+                                                     # make age very old if no conditions are met
+                                                     150))),
+         end_age = ifelse(str_detect(item, 'under 2'), 1, 
+                            ifelse(str_detect(item, '2 to 15'), 15,
+                                                     150)))
 ```
 
 ### Import and clean CES data for health insurance by age and consumer unit size
@@ -128,11 +153,13 @@ for (file_name in health_age_files) {
 # convert fron wide (each age group is in its own row)
 # to long (each age group is in a different row)
 ces_health <- gather(ces_health, 'age_group', 'expense', `65_74`:`75_plus`) %>%
-  # change age group names
-  mutate(age_group = str_replace_all(age_group, '65_74', '65 to 74')) %>%
-  mutate(age_group = str_replace_all(age_group, '75_plus', '75 plus')) %>%
-  # convert expense to numeric
-  mutate(expense = as.numeric(expense))
+  # change age group names to number representing start age
+  mutate(start_age = str_replace_all(age_group, '65_74', '65')) %>%
+  mutate(start_age = str_replace_all(start_age, '75_plus', '75')) %>%
+  # convert expense to integer
+  mutate(expense = as.integer(expense),
+         start_age = as.integer(start_age)) %>%
+  select(-age_group)
 
 ```
 
@@ -141,13 +168,13 @@ The cross tab of health insurance by consumer unit and age does not contain regi
 ```{r}
 # get ratio for health insurance by one consumer unit
 ratio_one <- df_ces %>%
-  filter(Characteristics == 'One person consumer unit',
-         Item == 'Health insurance') %>%
-  # we only need year and ratio, which will be merged with the healthin ins by consumer unit and age df
-  select(Year, region_ratio)
+  filter(consumer_unit_size == 1,
+         item == 'Health insurance') %>%
+  # we only need year and ratio, which will be merged with the health ins by consumer unit and age df
+  select(year, region_ratio)
 
 # add ratio to health insurance by age and consumer unit dataframe
-ces_health <- left_join(ces_health, ratio_one, by = 'Year') %>%
+ces_health <- left_join(ces_health, ratio_one, by = c('Year'='year')) %>%
   mutate(expense = round( expense * region_ratio, 0 ))
 ```
 
@@ -168,16 +195,14 @@ The two files cannot be merged into one because they contain different formats. 
 ```{r}
 # # select column for export and export
 # df_ces %>%
-#   select(Year, Characteristics, Item, Subcategory, Expense) %>%
-#   # rename column names to lover case
-#   rename_all(funs(tolower(.))) %>%
-#   write_csv('cleaned_data/ces_a.csv')
+#    select(-region_ratio) %>%
+#    write_csv('cleaned_data/ces_a.csv')
 # 
 # ces_health %>%
-#   select(-region_ratio) %>%
-#   # rename column names to lover case
-#   rename_all(funs(tolower(.))) %>%
-#   write_csv('cleaned_data/ces_b.csv')
+#    select(-region_ratio) %>%
+#    # rename column names to lover case
+#    rename_all(funs(tolower(.))) %>%
+#    write_csv('cleaned_data/ces_b.csv')
 ```
 
 ## Medical Expenditure Panel Survey data
