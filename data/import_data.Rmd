@@ -28,7 +28,7 @@ The one screen data source application was used (https://data.bls.gov/PDQWeb/cx)
 * For all items, 'Expenditures' was selected from 'Select One Category'.
 * The selections in the 'Select one or more items' box depend on the item selected in the 'Subcategory' box. For each of the following subcategories, the corresponding 'Select one or more items' lines were selected:
     + Healthcare: health insurance;
-    + Transportation: Vehicle purchases: Cars and trucks (used); Other vehicle expenses; Gasoline, other fuels, and motor oil; Vehicle insurance; Vehicle maintenance and repairs; Public and other transportation; and Vehicle finance charges;
+    + Transportation: Vehicle purchases: Cars and trucks (used); Other vehicle expenses; Gasoline, other fuels, and motor oil; and Public and other transportation;
     + Apparel and services: all;
     + Housing: Housekeeping supplies;
     + Personal care products and services: Personal care products and services;
@@ -77,6 +77,7 @@ df_ces <- data.frame()
 
 # loop through each data file, import and clean data, and add to dataframe containing ces data
 for (i in seq_along(data_files)) {
+  print(i)
   # import ces expense file
   df_ces_single <- ff_clean_ces(paste0(ces_path, data_files[i]), 
                                 paste0(ces_path, header_files[i]))
@@ -107,7 +108,13 @@ df_ces <- df_ces %>%
                                                      150))),
          end_age = ifelse(str_detect(item, 'under 2'), 1, 
                             ifelse(str_detect(item, '2 to 15'), 15,
-                                                     150)))
+                                                     150))) %>%
+  # come items have gender categories
+  # extract gender and place in its own column, 
+  # with items not having gender labeled as 0
+  mutate(gender = ifelse(str_detect(item, ' Men|Boys'), 1,
+                         ifelse(str_detect(item, 'Women|Girls'), 2, 0)))
+  
 ```
 
 ### Import and clean CES data for health insurance by age and consumer unit size
@@ -145,7 +152,7 @@ for (file_name in health_age_files) {
   # change column names to ensure they are the same for every dataset
   colnames(health_age) <- c('Item', '65_74', '75_plus', 'Year')
   
-  # add sinlge year to dataframe containing all years
+  # add singlge year to dataframe containing all years
   ces_health <- bind_rows(ces_health, health_age)
 
 }
@@ -156,11 +163,22 @@ ces_health <- gather(ces_health, 'age_group', 'expense', `65_74`:`75_plus`) %>%
   # change age group names to number representing start age
   mutate(start_age = str_replace_all(age_group, '65_74', '65')) %>%
   mutate(start_age = str_replace_all(start_age, '75_plus', '75')) %>%
-  # convert expense to integer
+  # create end age
+  mutate(end_age = ifelse(start_age == 65, 74, 150)) %>%
+  # convert expense and ages to integer
   mutate(expense = as.integer(expense),
-         start_age = as.integer(start_age)) %>%
-  select(-age_group)
-
+         start_age = as.integer(start_age),
+         end_age = as.integer(end_age)) %>%
+  select(-age_group) %>%
+  # convert column to lowercase
+  rename_all(funs(tolower(.))) %>%
+  # add subcategory to match other ces dataset
+  mutate(subcategory = 'Healthcare') %>%
+  # this dataset is only used for individuals of the given age
+  # therefore, the consumer unit size will be one
+  mutate(consumer_unit_size = 1,
+         # add gender to match primary ces dataset
+         gender = 0)
 ```
 
 The cross tab of health insurance by consumer unit and age does not contain regional information. So, we will apply the regional ratio from the health insurance by one consumer unit data.
@@ -174,8 +192,9 @@ ratio_one <- df_ces %>%
   select(year, region_ratio)
 
 # add ratio to health insurance by age and consumer unit dataframe
-ces_health <- left_join(ces_health, ratio_one, by = c('Year'='year')) %>%
-  mutate(expense = round( expense * region_ratio, 0 ))
+ces_health <- left_join(ces_health, ratio_one, by = c('year'='year')) %>%
+  mutate(expense = round( expense * region_ratio, 0 )) %>%
+  select(-region_ratio)
 ```
 
 Two CES files are now cleaned and ready for export:
@@ -190,19 +209,14 @@ Two CES files are now cleaned and ready for export:
     + Miscellaneous.
 2. Health insurance by age and consumer unit size.
 
-The two files cannot be merged into one because they contain different formats. The former is divided by consumer unit size, while the latter is split by age group.
+These two files can be merged into one and written out.
 
 ```{r}
-# # select column for export and export
-# df_ces %>%
-#    select(-region_ratio) %>%
-#    write_csv('cleaned_data/ces_a.csv')
-# 
-# ces_health %>%
-#    select(-region_ratio) %>%
-#    # rename column names to lover case
-#    rename_all(funs(tolower(.))) %>%
-#    write_csv('cleaned_data/ces_b.csv')
+# merge ces files and write out
+df_ces %>%
+  select(-region_ratio) %>%
+  bind_rows(ces_health) #%>%
+  #write_csv('cleaned_data/ces.csv')
 ```
 
 ## Medical Expenditure Panel Survey data
@@ -228,9 +242,10 @@ meps <- read_csv('raw_data/meps_raw.csv') %>%
          region == '3 SOUTH') %>%
   # no longer need region variable, since it was only needed for filtering
   select(-region) %>%
-  # clean up variables
-  mutate(age = str_replace_all(age, '-', 'to')) %>%
-  mutate(age = str_replace_all(age, ' AGE', ''))
+  # only keep first year of age range,
+  # this results in only keeping the start age year, which is what is used in other expenses
+  mutate(start_age = str_extract(age, '[0-9]*')) %>%
+  select(-age)
 ```
 
 2015 is the most recent year for MEPS data. 2016 and 2017 were estimated by using 2015 values and adjusting them for inflation.
@@ -264,12 +279,12 @@ meps <- bind_rows(meps_inflation, meps) %>%
   # add description variable
   mutate(item = 'Medical expenses') %>%
   # change names to match CES data format
-  rename(age_group = age, expense =  mean) %>%
+  rename(expense =  mean) %>%
   # change column order to match CES
-  select(item, year, age_group, expense)
+  select(item, year, start_age, expense)
 
 # write out data
-#write_csv(meps, 'cleaned_data/meps.csv')
+# write_csv(meps, 'cleaned_data/meps.csv')
 ```
 
 ## Fair Market Rent (FMR)

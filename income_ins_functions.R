@@ -436,8 +436,6 @@ child_care <- function(pop) {
   age_labels <- age_breaks[-(length(age_breaks))]
   
   pop <- pop %>% 
-    filter(year == 2017,
-           cntyname == 'Forsyth') %>%
     # create age labels based on food costs age bins
     mutate(start_age = cut(AGEP, breaks = !!age_breaks, 
                            labels = !!age_labels, 
@@ -446,7 +444,6 @@ child_care <- function(pop) {
            start_age = as.integer(as.character(start_age))) %>%
     # merge in child care costs, based on year, age, and county
     left_join(child_costs, by = c('year', c('cntyname' = 'county'), 'start_age')) %>%
-    #select(-gender:-end_age) %>%
     # group by economic unit and sum across units
     group_by(year, SERIALNO, economic_unit) %>%
     # missing values represent no child care costs
@@ -456,6 +453,134 @@ child_care <- function(pop) {
                                              child_care_costs)) %>%
     select(-start_age, -child_care_costs) %>%
     ungroup()
+  
+}
+
+ces <- function(pop) {
+  
+  # This function adds CES data, which includes adding two additional columns:
+  #   1. All consumer expenditure survey expenses minus health insurance,
+  #   2. Health insurance
+  #
+
+  ces <- read_csv('data/cleaned_data/ces.csv')
+
+  # non-health insurance items can be grouped together and summed based on year and consumer unit size
+  # some of these items also divide by age and gender, but we do not need to account for these since
+  # the estimate does not take into account whether the household has a person
+  # of the given age or gender
+  
+  ces_group <- ces %>%
+    filter(# remove healthcare because we will calculate this later
+      item != 'Health insurance') %>%
+    # group by year and consumer unit size, and sum
+    group_by(year, consumer_unit_size) %>%
+    summarize(economic_unit_ces = sum(expense)) %>%
+    ungroup()
+
+  
+  # Health insurance is calculated as follows:
+  # First, all economic unit members under 65 are grouped into one health insurance
+  # unit and their health insurance costs are summed.
+  # Then, health insurance costs for those over 65 are calculated using expenses by
+  # age for single person units.  
+  
+  ces_health <- ces %>%
+    filter(item == 'Health insurance') %>%
+    # ages at 150 are really for those 0-64, since 65 + are the rows with listed ages
+    mutate(start_age = ifelse(start_age == 150, 0, start_age)) %>%
+    select(year, consumer_unit_size, expense, start_age)
+  
+  
+  pop <- pop %>%
+    # ces expenses are divided by consumer unit size, which is the same as economic unit size;
+    # therefore, calculate economic unit size of population data
+    group_by(year, SERIALNO, economic_unit) %>%
+    # economic unit size is the total number of people in the unit if economic_unit is true,
+    # otherwise, it is just one
+    mutate(economic_unit_size = ifelse(economic_unit == TRUE, 
+                                       sum(economic_unit), 1)) %>%
+    ungroup() %>%
+    # calculate health insurance unit size
+    # create variable signifying whether over 65, will be used to 
+    # create group of total number of economic unit members under 65
+    mutate(under_65 = ifelse(AGEP < 65, TRUE, FALSE)) %>%
+    # this group signifies health units
+    group_by(year, SERIALNO, economic_unit_size, under_65) %>%
+    # calculate number of people in unit
+    # all persons 65 and over are in their own unit
+    mutate(health_unit = ifelse(economic_unit == TRUE & under_65 == TRUE, 
+                                sum(economic_unit), 1),
+           # five is the highest number of units for economic and health units
+           health_unit = ifelse(health_unit > 5, 5, health_unit)) %>%
+    ungroup() %>%
+    mutate(economic_unit_size = ifelse(economic_unit_size > 5, 5, economic_unit_size)) %>%
+    # to match ages with health plans, change age to be either 0, 65, or 75
+    mutate(age_health = ifelse(AGEP < 65, 0,
+                               ifelse(AGEP < 75, 65, 75))) %>%
+    # join health insurance costs by year and age
+    left_join(ces_health, by = c('year', c('health_unit' = 'consumer_unit_size'), 
+                                 c('age_health' = 'start_age'))) %>%
+    # for economic units with no one under 65, expense equals economic unit expense,
+    # but for those with people 65 and over, their expenses are separate;
+    # therefore, 65 and older expenses need to be combined with the rest of the economic unit
+    group_by(year, SERIALNO, economic_unit, under_65) %>%
+    # sum together expenses of all people in economic unit 65 and over
+    mutate(expense = ifelse(under_65 == FALSE, sum(expense), expense)) %>%
+    # add number of people in each group, to be used in creating pro rata expense
+    # pro rata expenses will then be summed by economic unit to create economic unit expenses
+    add_tally() %>%
+    # create pro rate expenses by dividing the number of people in health unit by expenses
+    mutate(expense = expense / n) %>%
+    # change group to economic unit and sum pro rata expenses
+    group_by(year, SERIALNO, economic_unit) %>% 
+    mutate(expense = sum(expense)) %>%
+    rename(economic_unit_health_ins = expense) %>%
+    ungroup() %>%
+    # add on ces expenses
+    left_join(ces_group, by = c('year', c('economic_unit_size' = 'consumer_unit_size'))) %>%
+    select(-economic_unit_size:-age_health, -n)
+  
+  return(pop)
+  
+}
+
+meps <- function(pop) {
+  
+  meps <- read_csv('data/cleaned_data/meps.csv') %>%
+    select(-item)
+  
+  # create age breaks for differing costs of childcare
+  meps_breaks <- meps %>%
+    select(start_age) %>%
+    distinct() %>%
+    .[[1]] %>%
+    append(., 150)
+  
+  # create labels for bins; these are the start ages
+  meps_labels <- meps_breaks[-(length(meps_breaks))]
+  
+  pop <- pop %>% 
+    # create age labels based on costs age bins
+    mutate(start_age = cut(AGEP, breaks = !!meps_breaks, 
+                           labels = !!meps_labels, 
+                           include.lowest = TRUE, right = FALSE),
+           # convert to integer so it can be merged with population dataset
+           start_age = as.integer(as.character(start_age))) %>%
+    # merge in costs, based on year, and age
+    left_join(meps, by = c('year', 'start_age')) %>%
+    # group by economic unit and sum across units
+    group_by(year, SERIALNO, economic_unit) %>%
+    # missing values represent no child care costs
+    mutate(expense = replace_na(expense, 0),
+           expense = ifelse(economic_unit == TRUE,
+                            sum(expense, na.rm = TRUE),
+                            expense)) %>%
+    select(-start_age) %>%
+    rename(economic_unit_meps = expense) %>%
+    ungroup()
+  
+  return(pop)
   
 }
   
