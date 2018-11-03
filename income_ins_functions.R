@@ -213,7 +213,7 @@ create_economic_units <- function(con, year, state) {
   econonmic_unit_a <- c(0,1,2,3,4,5,6,7,10,11)
   econonmic_unit_b <- c(0,1,2,3,4,5,6,7,8,9,10,13,14,15)
   
-  economic_unit_vec <- if (year < 2008) economic_unit_a else econonmic_unit_b
+  economic_unit_vec <- if (year < 2008) econonmic_unit_a else econonmic_unit_b
   
   ###############################################
   
@@ -225,7 +225,7 @@ create_economic_units <- function(con, year, state) {
     
     counties <- counties %>%
       select(puma2k, cntyname) %>%
-      rename(PUMA = puma2K)
+      rename(PUMA = puma2k)
     
   } else {
     
@@ -258,6 +258,8 @@ create_economic_units <- function(con, year, state) {
                 # relationship to reference person; variable name changed in 2010
                 ifelse(year < 2010, 'REL', 'RELP'),
                 'PINCP', # total personal income
+                'HISP', # hispanic origin
+                'RAC1P', # race
                 'AGEP', # age
                 'SEX', # sex
                 'ESR' # employment status
@@ -267,8 +269,9 @@ create_economic_units <- function(con, year, state) {
   pop <- population %>%
     select(!!pop_vars) %>%
     # need to collect now because cannot transform NA without collecting
-    filter(ST == !!state,
-           PUMA %in% c(1802)) %>%
+    filter(ST == !!state & PUMA == 1801) %>%
+    # some years only have final two digits; add 2000 to these digits to make them four digits long
+    mutate(year = ifelse(year < 2000, year + 2000, year)) %>%
     collect() %>%
     # add county names
     left_join(counties, by = 'PUMA')
@@ -290,10 +293,14 @@ create_economic_units <- function(con, year, state) {
   
 }
 
-post_tax_income <- function(pop, tax_liabilities) {
-  
+post_tax_income <- function(pop) {
+
   # This function calculates income for each economic unit
   # it incorporates, and subtracts, taxes
+  
+  print('taxes')
+  
+  tax_liabilities <- readRDS('nc_tax_liab_ind.Rda')
   
   # merge taxes with population dataset
   pop %>%
@@ -305,7 +312,7 @@ post_tax_income <- function(pop, tax_liabilities) {
     # create group to calculate economic unit post-tax income
     group_by(year, SERIALNO, economic_unit) %>%
     # if part of economic unit, add incomes, otherwise use individual's income
-    mutate(ecnonomic_unit_income = ifelse(economic_unit == TRUE,
+    mutate(economic_unit_income = ifelse(economic_unit == TRUE,
                                                   sum(income),
                                                   income)) %>%
     ungroup() %>%
@@ -327,6 +334,8 @@ rent <- function(pop) {
   # rent between household and economic unit is shared
   # based on the proportion of rooms each economic unit needs
   #############################################################
+  
+  print('rent')
   
   # import rent values
   fmr <- read_csv('data/cleaned_data/fmr.csv') %>%
@@ -372,6 +381,8 @@ rent <- function(pop) {
 }
 
 food <- function(pop) {
+  
+  print('food')
   
   # import and clean food costs dataset
   food <- read_csv('data/cleaned_data/food.csv') %>%
@@ -419,7 +430,9 @@ food <- function(pop) {
 
 child_care <- function(pop) {
   
-  child_costs <- read_csv('data/cleaned_data/child_care.csv') %>%
+  print('child care')
+  
+  child_costs <- readRDS('data/cleaned_data/child_care.Rda') %>%
     # rename child care costs column to ensure it does not conflict with the name
     # of another column
     rename(child_care_costs = estimate)
@@ -448,13 +461,24 @@ child_care <- function(pop) {
     group_by(year, SERIALNO, economic_unit) %>%
     # missing values represent no child care costs
     mutate(child_care_costs = replace_na(child_care_costs, 0),
-           economic_unit_child_care = ifelse(economic_unit == TRUE,
-                                             sum(child_care_costs, na.rm = TRUE),
-                                             child_care_costs)) %>%
+           # ESR represents employment, and is used to determine whether person is persent
+           # to watch kid; make NA's 0 so we can test whether it is 3
+           ESR = replace_na(ESR, 0),
+           # if there is someone in economic not working make child care costs 0
+           economic_unit_child_care = ifelse(economic_unit == TRUE & ESR == 3,
+                                             sum(child_care_costs, na.rm = TRUE) * 0,
+                                             # sum child care costs for economic units with all people working
+                                             ifelse(economic_unit == TRUE & (ESR != 3 | is.na(ESR)),
+                                                    sum(child_care_costs, na.rm = TRUE),
+                                                    child_care_costs))) %>%
+
     select(-start_age, -child_care_costs) %>%
     ungroup()
+
+  return(pop)
   
 }
+
 
 ces <- function(pop) {
   
@@ -463,6 +487,8 @@ ces <- function(pop) {
   #   2. Health insurance
   #
 
+  print('ces')
+  
   ces <- read_csv('data/cleaned_data/ces.csv')
 
   # non-health insurance items can be grouped together and summed based on year and consumer unit size
@@ -547,6 +573,8 @@ ces <- function(pop) {
 
 meps <- function(pop) {
   
+  print('meps')
+  
   meps <- read_csv('data/cleaned_data/meps.csv') %>%
     select(-item)
   
@@ -583,4 +611,5 @@ meps <- function(pop) {
   return(pop)
   
 }
-  
+
+

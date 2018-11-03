@@ -548,7 +548,10 @@ child <- child %>%
   mutate(county = 'NC') %>%
   ungroup() %>%
   # bind NC costs to county costs
-  bind_rows(child, .)
+  bind_rows(child, .) %>%
+  # convert monthly amounts to year
+  mutate(estimate = estimate * 12)
 
-# write_csv(child, 'cleaned_data/child_care.csv')
+# save as R object because csvfile will not load properly
+#saveRDS(child, 'cleaned_data/child_care.Rda')
 ```
