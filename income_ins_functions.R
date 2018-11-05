@@ -612,24 +612,36 @@ meps <- function(pop) {
   
 }
 
-income_ins <- function(df, col, demo = TRUE) {
+income_ins <- function(df, geo_area, col, demo = TRUE) {
   
   # this function calculates income insufficiency for a given demographic
   # input is a data.table that has already been extended based on replicate weights
+  # geo_area: either 'PUMA' or 'cntyname'
   # col is a column name that is the grouping variable, as a string
   # demo is whether we are calculating income insufficiency by demographic
   
   if (demo == TRUE) {
     
-    df <- df[, .N, by = .(PUMA, get(col), income_insufficient)]
+    df <- df[, .N, by = .(get(geo_area), get(col), income_insufficient)]
+    
+    # change column names
+    setnames(df, c('get', 'get.1'), c('geo_area', 'sub_demographic'))
+    
     # convert from long to wide; needed to calculate percentage
-    df <- dcast(df, PUMA + get ~ income_insufficient, value.var = "N")
+    df <- dcast(df, geo_area + sub_demographic ~ income_insufficient, value.var = "N")
     
   } else if (demo == FALSE) {
     
-    df <- df[, .N, by = .(PUMA, income_insufficient)]
+    df <- df[, .N, by = .(get(geo_area), income_insufficient)]
+    
+    # change column names
+    setnames(df, 'get', 'geo_area')
+    
     # convert from long to wide; needed to calculate percentage
-    df <- dcast(df, PUMA ~ income_insufficient, value.var = "N")
+    df <- dcast(df, geo_area ~ income_insufficient, value.var = "N")
+    
+    # add column for subdemographic, so it matches structure of demographic datasets
+    df <- df[, sub_demographic := 0]
     
   } else {
     
@@ -693,15 +705,17 @@ replicate_weights <- function(pop, weights_tbl, weight) {
   
 }
 
-standard_errors <- function(pop, weights_tbl, pop_weights, col) {
+standard_errors <- function(pop, geo_area, weights_tbl, pop_weights, col, demo = TRUE) {
   
   # This function calculates standard errors and also aggregates other functions,
   # such as creating extended replicate weight dataset and calculatingincome insufficiency
   # Input:
   #   pop: data.table of population, not extended with replciate weights
+  #   geo_area: 'PUMA' or 'cntyname'
   #   weights_tbl: table of weights, uncollected
   #   pop_weights: vector of all weight column names
   #   col: demographic to use when calculating income insufficiency
+  #   demo: boolean, whether calcualtion is for demographic variable
   
   for (weight in pop_weights) {
     
@@ -715,7 +729,7 @@ standard_errors <- function(pop, weights_tbl, pop_weights, col) {
     # separate this estimate in its own object
     if (weight == 'PWGTP') {
       
-      point_estimate <- income_ins(pop_wgt, col, TRUE)
+      point_estimate <- income_ins(pop_wgt, geo_area, col, demo)
       
     } else {
       
@@ -725,9 +739,9 @@ standard_errors <- function(pop, weights_tbl, pop_weights, col) {
       # these will later be summed and squared to create the SE
       
       # create point estimate for replicate weights
-      single_sq_diff <- income_ins(pop_wgt, col, TRUE) %>%
+      single_sq_diff <- income_ins(pop_wgt, geo_area, col, demo) %>%
         # merge with point estimates from primary weights
-        left_join(point_estimate, by = c('PUMA', 'get', 'demographic')) %>%
+        left_join(point_estimate, by = c('geo_area', 'sub_demographic', 'demographic')) %>%
         # calculate squared difference
         mutate(sq_diff = (income_ins.x - income_ins.y)^2) %>%
         select(-income_ins.x, -income_ins.y)
@@ -741,7 +755,7 @@ standard_errors <- function(pop, weights_tbl, pop_weights, col) {
         
         # if it isn't the first, add squared differences to dataframe containing them
         sq_diff <- sq_diff %>%
-          left_join(single_sq_diff, by = c('PUMA', 'get', 'demographic'))
+          left_join(single_sq_diff, by = c('geo_area', 'sub_demographic', 'demographic'))
         
       }
       

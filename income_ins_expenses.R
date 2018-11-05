@@ -22,7 +22,7 @@ con <- dbConnect(RSQLite::SQLite(), "pums_db.db")
 # import needed PUMA data for all years
 pop <- data.frame()
 
-for (yr in seq(2012, 2017)) {
+for (yr in seq(2006, 2017)) {
   
   print(yr)
   pop <- create_economic_units(con, yr, 37) %>%
