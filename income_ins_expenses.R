@@ -1,0 +1,47 @@
+###################################################################################
+#
+# This script calculates income insufficiency for each person.
+# It calculates expenses for each individual and creates a column
+# that is a boolean representing whether the person is income
+# insufficient; with TRUE being yes and FALSE being no.
+# A person is income insufficient if they live in an economic unit
+# where unit average expenses are greater than unit income.
+# Then script also saves the output as an R object for quick import.
+#
+####################################################################################
+
+
+library(tidyverse)
+library(data.table)
+library(DBI)
+
+source('income_ins_functions.R')
+
+con <- dbConnect(RSQLite::SQLite(), "pums_db.db")
+
+# import needed PUMA data for all years
+pop <- data.frame()
+
+for (yr in seq(2012, 2017)) {
+  
+  print(yr)
+  pop <- create_economic_units(con, yr, 37) %>%
+    bind_rows(pop, .)
+  
+}
+
+pop <- pop %>%
+  post_tax_income() %>%
+  rent() %>%
+  food() %>%
+  child_care() %>%
+  ces() %>%
+  meps() %>%
+  # calculate income insufficiency
+  mutate(income_insufficient = economic_unit_income - rowSums(.[,15:20], na.rm = TRUE),
+         # true if income insufficienct false if income sufficient
+         income_insufficient = ifelse(income_insufficient < 0, TRUE, FALSE)) %>%
+  select(SERIALNO, SPORDER, year, PUMA, cntyname, AGEP, SEX, RAC1P, HISP, economic_unit, income_insufficient)
+
+# save intermediate output
+#saveRDS(pop, 'population_expense.Rda')

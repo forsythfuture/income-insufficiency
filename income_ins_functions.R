@@ -269,7 +269,7 @@ create_economic_units <- function(con, year, state) {
   pop <- population %>%
     select(!!pop_vars) %>%
     # need to collect now because cannot transform NA without collecting
-    filter(ST == !!state & PUMA == 1801) %>%
+    filter(ST == !!state) %>%
     # some years only have final two digits; add 2000 to these digits to make them four digits long
     mutate(year = ifelse(year < 2000, year + 2000, year)) %>%
     collect() %>%
@@ -612,4 +612,150 @@ meps <- function(pop) {
   
 }
 
+income_ins <- function(df, col, demo = TRUE) {
+  
+  # this function calculates income insufficiency for a given demographic
+  # input is a data.table that has already been extended based on replicate weights
+  # col is a column name that is the grouping variable, as a string
+  # demo is whether we are calculating income insufficiency by demographic
+  
+  if (demo == TRUE) {
+    
+    df <- df[, .N, by = .(PUMA, get(col), income_insufficient)]
+    # convert from long to wide; needed to calculate percentage
+    df <- dcast(df, PUMA + get ~ income_insufficient, value.var = "N")
+    
+  } else if (demo == FALSE) {
+    
+    df <- df[, .N, by = .(PUMA, income_insufficient)]
+    # convert from long to wide; needed to calculate percentage
+    df <- dcast(df, PUMA ~ income_insufficient, value.var = "N")
+    
+  } else {
+    
+    stop("demo must be TRUE of FALSE.")
+    
+  }
+  
+  # replace NA values with zero
+  df <- df[is.na(`TRUE`), `TRUE`:=0][
+    is.na(`FALSE`), `FALSE`:=0][
+      # calculate income insufficiency for each group
+      , income_ins := `TRUE` / (`TRUE` + `FALSE`)][
+        # add demographic category to dataset
+        , demographic := ..col][
+          # variables representing number of true and false no longer needed
+          , c('TRUE', 'FALSE') := NULL]
+  
+  # return as data.frame
+  df <- as.data.frame(df)
+  
+  return(df)
+  
+}
 
+replicate_weights <- function(pop, weights_tbl, weight) {
+  
+  # This function takes a population data.table as input and extends the data.table 
+  # based on weights for one weight column
+  # Input:
+  #   dt: a data.table that we want extended based on replicate weights
+  #       table must include SERIALNO and SPORDER
+  #   weights_tbl: a table of replicate weights and SERIALNO and SPORDER
+  #                the table should not be collected into RAM
+  #   wgt: the replicate weight column used to extend data.table
+  
+  # bring into memory weights dataframe with serialno, sporder and just one weight column
+  wgt <- weights_tbl %>%
+    select(SERIALNO, SPORDER, !!weight) %>%
+    collect() %>%
+    # if 2017, remove first four letters, which are year
+    # this matches with the format for the population dataset
+    mutate(SERIALNO = if (!!year == 2017) as.integer(str_replace_all(.$SERIALNO, '^2017', '')) else .$SERIALNO,
+           SERIALNO = as.integer(SERIALNO)) %>%
+    # convert to data table
+    as.data.table()
+  
+  # merge weights with population data.table
+  pop_wgt <- merge(pop, wgt, by = c('SERIALNO', 'SPORDER'))
+  
+  # change name of column so that it is the same of each iteration
+  setnames(pop_wgt, weight, 'wgt')
+  
+  #palmas[[weight]] <- 
+  pop_wgt <- pop_wgt[
+    # filter out replicate weight values less than 1
+    wgt > 0][
+      # add additional rows based on the number of replicate weights
+      rep(seq(.N), wgt), !"wgt"]
+  
+  return(pop_wgt)
+  
+}
+
+standard_errors <- function(pop, weights_tbl, pop_weights, col) {
+  
+  # This function calculates standard errors and also aggregates other functions,
+  # such as creating extended replicate weight dataset and calculatingincome insufficiency
+  # Input:
+  #   pop: data.table of population, not extended with replciate weights
+  #   weights_tbl: table of weights, uncollected
+  #   pop_weights: vector of all weight column names
+  #   col: demographic to use when calculating income insufficiency
+  
+  for (weight in pop_weights) {
+    
+    # print progress update
+    print(col)
+    print(weight)
+    
+    pop_wgt <- replicate_weights(pop, weights_tbl, weight)
+    
+    # if it is the first weight column, then this is the point estimate
+    # separate this estimate in its own object
+    if (weight == 'PWGTP') {
+      
+      point_estimate <- income_ins(pop_wgt, col, TRUE)
+      
+    } else {
+      
+      # for the replicate weights we need to calculate the point estimate
+      # and then the squared difference between the replicate weight
+      # point estiamte and the primary weight point estimate
+      # these will later be summed and squared to create the SE
+      
+      # create point estimate for replicate weights
+      single_sq_diff <- income_ins(pop_wgt, col, TRUE) %>%
+        # merge with point estimates from primary weights
+        left_join(point_estimate, by = c('PUMA', 'get', 'demographic')) %>%
+        # calculate squared difference
+        mutate(sq_diff = (income_ins.x - income_ins.y)^2) %>%
+        select(-income_ins.x, -income_ins.y)
+      
+      # if this is the first replicate weight, create dataframe to store squared differences
+      if (str_detect(weight, '.*[Pp]1$')) {
+        
+        sq_diff <- single_sq_diff
+        
+      } else {
+        
+        # if it isn't the first, add squared differences to dataframe containing them
+        sq_diff <- sq_diff %>%
+          left_join(single_sq_diff, by = c('PUMA', 'get', 'demographic'))
+        
+      }
+      
+    }
+    
+  }
+  
+  # calculate sum of squared difference
+  sum_sq_diff <- sq_diff %>%
+    select(starts_with("sq_diff")) %>%
+    rowSums()
+  
+  point_estimate$se <- sqrt( sum_sq_diff * (4/80) )
+  
+  return(point_estimate)
+  
+}
