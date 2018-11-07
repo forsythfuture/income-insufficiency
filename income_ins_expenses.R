@@ -44,4 +44,4 @@ pop <- pop %>%
   select(SERIALNO, SPORDER, year, PUMA, cntyname, AGEP, SEX, RAC1P, HISP, economic_unit, income_insufficient)
 
 # save intermediate output
-#saveRDS(pop, 'population_expense.Rda')
+# saveRDS(pop, 'population_expense.Rda')

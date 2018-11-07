@@ -33,7 +33,6 @@ pop <- readRDS('population_expense.Rda') %>%
 years <- seq(2006, 2017)
 state <- 37
 
-
 # initialize dataframe to store demographic income insufficiency for all demographics and years
 demo_income_ins <- data.frame()
 
@@ -48,7 +47,7 @@ for (yr in years) {
   weights_tbl <- tbl(con, tbl_name) %>%
     filter(ST == !!state)
   
-  pop <- pop[year == yr]
+  pop_year <- pop[year == yr]
   
   # replciate weight variable names are lower case until 2017 and upper case starting in 2017
   weight_names <- ifelse(yr >= 2017, 'PWGTP', 'pwgtp')
@@ -65,14 +64,19 @@ for (yr in years) {
     
     demo <- if (col == 'total') FALSE else TRUE
     
-    print(yr)
-    
     # iterate through geo graphic areas
     for(geo_area in c('PUMA', 'cntyname')) {
       
+      print(yr)
+      print(col)
+      print(geo_area)
+      
       # calculate income insufficeincy for given year and demographic
-      demo_income_ins_single <- standard_errors(pop, geo_area, weights_tbl, pop_weights, col, demo) %>%
-        mutate(year = yr)
+      demo_income_ins_single <- standard_errors(pop_year, geo_area, weights_tbl, pop_weights, col, demo) %>%
+        # geo_area for PUMA is integer, and for county is character
+        # convert PUMA to character so they can be combined
+        mutate(geo_area = as.character(geo_area),
+               year = yr)
       
       # add specific year and demographic to dataset of all years and demographics
       demo_income_ins <- bind_rows(demo_income_ins, demo_income_ins_single)
