@@ -29,7 +29,7 @@ pop <- readRDS('population_expense.Rda') %>%
          start_age = as.integer(as.character(start_age))) %>%
   as.data.table()
 
-### iterate through each yearm calculating income insufficiency and standard errors
+### iterate through each year calculating income insufficiency and standard errors
 years <- seq(2006, 2017)
 state <- 37
 
@@ -51,7 +51,7 @@ for (yr in years) {
   pop <- pop[year == yr]
   
   # replciate weight variable names are lower case until 2017 and upper case starting in 2017
-  weight_names <- ifelse(year >= 2017, 'PWGTP', 'pwgtp')
+  weight_names <- ifelse(yr >= 2017, 'PWGTP', 'pwgtp')
   # replicate weight variables
   pop_weights <- c('PWGTP', paste0(weight_names, seq(1, 80)))
   

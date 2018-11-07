@@ -681,10 +681,6 @@ replicate_weights <- function(pop, weights_tbl, weight) {
   wgt <- weights_tbl %>%
     select(SERIALNO, SPORDER, !!weight) %>%
     collect() %>%
-    # if 2017, remove first four letters, which are year
-    # this matches with the format for the population dataset
-    mutate(SERIALNO = if (!!year == 2017) as.integer(str_replace_all(.$SERIALNO, '^2017', '')) else .$SERIALNO,
-           SERIALNO = as.integer(SERIALNO)) %>%
     # convert to data table
     as.data.table()
   
