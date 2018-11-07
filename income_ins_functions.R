@@ -681,10 +681,6 @@ replicate_weights <- function(pop, weights_tbl, weight) {
   wgt <- weights_tbl %>%
     select(SERIALNO, SPORDER, !!weight) %>%
     collect() %>%
-    # if 2017, remove first four letters, which are year
-    # this matches with the format for the population dataset
-    mutate(SERIALNO = if (!!year == 2017) as.integer(str_replace_all(.$SERIALNO, '^2017', '')) else .$SERIALNO,
-           SERIALNO = as.integer(SERIALNO)) %>%
     # convert to data table
     as.data.table()
   
@@ -705,6 +701,15 @@ replicate_weights <- function(pop, weights_tbl, weight) {
   
 }
 
+# popA <- pop
+# pop <- pop_year
+# geo_area <- 'PUMA'
+# weight <- 'pwgtp2'
+# col <- "RAC1P"
+# demo <- TRUE
+# state <- 37
+# yr <- 2008
+
 standard_errors <- function(pop, geo_area, weights_tbl, pop_weights, col, demo = TRUE) {
   
   # This function calculates standard errors and also aggregates other functions,
@@ -718,10 +723,6 @@ standard_errors <- function(pop, geo_area, weights_tbl, pop_weights, col, demo =
   #   demo: boolean, whether calcualtion is for demographic variable
   
   for (weight in pop_weights) {
-    
-    # print progress update
-    print(col)
-    print(weight)
     
     pop_wgt <- replicate_weights(pop, weights_tbl, weight)
     
@@ -768,8 +769,23 @@ standard_errors <- function(pop, geo_area, weights_tbl, pop_weights, col, demo =
     select(starts_with("sq_diff")) %>%
     rowSums()
   
-  point_estimate$se <- sqrt( sum_sq_diff * (4/80) )
+  # add sun of squared differences to squared differences dataset;
+  # and delete the squared differences
+  # we're adding it to the squared differences dataset because this dataset has
+  # geographic and demographic information that can be used to merge with point estimates
+  sq_diff <- sq_diff %>%
+    # remove all sq difference columns
+    select(-starts_with("sq_diff")) %>%
+    # add sum of squared differences
+    mutate(sum_sq_diff = !!sum_sq_diff,
+           # square summed differences
+           sum_sq_diff = sqrt( sum_sq_diff * (4/80) )) %>%
+    rename(se = sum_sq_diff) %>%
+    # merge with point estimates
+    inner_join(point_estimate, ., by = c('geo_area', 'sub_demographic', 'demographic'))
   
-  return(point_estimate)
+  #point_estimate$se <- sqrt( sum_sq_diff * (4/80) )
+  
+  return(sq_diff)
   
 }
