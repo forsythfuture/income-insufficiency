@@ -37,7 +37,7 @@ state <- 37
 # initialize dataframe to store demographic income insufficiency for all demographics and years
 demo_income_ins <- data.frame()
 
-for (yr in years) {
+for (yr in 2016) {
 
   # create population weights table name based on year
   tbl_name <- as.character(yr) %>%
@@ -59,14 +59,14 @@ for (yr in years) {
   demo_cols <- c('RAC1P', 'HISP', 'SEX', 'start_age', 'total')
   
   # iterate through each demographic, calculating income insufficiency
-  for (col in demo_cols) {
+  for (col in 'total') {
     
     # if demographic column is 'total' then demo parameter is FALSE
     
     demo <- if (col == 'total') FALSE else TRUE
     
     # iterate through geo graphic areas
-    for(geo_area in c('cntyname')) {
+    for(geo_area in c('PUMA', 'cntyname')) {
       
       print(yr)
       print(col)
@@ -91,3 +91,11 @@ for (yr in years) {
   }
   
 }
+
+income_ins <- readRDS('income_ins.Rda')
+
+expenses <- readRDS('population_expense.Rda') %>%
+  filter(year == 2016,
+         cntyname == 'Forsyth')
+
+sum(expenses$income_insufficient) / nrow(expenses)

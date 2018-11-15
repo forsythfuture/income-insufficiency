@@ -269,7 +269,8 @@ create_economic_units <- function(con, year, state) {
   pop <- population %>%
     select(!!pop_vars) %>%
     # filter for state and PUMA
-    filter(ST == !!state) %>%
+    filter(ST == !!state,
+           PUMA %in% c(1801, 1802, 1803)) %>%
     # some years only have final two digits; add 2000 to these digits to make them four digits long
     mutate(year = ifelse(year < 2000, year + 2000, year)) %>%
     collect() %>%
@@ -317,7 +318,7 @@ expense_groupings <- function(df, group_num) {
   df %>%
     distinct(year, SERIALNO, economic_unit, .keep_all = TRUE) %>%
     group_by(year, cntyname) %>%
-    select(year, cntyname, economic_unit_rent:economic_unit_meps) %>%
+    select(year, cntyname, economic_unit_child_care:economic_unit_meps) %>%
     mutate(expense_group = !!group_num) %>%
     mutate_at(vars(economic_unit_rent:economic_unit_meps), funs(round(mean(.),0))) %>%
     distinct()
@@ -481,7 +482,7 @@ child_care <- function(pop) {
   # create labels for bins; these are the start ages
   age_labels <- age_breaks[-(length(age_breaks))]
   
-  popA <- pop %>% 
+  pop <- pop %>% 
     # create age labels based on food costs age bins 1417191
     mutate(start_age = cut(AGEP, breaks = !!age_breaks, 
                            labels = !!age_labels, 

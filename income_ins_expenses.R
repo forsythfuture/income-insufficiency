@@ -48,7 +48,7 @@ four <- pop %>%
   group_by(year, cntyname, SERIALNO, economic_unit) %>%
   mutate(age_sum = sum(AGEP)) %>%
   filter(age_sum == 6) %>%
-  expense_groupings(., 3)
+  expense_groupings(., 4)
 
 # one working adult wit ha 2 and 4 year old
 five <- pop %>%
@@ -58,4 +58,8 @@ five <- pop %>%
   group_by(year, cntyname, SERIALNO, economic_unit) %>%
   mutate(age_sum = sum(AGEP)) %>%
   filter(age_sum == 6) %>%
-  expense_groupings(., 3)  
+  expense_groupings(., 5) 
+
+expenses <- bind_rows(list(one,two,three,four,five))
+
+write_csv(expenses, 'expenses.csv')
