@@ -269,9 +269,7 @@ create_economic_units <- function(con, year, state) {
   pop <- population %>%
     select(!!pop_vars) %>%
     # filter for state and PUMA
-    filter(ST == !!state,
-           # delete this to run full script
-           PUMA %IN% c(1801, 1802, 1803)) %>%
+    filter(ST == !!state) %>%
     # some years only have final two digits; add 2000 to these digits to make them four digits long
     mutate(year = ifelse(year < 2000, year + 2000, year)) %>%
     collect() %>%
@@ -336,21 +334,22 @@ tax_liability <- function(pop) {
   tax_liabilities <- readRDS('nc_tax_liab_all.Rda')
   
   # merge taxes with population dataset
-  pop %>%
+  a <- pop %>%
     left_join(tax_liabilities, by = c('year', 'SERIALNO', 'SPORDER')) %>%
     # replace NA for taxes with zero
-    mutate(taxes = replace_na(taxes, 0),
+    mutate(total_taxes = replace_na(total_taxes, 0)) %>%
            # subtract taxes from income
-           income = PINCP - taxes) %>%
     # create group to calculate economic unit post-tax income
     group_by(year, SERIALNO, economic_unit) %>%
-    # if part of economic unit, add incomes, otherwise use individual's income
+    # if part of economic unit, add incomes and taxes, otherwise use individual's income
     mutate(economic_unit_income = ifelse(economic_unit == TRUE,
-                                                  sum(income),
-                                                  income)) %>%
+                                         sum(PINCP),
+                                         PINCP),
+          economic_unit_taxes = ifelse(economic_unit == TRUE,
+                                                      sum(total_taxes),
+                                                      total_taxes)) %>%
     ungroup() %>%
-    rename(tax_liability = taxes) %>%
-    select(-PINCP, -income)
+    select(-PINCP, -total_taxes)
 
 }
 

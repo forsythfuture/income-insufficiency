@@ -21,6 +21,7 @@ age_labels <- age_bins[-1]
 
 # read dataset with expenses
 pop <- readRDS('population_expense.Rda') %>%
+  filter(cntyname == 'Forsyth') %>%
   # create age bins
   mutate(start_age = cut(AGEP, breaks = !!age_bins, 
                          labels = !!age_labels, 
@@ -30,7 +31,7 @@ pop <- readRDS('population_expense.Rda') %>%
   as.data.table()
 
 ### iterate through each year calculating income insufficiency and standard errors
-years <- seq(2006, 2017)
+years <- seq(2015, 2016)
 state <- 37
 
 # initialize dataframe to store demographic income insufficiency for all demographics and years
