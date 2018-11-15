@@ -4,601 +4,61 @@ year,consumer_unit_size,item,subcategory,expense,start_age,end_age,gender
 2006,3,Apparel and services,Apparel and services,2149,150,150,0
 2006,4,Apparel and services,Apparel and services,2512,150,150,0
 2006,5,Apparel and services,Apparel and services,2592,150,150,0
-2006,1,"Apparel, Boys, 2 to 15",Apparel and services,11,2,15,1
-2006,2,"Apparel, Boys, 2 to 15",Apparel and services,38,2,15,1
-2006,3,"Apparel, Boys, 2 to 15",Apparel and services,122,2,15,1
-2006,4,"Apparel, Boys, 2 to 15",Apparel and services,258,2,15,1
-2006,5,"Apparel, Boys, 2 to 15",Apparel and services,342,2,15,1
-2006,1,Footwear,Apparel and services,134,150,150,0
-2006,2,Footwear,Apparel and services,266,150,150,0
-2006,3,Footwear,Apparel and services,362,150,150,0
-2006,4,Footwear,Apparel and services,407,150,150,0
-2006,5,Footwear,Apparel and services,450,150,150,0
-2006,1,"Apparel, Girls, 2 to 15",Apparel and services,12,2,15,2
-2006,2,"Apparel, Girls, 2 to 15",Apparel and services,56,2,15,2
-2006,3,"Apparel, Girls, 2 to 15",Apparel and services,175,2,15,2
-2006,4,"Apparel, Girls, 2 to 15",Apparel and services,316,2,15,2
-2006,5,"Apparel, Girls, 2 to 15",Apparel and services,355,2,15,2
-2006,1,"Apparel, Children under 2",Apparel and services,19,0,1,0
-2006,2,"Apparel, Children under 2",Apparel and services,51,0,1,0
-2006,3,"Apparel, Children under 2",Apparel and services,136,0,1,0
-2006,4,"Apparel, Children under 2",Apparel and services,167,0,1,0
-2006,5,"Apparel, Children under 2",Apparel and services,231,0,1,0
-2006,1,"Apparel, Men and boys",Apparel and services,205,150,150,1
-2006,2,"Apparel, Men and boys",Apparel and services,406,150,150,1
-2006,3,"Apparel, Men and boys",Apparel and services,537,150,150,1
-2006,4,"Apparel, Men and boys",Apparel and services,660,150,150,1
-2006,5,"Apparel, Men and boys",Apparel and services,688,150,150,1
-2006,1,"Apparel, Men, 16 and over",Apparel and services,187,16,150,1
-2006,2,"Apparel, Men, 16 and over",Apparel and services,358,16,150,1
-2006,3,"Apparel, Men, 16 and over",Apparel and services,414,16,150,1
-2006,4,"Apparel, Men, 16 and over",Apparel and services,420,16,150,1
-2006,5,"Apparel, Men, 16 and over",Apparel and services,377,16,150,1
-2006,1,Other apparel products and services,Apparel and services,188,150,150,0
-2006,2,Other apparel products and services,Apparel and services,292,150,150,0
-2006,3,Other apparel products and services,Apparel and services,254,150,150,0
-2006,4,Other apparel products and services,Apparel and services,262,150,150,0
-2006,5,Other apparel products and services,Apparel and services,277,150,150,0
-2006,1,"Apparel, Women and girls",Apparel and services,331,150,150,2
-2006,2,"Apparel, Women and girls",Apparel and services,720,150,150,2
-2006,3,"Apparel, Women and girls",Apparel and services,860,150,150,2
-2006,4,"Apparel, Women and girls",Apparel and services,1018,150,150,2
-2006,5,"Apparel, Women and girls",Apparel and services,948,150,150,2
-2006,1,"Apparel, Women, 16 and over",Apparel and services,313,16,150,2
-2006,2,"Apparel, Women, 16 and over",Apparel and services,655,16,150,2
-2006,3,"Apparel, Women, 16 and over",Apparel and services,686,16,150,2
-2006,4,"Apparel, Women, 16 and over",Apparel and services,719,16,150,2
-2006,5,"Apparel, Women, 16 and over",Apparel and services,616,16,150,2
 2007,1,Apparel and services,Apparel and services,873,150,150,0
 2007,2,Apparel and services,Apparel and services,1662,150,150,0
 2007,3,Apparel and services,Apparel and services,2096,150,150,0
 2007,4,Apparel and services,Apparel and services,2572,150,150,0
 2007,5,Apparel and services,Apparel and services,2446,150,150,0
-2007,1,"Apparel, Boys, 2 to 15",Apparel and services,13,2,15,1
-2007,2,"Apparel, Boys, 2 to 15",Apparel and services,25,2,15,1
-2007,3,"Apparel, Boys, 2 to 15",Apparel and services,96,2,15,1
-2007,4,"Apparel, Boys, 2 to 15",Apparel and services,207,2,15,1
-2007,5,"Apparel, Boys, 2 to 15",Apparel and services,263,2,15,1
-2007,1,Footwear,Apparel and services,144,150,150,0
-2007,2,Footwear,Apparel and services,265,150,150,0
-2007,3,Footwear,Apparel and services,375,150,150,0
-2007,4,Footwear,Apparel and services,498,150,150,0
-2007,5,Footwear,Apparel and services,480,150,150,0
-2007,1,"Apparel, Girls, 2 to 15",Apparel and services,18,2,15,2
-2007,2,"Apparel, Girls, 2 to 15",Apparel and services,54,2,15,2
-2007,3,"Apparel, Girls, 2 to 15",Apparel and services,172,2,15,2
-2007,4,"Apparel, Girls, 2 to 15",Apparel and services,327,2,15,2
-2007,5,"Apparel, Girls, 2 to 15",Apparel and services,324,2,15,2
-2007,1,"Apparel, Children under 2",Apparel and services,18,0,1,0
-2007,2,"Apparel, Children under 2",Apparel and services,45,0,1,0
-2007,3,"Apparel, Children under 2",Apparel and services,158,0,1,0
-2007,4,"Apparel, Children under 2",Apparel and services,161,0,1,0
-2007,5,"Apparel, Children under 2",Apparel and services,222,0,1,0
-2007,1,"Apparel, Men and boys",Apparel and services,261,150,150,1
-2007,2,"Apparel, Men and boys",Apparel and services,388,150,150,1
-2007,3,"Apparel, Men and boys",Apparel and services,498,150,150,1
-2007,4,"Apparel, Men and boys",Apparel and services,616,150,150,1
-2007,5,"Apparel, Men and boys",Apparel and services,676,150,150,1
-2007,1,"Apparel, Men, 16 and over",Apparel and services,249,16,150,1
-2007,2,"Apparel, Men, 16 and over",Apparel and services,365,16,150,1
-2007,3,"Apparel, Men, 16 and over",Apparel and services,403,16,150,1
-2007,4,"Apparel, Men, 16 and over",Apparel and services,405,16,150,1
-2007,5,"Apparel, Men, 16 and over",Apparel and services,406,16,150,1
-2007,1,Other apparel products and services,Apparel and services,156,150,150,0
-2007,2,Other apparel products and services,Apparel and services,276,150,150,0
-2007,3,Other apparel products and services,Apparel and services,278,150,150,0
-2007,4,Other apparel products and services,Apparel and services,355,150,150,0
-2007,5,Other apparel products and services,Apparel and services,217,150,150,0
-2007,1,"Apparel, Women and girls",Apparel and services,300,150,150,2
-2007,2,"Apparel, Women and girls",Apparel and services,682,150,150,2
-2007,3,"Apparel, Women and girls",Apparel and services,787,150,150,2
-2007,4,"Apparel, Women and girls",Apparel and services,945,150,150,2
-2007,5,"Apparel, Women and girls",Apparel and services,864,150,150,2
-2007,1,"Apparel, Women, 16 and over",Apparel and services,274,16,150,2
-2007,2,"Apparel, Women, 16 and over",Apparel and services,614,16,150,2
-2007,3,"Apparel, Women, 16 and over",Apparel and services,620,16,150,2
-2007,4,"Apparel, Women, 16 and over",Apparel and services,646,16,150,2
-2007,5,"Apparel, Women, 16 and over",Apparel and services,571,16,150,2
 2008,1,Apparel and services,Apparel and services,907,150,150,0
 2008,2,Apparel and services,Apparel and services,1682,150,150,0
 2008,3,Apparel and services,Apparel and services,2338,150,150,0
 2008,4,Apparel and services,Apparel and services,2454,150,150,0
 2008,5,Apparel and services,Apparel and services,2801,150,150,0
-2008,1,"Apparel, Boys, 2 to 15",Apparel and services,11,2,15,1
-2008,2,"Apparel, Boys, 2 to 15",Apparel and services,35,2,15,1
-2008,3,"Apparel, Boys, 2 to 15",Apparel and services,109,2,15,1
-2008,4,"Apparel, Boys, 2 to 15",Apparel and services,226,2,15,1
-2008,5,"Apparel, Boys, 2 to 15",Apparel and services,277,2,15,1
-2008,1,Footwear,Apparel and services,170,150,150,0
-2008,2,Footwear,Apparel and services,302,150,150,0
-2008,3,Footwear,Apparel and services,442,150,150,0
-2008,4,Footwear,Apparel and services,515,150,150,0
-2008,5,Footwear,Apparel and services,537,150,150,0
-2008,1,"Apparel, Girls, 2 to 15",Apparel and services,19,2,15,2
-2008,2,"Apparel, Girls, 2 to 15",Apparel and services,56,2,15,2
-2008,3,"Apparel, Girls, 2 to 15",Apparel and services,142,2,15,2
-2008,4,"Apparel, Girls, 2 to 15",Apparel and services,246,2,15,2
-2008,5,"Apparel, Girls, 2 to 15",Apparel and services,419,2,15,2
-2008,1,"Apparel, Children under 2",Apparel and services,14,0,1,0
-2008,2,"Apparel, Children under 2",Apparel and services,39,0,1,0
-2008,3,"Apparel, Children under 2",Apparel and services,160,0,1,0
-2008,4,"Apparel, Children under 2",Apparel and services,157,0,1,0
-2008,5,"Apparel, Children under 2",Apparel and services,191,0,1,0
-2008,1,"Apparel, Men and boys",Apparel and services,199,150,150,1
-2008,2,"Apparel, Men and boys",Apparel and services,389,150,150,1
-2008,3,"Apparel, Men and boys",Apparel and services,579,150,150,1
-2008,4,"Apparel, Men and boys",Apparel and services,608,150,150,1
-2008,5,"Apparel, Men and boys",Apparel and services,739,150,150,1
-2008,1,"Apparel, Men, 16 and over",Apparel and services,185,16,150,1
-2008,2,"Apparel, Men, 16 and over",Apparel and services,350,16,150,1
-2008,3,"Apparel, Men, 16 and over",Apparel and services,469,16,150,1
-2008,4,"Apparel, Men, 16 and over",Apparel and services,390,16,150,1
-2008,5,"Apparel, Men, 16 and over",Apparel and services,473,16,150,1
-2008,1,Other apparel products and services,Apparel and services,142,150,150,0
-2008,2,Other apparel products and services,Apparel and services,237,150,150,0
-2008,3,Other apparel products and services,Apparel and services,243,150,150,0
-2008,4,Other apparel products and services,Apparel and services,268,150,150,0
-2008,5,Other apparel products and services,Apparel and services,230,150,150,0
-2008,1,"Apparel, Women and girls",Apparel and services,382,150,150,2
-2008,2,"Apparel, Women and girls",Apparel and services,714,150,150,2
-2008,3,"Apparel, Women and girls",Apparel and services,912,150,150,2
-2008,4,"Apparel, Women and girls",Apparel and services,908,150,150,2
-2008,5,"Apparel, Women and girls",Apparel and services,1115,150,150,2
-2008,1,"Apparel, Women, 16 and over",Apparel and services,365,16,150,2
-2008,2,"Apparel, Women, 16 and over",Apparel and services,658,16,150,2
-2008,3,"Apparel, Women, 16 and over",Apparel and services,771,16,150,2
-2008,4,"Apparel, Women, 16 and over",Apparel and services,661,16,150,2
-2008,5,"Apparel, Women, 16 and over",Apparel and services,693,16,150,2
 2009,1,Apparel and services,Apparel and services,1009,150,150,0
 2009,2,Apparel and services,Apparel and services,1621,150,150,0
 2009,3,Apparel and services,Apparel and services,2118,150,150,0
 2009,4,Apparel and services,Apparel and services,2662,150,150,0
 2009,5,Apparel and services,Apparel and services,2865,150,150,0
-2009,1,"Apparel, Boys, 2 to 15",Apparel and services,9,2,15,1
-2009,2,"Apparel, Boys, 2 to 15",Apparel and services,32,2,15,1
-2009,3,"Apparel, Boys, 2 to 15",Apparel and services,92,2,15,1
-2009,4,"Apparel, Boys, 2 to 15",Apparel and services,197,2,15,1
-2009,5,"Apparel, Boys, 2 to 15",Apparel and services,240,2,15,1
-2009,1,Footwear,Apparel and services,191,150,150,0
-2009,2,Footwear,Apparel and services,308,150,150,0
-2009,3,Footwear,Apparel and services,386,150,150,0
-2009,4,Footwear,Apparel and services,500,150,150,0
-2009,5,Footwear,Apparel and services,674,150,150,0
-2009,1,"Apparel, Girls, 2 to 15",Apparel and services,20,2,15,2
-2009,2,"Apparel, Girls, 2 to 15",Apparel and services,54,2,15,2
-2009,3,"Apparel, Girls, 2 to 15",Apparel and services,168,2,15,2
-2009,4,"Apparel, Girls, 2 to 15",Apparel and services,302,2,15,2
-2009,5,"Apparel, Girls, 2 to 15",Apparel and services,389,2,15,2
-2009,1,"Apparel, Children under 2",Apparel and services,21,0,1,0
-2009,2,"Apparel, Children under 2",Apparel and services,47,0,1,0
-2009,3,"Apparel, Children under 2",Apparel and services,149,0,1,0
-2009,4,"Apparel, Children under 2",Apparel and services,171,0,1,0
-2009,5,"Apparel, Children under 2",Apparel and services,193,0,1,0
-2009,1,"Apparel, Men and boys",Apparel and services,227,150,150,1
-2009,2,"Apparel, Men and boys",Apparel and services,330,150,150,1
-2009,3,"Apparel, Men and boys",Apparel and services,435,150,150,1
-2009,4,"Apparel, Men and boys",Apparel and services,554,150,150,1
-2009,5,"Apparel, Men and boys",Apparel and services,571,150,150,1
-2009,1,"Apparel, Men, 16 and over",Apparel and services,218,16,150,1
-2009,2,"Apparel, Men, 16 and over",Apparel and services,299,16,150,1
-2009,3,"Apparel, Men, 16 and over",Apparel and services,343,16,150,1
-2009,4,"Apparel, Men, 16 and over",Apparel and services,361,16,150,1
-2009,5,"Apparel, Men, 16 and over",Apparel and services,335,16,150,1
-2009,1,Other apparel products and services,Apparel and services,170,150,150,0
-2009,2,Other apparel products and services,Apparel and services,255,150,150,0
-2009,3,Other apparel products and services,Apparel and services,246,150,150,0
-2009,4,Other apparel products and services,Apparel and services,331,150,150,0
-2009,5,Other apparel products and services,Apparel and services,385,150,150,0
-2009,1,"Apparel, Women and girls",Apparel and services,401,150,150,2
-2009,2,"Apparel, Women and girls",Apparel and services,683,150,150,2
-2009,3,"Apparel, Women and girls",Apparel and services,900,150,150,2
-2009,4,"Apparel, Women and girls",Apparel and services,1101,150,150,2
-2009,5,"Apparel, Women and girls",Apparel and services,1041,150,150,2
-2009,1,"Apparel, Women, 16 and over",Apparel and services,380,16,150,2
-2009,2,"Apparel, Women, 16 and over",Apparel and services,628,16,150,2
-2009,3,"Apparel, Women, 16 and over",Apparel and services,730,16,150,2
-2009,4,"Apparel, Women, 16 and over",Apparel and services,803,16,150,2
-2009,5,"Apparel, Women, 16 and over",Apparel and services,656,16,150,2
 2010,1,Apparel and services,Apparel and services,712,150,150,0
 2010,2,Apparel and services,Apparel and services,1510,150,150,0
 2010,3,Apparel and services,Apparel and services,1851,150,150,0
 2010,4,Apparel and services,Apparel and services,2228,150,150,0
 2010,5,Apparel and services,Apparel and services,2293,150,150,0
-2010,1,"Apparel, Boys, 2 to 15",Apparel and services,9,2,15,1
-2010,2,"Apparel, Boys, 2 to 15",Apparel and services,25,2,15,1
-2010,3,"Apparel, Boys, 2 to 15",Apparel and services,76,2,15,1
-2010,4,"Apparel, Boys, 2 to 15",Apparel and services,163,2,15,1
-2010,5,"Apparel, Boys, 2 to 15",Apparel and services,212,2,15,1
-2010,1,Footwear,Apparel and services,147,150,150,0
-2010,2,Footwear,Apparel and services,266,150,150,0
-2010,3,Footwear,Apparel and services,328,150,150,0
-2010,4,Footwear,Apparel and services,437,150,150,0
-2010,5,Footwear,Apparel and services,569,150,150,0
-2010,1,"Apparel, Girls, 2 to 15",Apparel and services,14,2,15,2
-2010,2,"Apparel, Girls, 2 to 15",Apparel and services,41,2,15,2
-2010,3,"Apparel, Girls, 2 to 15",Apparel and services,130,2,15,2
-2010,4,"Apparel, Girls, 2 to 15",Apparel and services,249,2,15,2
-2010,5,"Apparel, Girls, 2 to 15",Apparel and services,318,2,15,2
-2010,1,"Apparel, Children under 2",Apparel and services,17,0,1,0
-2010,2,"Apparel, Children under 2",Apparel and services,48,0,1,0
-2010,3,"Apparel, Children under 2",Apparel and services,171,0,1,0
-2010,4,"Apparel, Children under 2",Apparel and services,169,0,1,0
-2010,5,"Apparel, Children under 2",Apparel and services,198,0,1,0
-2010,1,"Apparel, Men and boys",Apparel and services,149,150,150,1
-2010,2,"Apparel, Men and boys",Apparel and services,297,150,150,1
-2010,3,"Apparel, Men and boys",Apparel and services,375,150,150,1
-2010,4,"Apparel, Men and boys",Apparel and services,459,150,150,1
-2010,5,"Apparel, Men and boys",Apparel and services,494,150,150,1
-2010,1,"Apparel, Men, 16 and over",Apparel and services,139,16,150,1
-2010,2,"Apparel, Men, 16 and over",Apparel and services,270,16,150,1
-2010,3,"Apparel, Men, 16 and over",Apparel and services,299,16,150,1
-2010,4,"Apparel, Men, 16 and over",Apparel and services,300,16,150,1
-2010,5,"Apparel, Men, 16 and over",Apparel and services,289,16,150,1
-2010,1,Other apparel products and services,Apparel and services,109,150,150,0
-2010,2,Other apparel products and services,Apparel and services,277,150,150,0
-2010,3,Other apparel products and services,Apparel and services,187,150,150,0
-2010,4,Other apparel products and services,Apparel and services,204,150,150,0
-2010,5,Other apparel products and services,Apparel and services,160,150,150,0
-2010,1,"Apparel, Women and girls",Apparel and services,282,150,150,2
-2010,2,"Apparel, Women and girls",Apparel and services,598,150,150,2
-2010,3,"Apparel, Women and girls",Apparel and services,803,150,150,2
-2010,4,"Apparel, Women and girls",Apparel and services,980,150,150,2
-2010,5,"Apparel, Women and girls",Apparel and services,911,150,150,2
-2010,1,"Apparel, Women, 16 and over",Apparel and services,265,16,150,2
-2010,2,"Apparel, Women, 16 and over",Apparel and services,551,16,150,2
-2010,3,"Apparel, Women, 16 and over",Apparel and services,673,16,150,2
-2010,4,"Apparel, Women, 16 and over",Apparel and services,740,16,150,2
-2010,5,"Apparel, Women, 16 and over",Apparel and services,609,16,150,2
 2011,1,Apparel and services,Apparel and services,948,150,150,0
 2011,2,Apparel and services,Apparel and services,1517,150,150,0
 2011,3,Apparel and services,Apparel and services,1871,150,150,0
 2011,4,Apparel and services,Apparel and services,2231,150,150,0
 2011,5,Apparel and services,Apparel and services,2638,150,150,0
-2011,1,"Apparel, Boys, 2 to 15",Apparel and services,12,2,15,1
-2011,2,"Apparel, Boys, 2 to 15",Apparel and services,23,2,15,1
-2011,3,"Apparel, Boys, 2 to 15",Apparel and services,88,2,15,1
-2011,4,"Apparel, Boys, 2 to 15",Apparel and services,167,2,15,1
-2011,5,"Apparel, Boys, 2 to 15",Apparel and services,216,2,15,1
-2011,1,Footwear,Apparel and services,154,150,150,0
-2011,2,Footwear,Apparel and services,289,150,150,0
-2011,3,Footwear,Apparel and services,346,150,150,0
-2011,4,Footwear,Apparel and services,483,150,150,0
-2011,5,Footwear,Apparel and services,523,150,150,0
-2011,1,"Apparel, Girls, 2 to 15",Apparel and services,29,2,15,2
-2011,2,"Apparel, Girls, 2 to 15",Apparel and services,50,2,15,2
-2011,3,"Apparel, Girls, 2 to 15",Apparel and services,112,2,15,2
-2011,4,"Apparel, Girls, 2 to 15",Apparel and services,264,2,15,2
-2011,5,"Apparel, Girls, 2 to 15",Apparel and services,303,2,15,2
-2011,1,"Apparel, Children under 2",Apparel and services,16,0,1,0
-2011,2,"Apparel, Children under 2",Apparel and services,32,0,1,0
-2011,3,"Apparel, Children under 2",Apparel and services,129,0,1,0
-2011,4,"Apparel, Children under 2",Apparel and services,133,0,1,0
-2011,5,"Apparel, Children under 2",Apparel and services,189,0,1,0
-2011,1,"Apparel, Men and boys",Apparel and services,243,150,150,1
-2011,2,"Apparel, Men and boys",Apparel and services,336,150,150,1
-2011,3,"Apparel, Men and boys",Apparel and services,444,150,150,1
-2011,4,"Apparel, Men and boys",Apparel and services,514,150,150,1
-2011,5,"Apparel, Men and boys",Apparel and services,753,150,150,1
-2011,1,"Apparel, Men, 16 and over",Apparel and services,235,16,150,1
-2011,2,"Apparel, Men, 16 and over",Apparel and services,319,16,150,1
-2011,3,"Apparel, Men, 16 and over",Apparel and services,356,16,150,1
-2011,4,"Apparel, Men, 16 and over",Apparel and services,337,16,150,1
-2011,5,"Apparel, Men, 16 and over",Apparel and services,526,16,150,1
-2011,1,Other apparel products and services,Apparel and services,118,150,150,0
-2011,2,Other apparel products and services,Apparel and services,225,150,150,0
-2011,3,Other apparel products and services,Apparel and services,224,150,150,0
-2011,4,Other apparel products and services,Apparel and services,239,150,150,0
-2011,5,Other apparel products and services,Apparel and services,219,150,150,0
-2011,1,"Apparel, Women and girls",Apparel and services,413,150,150,2
-2011,2,"Apparel, Women and girls",Apparel and services,625,150,150,2
-2011,3,"Apparel, Women and girls",Apparel and services,732,150,150,2
-2011,4,"Apparel, Women and girls",Apparel and services,869,150,150,2
-2011,5,"Apparel, Women and girls",Apparel and services,976,150,150,2
-2011,1,"Apparel, Women, 16 and over",Apparel and services,382,16,150,2
-2011,2,"Apparel, Women, 16 and over",Apparel and services,574,16,150,2
-2011,3,"Apparel, Women, 16 and over",Apparel and services,619,16,150,2
-2011,4,"Apparel, Women, 16 and over",Apparel and services,606,16,150,2
-2011,5,"Apparel, Women, 16 and over",Apparel and services,677,16,150,2
 2012,1,Apparel and services,Apparel and services,828,150,150,0
 2012,2,Apparel and services,Apparel and services,1618,150,150,0
 2012,3,Apparel and services,Apparel and services,1994,150,150,0
 2012,4,Apparel and services,Apparel and services,2519,150,150,0
 2012,5,Apparel and services,Apparel and services,2587,150,150,0
-2012,1,"Apparel, Boys, 2 to 15",Apparel and services,13,2,15,1
-2012,2,"Apparel, Boys, 2 to 15",Apparel and services,30,2,15,1
-2012,3,"Apparel, Boys, 2 to 15",Apparel and services,85,2,15,1
-2012,4,"Apparel, Boys, 2 to 15",Apparel and services,234,2,15,1
-2012,5,"Apparel, Boys, 2 to 15",Apparel and services,282,2,15,1
-2012,1,Footwear,Apparel and services,147,150,150,0
-2012,2,Footwear,Apparel and services,330,150,150,0
-2012,3,Footwear,Apparel and services,443,150,150,0
-2012,4,Footwear,Apparel and services,541,150,150,0
-2012,5,Footwear,Apparel and services,624,150,150,0
-2012,1,"Apparel, Girls, 2 to 15",Apparel and services,14,2,15,2
-2012,2,"Apparel, Girls, 2 to 15",Apparel and services,66,2,15,2
-2012,3,"Apparel, Girls, 2 to 15",Apparel and services,149,2,15,2
-2012,4,"Apparel, Girls, 2 to 15",Apparel and services,283,2,15,2
-2012,5,"Apparel, Girls, 2 to 15",Apparel and services,343,2,15,2
-2012,1,"Apparel, Children under 2",Apparel and services,9,0,1,0
-2012,2,"Apparel, Children under 2",Apparel and services,30,0,1,0
-2012,3,"Apparel, Children under 2",Apparel and services,127,0,1,0
-2012,4,"Apparel, Children under 2",Apparel and services,146,0,1,0
-2012,5,"Apparel, Children under 2",Apparel and services,169,0,1,0
-2012,1,"Apparel, Men and boys",Apparel and services,192,150,150,1
-2012,2,"Apparel, Men and boys",Apparel and services,333,150,150,1
-2012,3,"Apparel, Men and boys",Apparel and services,411,150,150,1
-2012,4,"Apparel, Men and boys",Apparel and services,569,150,150,1
-2012,5,"Apparel, Men and boys",Apparel and services,678,150,150,1
-2012,1,"Apparel, Men, 16 and over",Apparel and services,175,16,150,1
-2012,2,"Apparel, Men, 16 and over",Apparel and services,298,16,150,1
-2012,3,"Apparel, Men, 16 and over",Apparel and services,324,16,150,1
-2012,4,"Apparel, Men, 16 and over",Apparel and services,342,16,150,1
-2012,5,"Apparel, Men, 16 and over",Apparel and services,405,16,150,1
-2012,1,Other apparel products and services,Apparel and services,151,150,150,0
-2012,2,Other apparel products and services,Apparel and services,228,150,150,0
-2012,3,Other apparel products and services,Apparel and services,236,150,150,0
-2012,4,Other apparel products and services,Apparel and services,277,150,150,0
-2012,5,Other apparel products and services,Apparel and services,211,150,150,0
-2012,1,"Apparel, Women and girls",Apparel and services,324,150,150,2
-2012,2,"Apparel, Women and girls",Apparel and services,696,150,150,2
-2012,3,"Apparel, Women and girls",Apparel and services,788,150,150,2
-2012,4,"Apparel, Women and girls",Apparel and services,994,150,150,2
-2012,5,"Apparel, Women and girls",Apparel and services,914,150,150,2
-2012,1,"Apparel, Women, 16 and over",Apparel and services,306,16,150,2
-2012,2,"Apparel, Women, 16 and over",Apparel and services,624,16,150,2
-2012,3,"Apparel, Women, 16 and over",Apparel and services,639,16,150,2
-2012,4,"Apparel, Women, 16 and over",Apparel and services,718,16,150,2
-2012,5,"Apparel, Women, 16 and over",Apparel and services,584,16,150,2
 2013,1,Apparel and services,Apparel and services,780,150,150,0
 2013,2,Apparel and services,Apparel and services,1379,150,150,0
 2013,3,Apparel and services,Apparel and services,1788,150,150,0
 2013,4,Apparel and services,Apparel and services,2252,150,150,0
 2013,5,Apparel and services,Apparel and services,2140,150,150,0
-2013,1,"Apparel, Boys, 2 to 15",Apparel and services,14,2,15,1
-2013,2,"Apparel, Boys, 2 to 15",Apparel and services,21,2,15,1
-2013,3,"Apparel, Boys, 2 to 15",Apparel and services,74,2,15,1
-2013,4,"Apparel, Boys, 2 to 15",Apparel and services,187,2,15,1
-2013,5,"Apparel, Boys, 2 to 15",Apparel and services,223,2,15,1
-2013,1,Footwear,Apparel and services,120,150,150,0
-2013,2,Footwear,Apparel and services,224,150,150,0
-2013,3,Footwear,Apparel and services,369,150,150,0
-2013,4,Footwear,Apparel and services,446,150,150,0
-2013,5,Footwear,Apparel and services,458,150,150,0
-2013,1,"Apparel, Girls, 2 to 15",Apparel and services,16,2,15,2
-2013,2,"Apparel, Girls, 2 to 15",Apparel and services,50,2,15,2
-2013,3,"Apparel, Girls, 2 to 15",Apparel and services,124,2,15,2
-2013,4,"Apparel, Girls, 2 to 15",Apparel and services,274,2,15,2
-2013,5,"Apparel, Girls, 2 to 15",Apparel and services,311,2,15,2
-2013,1,"Apparel, Children under 2",Apparel and services,15,0,1,0
-2013,2,"Apparel, Children under 2",Apparel and services,28,0,1,0
-2013,3,"Apparel, Children under 2",Apparel and services,130,0,1,0
-2013,4,"Apparel, Children under 2",Apparel and services,143,0,1,0
-2013,5,"Apparel, Children under 2",Apparel and services,177,0,1,0
-2013,1,"Apparel, Men and boys",Apparel and services,192,150,150,1
-2013,2,"Apparel, Men and boys",Apparel and services,310,150,150,1
-2013,3,"Apparel, Men and boys",Apparel and services,392,150,150,1
-2013,4,"Apparel, Men and boys",Apparel and services,616,150,150,1
-2013,5,"Apparel, Men and boys",Apparel and services,514,150,150,1
-2013,1,"Apparel, Men, 16 and over",Apparel and services,178,16,150,1
-2013,2,"Apparel, Men, 16 and over",Apparel and services,286,16,150,1
-2013,3,"Apparel, Men, 16 and over",Apparel and services,320,16,150,1
-2013,4,"Apparel, Men, 16 and over",Apparel and services,434,16,150,1
-2013,5,"Apparel, Men, 16 and over",Apparel and services,298,16,150,1
-2013,1,Other apparel products and services,Apparel and services,118,150,150,0
-2013,2,Other apparel products and services,Apparel and services,211,150,150,0
-2013,3,Other apparel products and services,Apparel and services,202,150,150,0
-2013,4,Other apparel products and services,Apparel and services,206,150,150,0
-2013,5,Other apparel products and services,Apparel and services,165,150,150,0
-2013,1,"Apparel, Women and girls",Apparel and services,333,150,150,2
-2013,2,"Apparel, Women and girls",Apparel and services,604,150,150,2
-2013,3,"Apparel, Women and girls",Apparel and services,693,150,150,2
-2013,4,"Apparel, Women and girls",Apparel and services,846,150,150,2
-2013,5,"Apparel, Women and girls",Apparel and services,829,150,150,2
-2013,1,"Apparel, Women, 16 and over",Apparel and services,316,16,150,2
-2013,2,"Apparel, Women, 16 and over",Apparel and services,552,16,150,2
-2013,3,"Apparel, Women, 16 and over",Apparel and services,569,16,150,2
-2013,4,"Apparel, Women, 16 and over",Apparel and services,578,16,150,2
-2013,5,"Apparel, Women, 16 and over",Apparel and services,525,16,150,2
 2014,1,Apparel and services,Apparel and services,715,150,150,0
 2014,2,Apparel and services,Apparel and services,1563,150,150,0
 2014,3,Apparel and services,Apparel and services,2037,150,150,0
 2014,4,Apparel and services,Apparel and services,2399,150,150,0
 2014,5,Apparel and services,Apparel and services,2538,150,150,0
-2014,1,"Apparel, Boys, 2 to 15",Apparel and services,9,2,15,1
-2014,2,"Apparel, Boys, 2 to 15",Apparel and services,34,2,15,1
-2014,3,"Apparel, Boys, 2 to 15",Apparel and services,106,2,15,1
-2014,4,"Apparel, Boys, 2 to 15",Apparel and services,227,2,15,1
-2014,5,"Apparel, Boys, 2 to 15",Apparel and services,321,2,15,1
-2014,1,Footwear,Apparel and services,144,150,150,0
-2014,2,Footwear,Apparel and services,346,150,150,0
-2014,3,Footwear,Apparel and services,413,150,150,0
-2014,4,Footwear,Apparel and services,525,150,150,0
-2014,5,Footwear,Apparel and services,633,150,150,0
-2014,1,"Apparel, Girls, 2 to 15",Apparel and services,14,2,15,2
-2014,2,"Apparel, Girls, 2 to 15",Apparel and services,52,2,15,2
-2014,3,"Apparel, Girls, 2 to 15",Apparel and services,163,2,15,2
-2014,4,"Apparel, Girls, 2 to 15",Apparel and services,278,2,15,2
-2014,5,"Apparel, Girls, 2 to 15",Apparel and services,307,2,15,2
-2014,1,"Apparel, Children under 2",Apparel and services,9,0,1,0
-2014,2,"Apparel, Children under 2",Apparel and services,36,0,1,0
-2014,3,"Apparel, Children under 2",Apparel and services,122,0,1,0
-2014,4,"Apparel, Children under 2",Apparel and services,132,0,1,0
-2014,5,"Apparel, Children under 2",Apparel and services,168,0,1,0
-2014,1,"Apparel, Men and boys",Apparel and services,151,150,150,1
-2014,2,"Apparel, Men and boys",Apparel and services,342,150,150,1
-2014,3,"Apparel, Men and boys",Apparel and services,421,150,150,1
-2014,4,"Apparel, Men and boys",Apparel and services,560,150,150,1
-2014,5,"Apparel, Men and boys",Apparel and services,647,150,150,1
-2014,1,"Apparel, Men, 16 and over",Apparel and services,140,16,150,1
-2014,2,"Apparel, Men, 16 and over",Apparel and services,304,16,150,1
-2014,3,"Apparel, Men, 16 and over",Apparel and services,314,16,150,1
-2014,4,"Apparel, Men, 16 and over",Apparel and services,337,16,150,1
-2014,5,"Apparel, Men, 16 and over",Apparel and services,333,16,150,1
-2014,1,Other apparel products and services,Apparel and services,109,150,150,0
-2014,2,Other apparel products and services,Apparel and services,217,150,150,0
-2014,3,Other apparel products and services,Apparel and services,317,150,150,0
-2014,4,Other apparel products and services,Apparel and services,296,150,150,0
-2014,5,Other apparel products and services,Apparel and services,164,150,150,0
-2014,1,"Apparel, Women and girls",Apparel and services,303,150,150,2
-2014,2,"Apparel, Women and girls",Apparel and services,625,150,150,2
-2014,3,"Apparel, Women and girls",Apparel and services,758,150,150,2
-2014,4,"Apparel, Women and girls",Apparel and services,883,150,150,2
-2014,5,"Apparel, Women and girls",Apparel and services,940,150,150,2
-2014,1,"Apparel, Women, 16 and over",Apparel and services,284,16,150,2
-2014,2,"Apparel, Women, 16 and over",Apparel and services,563,16,150,2
-2014,3,"Apparel, Women, 16 and over",Apparel and services,598,16,150,2
-2014,4,"Apparel, Women, 16 and over",Apparel and services,621,16,150,2
-2014,5,"Apparel, Women, 16 and over",Apparel and services,651,16,150,2
 2015,1,Apparel and services,Apparel and services,859,150,150,0
 2015,2,Apparel and services,Apparel and services,1432,150,150,0
 2015,3,Apparel and services,Apparel and services,2e3,150,150,0
 2015,4,Apparel and services,Apparel and services,3041,150,150,0
 2015,5,Apparel and services,Apparel and services,2481,150,150,0
-2015,1,"Apparel, Boys, 2 to 15",Apparel and services,11,2,15,1
-2015,2,"Apparel, Boys, 2 to 15",Apparel and services,35,2,15,1
-2015,3,"Apparel, Boys, 2 to 15",Apparel and services,144,2,15,1
-2015,4,"Apparel, Boys, 2 to 15",Apparel and services,223,2,15,1
-2015,5,"Apparel, Boys, 2 to 15",Apparel and services,283,2,15,1
-2015,1,Footwear,Apparel and services,158,150,150,0
-2015,2,Footwear,Apparel and services,284,150,150,0
-2015,3,Footwear,Apparel and services,420,150,150,0
-2015,4,Footwear,Apparel and services,677,150,150,0
-2015,5,Footwear,Apparel and services,625,150,150,0
-2015,1,"Apparel, Girls, 2 to 15",Apparel and services,7,2,15,2
-2015,2,"Apparel, Girls, 2 to 15",Apparel and services,37,2,15,2
-2015,3,"Apparel, Girls, 2 to 15",Apparel and services,98,2,15,2
-2015,4,"Apparel, Girls, 2 to 15",Apparel and services,220,2,15,2
-2015,5,"Apparel, Girls, 2 to 15",Apparel and services,302,2,15,2
-2015,1,"Apparel, Children under 2",Apparel and services,18,0,1,0
-2015,2,"Apparel, Children under 2",Apparel and services,41,0,1,0
-2015,3,"Apparel, Children under 2",Apparel and services,150,0,1,0
-2015,4,"Apparel, Children under 2",Apparel and services,208,0,1,0
-2015,5,"Apparel, Children under 2",Apparel and services,187,0,1,0
-2015,1,"Apparel, Men and boys",Apparel and services,180,150,150,1
-2015,2,"Apparel, Men and boys",Apparel and services,318,150,150,1
-2015,3,"Apparel, Men and boys",Apparel and services,502,150,150,1
-2015,4,"Apparel, Men and boys",Apparel and services,586,150,150,1
-2015,5,"Apparel, Men and boys",Apparel and services,669,150,150,1
-2015,1,"Apparel, Men, 16 and over",Apparel and services,164,16,150,1
-2015,2,"Apparel, Men, 16 and over",Apparel and services,277,16,150,1
-2015,3,"Apparel, Men, 16 and over",Apparel and services,363,16,150,1
-2015,4,"Apparel, Men, 16 and over",Apparel and services,377,16,150,1
-2015,5,"Apparel, Men, 16 and over",Apparel and services,406,16,150,1
-2015,1,Other apparel products and services,Apparel and services,137,150,150,0
-2015,2,Other apparel products and services,Apparel and services,202,150,150,0
-2015,3,Other apparel products and services,Apparel and services,192,150,150,0
-2015,4,Other apparel products and services,Apparel and services,585,150,150,0
-2015,5,Other apparel products and services,Apparel and services,208,150,150,0
-2015,1,"Apparel, Women and girls",Apparel and services,357,150,150,2
-2015,2,"Apparel, Women and girls",Apparel and services,578,150,150,2
-2015,3,"Apparel, Women and girls",Apparel and services,751,150,150,2
-2015,4,"Apparel, Women and girls",Apparel and services,977,150,150,2
-2015,5,"Apparel, Women and girls",Apparel and services,825,150,150,2
-2015,1,"Apparel, Women, 16 and over",Apparel and services,351,16,150,2
-2015,2,"Apparel, Women, 16 and over",Apparel and services,542,16,150,2
-2015,3,"Apparel, Women, 16 and over",Apparel and services,654,16,150,2
-2015,4,"Apparel, Women, 16 and over",Apparel and services,753,16,150,2
-2015,5,"Apparel, Women, 16 and over",Apparel and services,516,16,150,2
 2016,1,Apparel and services,Apparel and services,967,150,150,0
 2016,2,Apparel and services,Apparel and services,1547,150,150,0
 2016,3,Apparel and services,Apparel and services,2014,150,150,0
 2016,4,Apparel and services,Apparel and services,2698,150,150,0
 2016,5,Apparel and services,Apparel and services,2757,150,150,0
-2016,1,"Apparel, Boys, 2 to 15",Apparel and services,13,2,15,1
-2016,2,"Apparel, Boys, 2 to 15",Apparel and services,49,2,15,1
-2016,3,"Apparel, Boys, 2 to 15",Apparel and services,101,2,15,1
-2016,4,"Apparel, Boys, 2 to 15",Apparel and services,243,2,15,1
-2016,5,"Apparel, Boys, 2 to 15",Apparel and services,369,2,15,1
-2016,1,Footwear,Apparel and services,208,150,150,0
-2016,2,Footwear,Apparel and services,326,150,150,0
-2016,3,Footwear,Apparel and services,459,150,150,0
-2016,4,Footwear,Apparel and services,494,150,150,0
-2016,5,Footwear,Apparel and services,635,150,150,0
-2016,1,"Apparel, Girls, 2 to 15",Apparel and services,18,2,15,2
-2016,2,"Apparel, Girls, 2 to 15",Apparel and services,40,2,15,2
-2016,3,"Apparel, Girls, 2 to 15",Apparel and services,101,2,15,2
-2016,4,"Apparel, Girls, 2 to 15",Apparel and services,229,2,15,2
-2016,5,"Apparel, Girls, 2 to 15",Apparel and services,261,2,15,2
-2016,1,"Apparel, Children under 2",Apparel and services,11,0,1,0
-2016,2,"Apparel, Children under 2",Apparel and services,32,0,1,0
-2016,3,"Apparel, Children under 2",Apparel and services,145,0,1,0
-2016,4,"Apparel, Children under 2",Apparel and services,134,0,1,0
-2016,5,"Apparel, Children under 2",Apparel and services,179,0,1,0
-2016,1,"Apparel, Men and boys",Apparel and services,191,150,150,1
-2016,2,"Apparel, Men and boys",Apparel and services,344,150,150,1
-2016,3,"Apparel, Men and boys",Apparel and services,402,150,150,1
-2016,4,"Apparel, Men and boys",Apparel and services,683,150,150,1
-2016,5,"Apparel, Men and boys",Apparel and services,790,150,150,1
-2016,1,"Apparel, Men, 16 and over",Apparel and services,177,16,150,1
-2016,2,"Apparel, Men, 16 and over",Apparel and services,294,16,150,1
-2016,3,"Apparel, Men, 16 and over",Apparel and services,302,16,150,1
-2016,4,"Apparel, Men, 16 and over",Apparel and services,446,16,150,1
-2016,5,"Apparel, Men, 16 and over",Apparel and services,434,16,150,1
-2016,1,Other apparel products and services,Apparel and services,174,150,150,0
-2016,2,Other apparel products and services,Apparel and services,258,150,150,0
-2016,3,Other apparel products and services,Apparel and services,239,150,150,0
-2016,4,Other apparel products and services,Apparel and services,467,150,150,0
-2016,5,Other apparel products and services,Apparel and services,272,150,150,0
-2016,1,"Apparel, Women and girls",Apparel and services,383,150,150,2
-2016,2,"Apparel, Women and girls",Apparel and services,586,150,150,2
-2016,3,"Apparel, Women and girls",Apparel and services,772,150,150,2
-2016,4,"Apparel, Women and girls",Apparel and services,927,150,150,2
-2016,5,"Apparel, Women and girls",Apparel and services,876,150,150,2
-2016,1,"Apparel, Women, 16 and over",Apparel and services,366,16,150,2
-2016,2,"Apparel, Women, 16 and over",Apparel and services,547,16,150,2
-2016,3,"Apparel, Women, 16 and over",Apparel and services,671,16,150,2
-2016,4,"Apparel, Women, 16 and over",Apparel and services,698,16,150,2
-2016,5,"Apparel, Women, 16 and over",Apparel and services,614,16,150,2
 2017,1,Apparel and services,Apparel and services,920,150,150,0
 2017,2,Apparel and services,Apparel and services,1664,150,150,0
 2017,3,Apparel and services,Apparel and services,1774,150,150,0
 2017,4,Apparel and services,Apparel and services,2548,150,150,0
 2017,5,Apparel and services,Apparel and services,2701,150,150,0
-2017,1,"Apparel, Boys, 2 to 15",Apparel and services,11,2,15,1
-2017,2,"Apparel, Boys, 2 to 15",Apparel and services,33,2,15,1
-2017,3,"Apparel, Boys, 2 to 15",Apparel and services,98,2,15,1
-2017,4,"Apparel, Boys, 2 to 15",Apparel and services,222,2,15,1
-2017,5,"Apparel, Boys, 2 to 15",Apparel and services,293,2,15,1
-2017,1,Footwear,Apparel and services,183,150,150,0
-2017,2,Footwear,Apparel and services,317,150,150,0
-2017,3,Footwear,Apparel and services,363,150,150,0
-2017,4,Footwear,Apparel and services,568,150,150,0
-2017,5,Footwear,Apparel and services,683,150,150,0
-2017,1,"Apparel, Girls, 2 to 15",Apparel and services,17,2,15,2
-2017,2,"Apparel, Girls, 2 to 15",Apparel and services,44,2,15,2
-2017,3,"Apparel, Girls, 2 to 15",Apparel and services,148,2,15,2
-2017,4,"Apparel, Girls, 2 to 15",Apparel and services,312,2,15,2
-2017,5,"Apparel, Girls, 2 to 15",Apparel and services,396,2,15,2
-2017,1,"Apparel, Children under 2",Apparel and services,14,0,1,0
-2017,2,"Apparel, Children under 2",Apparel and services,42,0,1,0
-2017,3,"Apparel, Children under 2",Apparel and services,134,0,1,0
-2017,4,"Apparel, Children under 2",Apparel and services,189,0,1,0
-2017,5,"Apparel, Children under 2",Apparel and services,185,0,1,0
-2017,1,"Apparel, Men and boys",Apparel and services,209,150,150,1
-2017,2,"Apparel, Men and boys",Apparel and services,370,150,150,1
-2017,3,"Apparel, Men and boys",Apparel and services,459,150,150,1
-2017,4,"Apparel, Men and boys",Apparel and services,669,150,150,1
-2017,5,"Apparel, Men and boys",Apparel and services,587,150,150,1
-2017,1,"Apparel, Men, 16 and over",Apparel and services,201,16,150,1
-2017,2,"Apparel, Men, 16 and over",Apparel and services,340,16,150,1
-2017,3,"Apparel, Men, 16 and over",Apparel and services,362,16,150,1
-2017,4,"Apparel, Men, 16 and over",Apparel and services,443,16,150,1
-2017,5,"Apparel, Men, 16 and over",Apparel and services,284,16,150,1
-2017,1,Other apparel products and services,Apparel and services,164,150,150,0
-2017,2,Other apparel products and services,Apparel and services,292,150,150,0
-2017,3,Other apparel products and services,Apparel and services,186,150,150,0
-2017,4,Other apparel products and services,Apparel and services,237,150,150,0
-2017,5,Other apparel products and services,Apparel and services,247,150,150,0
-2017,1,"Apparel, Women and girls",Apparel and services,347,150,150,2
-2017,2,"Apparel, Women and girls",Apparel and services,641,150,150,2
-2017,3,"Apparel, Women and girls",Apparel and services,634,150,150,2
-2017,4,"Apparel, Women and girls",Apparel and services,888,150,150,2
-2017,5,"Apparel, Women and girls",Apparel and services,1005,150,150,2
-2017,1,"Apparel, Women, 16 and over",Apparel and services,322,16,150,2
-2017,2,"Apparel, Women, 16 and over",Apparel and services,583,16,150,2
-2017,3,"Apparel, Women, 16 and over",Apparel and services,491,16,150,2
-2017,4,"Apparel, Women, 16 and over",Apparel and services,600,16,150,2
-2017,5,"Apparel, Women, 16 and over",Apparel and services,644,16,150,2
 2006,1,Health insurance,Healthcare,944,150,150,0
 2006,2,Health insurance,Healthcare,1968,150,150,0
 2006,3,Health insurance,Healthcare,1486,150,150,0
@@ -900,289 +360,241 @@ year,consumer_unit_size,item,subcategory,expense,start_age,end_age,gender
 2017,4,Reading,Reading,118,150,150,0
 2017,5,Reading,Reading,77,150,150,0
 2006,1,"Gasoline, other fuels, and motor oil",Transportation,1257,150,150,0
-2006,6,"Gasoline, other fuels, and motor oil",Transportation,2819,150,150,0
 2006,2,"Gasoline, other fuels, and motor oil",Transportation,2394,150,150,0
 2006,3,"Gasoline, other fuels, and motor oil",Transportation,2864,150,150,0
 2006,4,"Gasoline, other fuels, and motor oil",Transportation,3328,150,150,0
 2006,5,"Gasoline, other fuels, and motor oil",Transportation,3441,150,150,0
 2006,1,Public and other transportation,Transportation,227,150,150,0
-2006,6,Public and other transportation,Transportation,353,150,150,0
 2006,2,Public and other transportation,Transportation,377,150,150,0
 2006,3,Public and other transportation,Transportation,330,150,150,0
 2006,4,Public and other transportation,Transportation,325,150,150,0
 2006,5,Public and other transportation,Transportation,349,150,150,0
 2006,1,"Vehicle purchases: Cars and trucks, used",Transportation,795,150,150,0
-2006,6,"Vehicle purchases: Cars and trucks, used",Transportation,2105,150,150,0
 2006,2,"Vehicle purchases: Cars and trucks, used",Transportation,1529,150,150,0
 2006,3,"Vehicle purchases: Cars and trucks, used",Transportation,2519,150,150,0
 2006,4,"Vehicle purchases: Cars and trucks, used",Transportation,2583,150,150,0
 2006,5,"Vehicle purchases: Cars and trucks, used",Transportation,2660,150,150,0
 2006,1,Other vehicle expenses,Transportation,1227,150,150,0
-2006,6,Other vehicle expenses,Transportation,2584,150,150,0
 2006,2,Other vehicle expenses,Transportation,2345,150,150,0
 2006,3,Other vehicle expenses,Transportation,2606,150,150,0
 2006,4,Other vehicle expenses,Transportation,2916,150,150,0
 2006,5,Other vehicle expenses,Transportation,2866,150,150,0
 2007,1,"Gasoline, other fuels, and motor oil",Transportation,1350,150,150,0
-2007,6,"Gasoline, other fuels, and motor oil",Transportation,3018,150,150,0
 2007,2,"Gasoline, other fuels, and motor oil",Transportation,2594,150,150,0
 2007,3,"Gasoline, other fuels, and motor oil",Transportation,2966,150,150,0
 2007,4,"Gasoline, other fuels, and motor oil",Transportation,3559,150,150,0
 2007,5,"Gasoline, other fuels, and motor oil",Transportation,3735,150,150,0
 2007,1,Public and other transportation,Transportation,222,150,150,0
-2007,6,Public and other transportation,Transportation,430,150,150,0
 2007,2,Public and other transportation,Transportation,494,150,150,0
 2007,3,Public and other transportation,Transportation,373,150,150,0
 2007,4,Public and other transportation,Transportation,427,150,150,0
 2007,5,Public and other transportation,Transportation,310,150,150,0
 2007,1,"Vehicle purchases: Cars and trucks, used",Transportation,696,150,150,0
-2007,6,"Vehicle purchases: Cars and trucks, used",Transportation,1978,150,150,0
 2007,2,"Vehicle purchases: Cars and trucks, used",Transportation,1349,150,150,0
 2007,3,"Vehicle purchases: Cars and trucks, used",Transportation,2309,150,150,0
 2007,4,"Vehicle purchases: Cars and trucks, used",Transportation,2327,150,150,0
 2007,5,"Vehicle purchases: Cars and trucks, used",Transportation,3046,150,150,0
 2007,1,Other vehicle expenses,Transportation,1340,150,150,0
-2007,6,Other vehicle expenses,Transportation,2814,150,150,0
 2007,2,Other vehicle expenses,Transportation,2514,150,150,0
 2007,3,Other vehicle expenses,Transportation,3055,150,150,0
 2007,4,Other vehicle expenses,Transportation,3054,150,150,0
 2007,5,Other vehicle expenses,Transportation,3103,150,150,0
 2008,1,"Gasoline, other fuels, and motor oil",Transportation,1497,150,150,0
-2008,6,"Gasoline, other fuels, and motor oil",Transportation,3525,150,150,0
 2008,2,"Gasoline, other fuels, and motor oil",Transportation,3017,150,150,0
 2008,3,"Gasoline, other fuels, and motor oil",Transportation,3548,150,150,0
 2008,4,"Gasoline, other fuels, and motor oil",Transportation,4116,150,150,0
 2008,5,"Gasoline, other fuels, and motor oil",Transportation,4389,150,150,0
 2008,1,Public and other transportation,Transportation,203,150,150,0
-2008,6,Public and other transportation,Transportation,384,150,150,0
 2008,2,Public and other transportation,Transportation,400,150,150,0
 2008,3,Public and other transportation,Transportation,366,150,150,0
 2008,4,Public and other transportation,Transportation,363,150,150,0
 2008,5,Public and other transportation,Transportation,383,150,150,0
 2008,1,"Vehicle purchases: Cars and trucks, used",Transportation,581,150,150,0
-2008,6,"Vehicle purchases: Cars and trucks, used",Transportation,1542,150,150,0
 2008,2,"Vehicle purchases: Cars and trucks, used",Transportation,1216,150,150,0
 2008,3,"Vehicle purchases: Cars and trucks, used",Transportation,1756,150,150,0
 2008,4,"Vehicle purchases: Cars and trucks, used",Transportation,1685,150,150,0
 2008,5,"Vehicle purchases: Cars and trucks, used",Transportation,2127,150,150,0
 2008,1,Other vehicle expenses,Transportation,1446,150,150,0
-2008,6,Other vehicle expenses,Transportation,2911,150,150,0
 2008,2,Other vehicle expenses,Transportation,2685,150,150,0
 2008,3,Other vehicle expenses,Transportation,2907,150,150,0
 2008,4,Other vehicle expenses,Transportation,3426,150,150,0
 2008,5,Other vehicle expenses,Transportation,2991,150,150,0
 2009,1,"Gasoline, other fuels, and motor oil",Transportation,1082,150,150,0
-2009,6,"Gasoline, other fuels, and motor oil",Transportation,2516,150,150,0
 2009,2,"Gasoline, other fuels, and motor oil",Transportation,2110,150,150,0
 2009,3,"Gasoline, other fuels, and motor oil",Transportation,2616,150,150,0
 2009,4,"Gasoline, other fuels, and motor oil",Transportation,2924,150,150,0
 2009,5,"Gasoline, other fuels, and motor oil",Transportation,3139,150,150,0
 2009,1,Public and other transportation,Transportation,199,150,150,0
-2009,6,Public and other transportation,Transportation,361,150,150,0
 2009,2,Public and other transportation,Transportation,366,150,150,0
 2009,3,Public and other transportation,Transportation,367,150,150,0
 2009,4,Public and other transportation,Transportation,372,150,150,0
 2009,5,Public and other transportation,Transportation,317,150,150,0
 2009,1,"Vehicle purchases: Cars and trucks, used",Transportation,563,150,150,0
-2009,6,"Vehicle purchases: Cars and trucks, used",Transportation,1473,150,150,0
 2009,2,"Vehicle purchases: Cars and trucks, used",Transportation,1239,150,150,0
 2009,3,"Vehicle purchases: Cars and trucks, used",Transportation,1299,150,150,0
 2009,4,"Vehicle purchases: Cars and trucks, used",Transportation,2141,150,150,0
 2009,5,"Vehicle purchases: Cars and trucks, used",Transportation,1588,150,150,0
 2009,1,Other vehicle expenses,Transportation,1325,150,150,0
-2009,6,Other vehicle expenses,Transportation,2793,150,150,0
 2009,2,Other vehicle expenses,Transportation,2537,150,150,0
 2009,3,Other vehicle expenses,Transportation,2885,150,150,0
 2009,4,Other vehicle expenses,Transportation,3154,150,150,0
 2009,5,Other vehicle expenses,Transportation,2995,150,150,0
 2010,1,"Gasoline, other fuels, and motor oil",Transportation,1217,150,150,0
-2010,6,"Gasoline, other fuels, and motor oil",Transportation,2648,150,150,0
 2010,2,"Gasoline, other fuels, and motor oil",Transportation,2290,150,150,0
 2010,3,"Gasoline, other fuels, and motor oil",Transportation,2618,150,150,0
 2010,4,"Gasoline, other fuels, and motor oil",Transportation,3059,150,150,0
 2010,5,"Gasoline, other fuels, and motor oil",Transportation,3257,150,150,0
 2010,1,Public and other transportation,Transportation,210,150,150,0
-2010,6,Public and other transportation,Transportation,375,150,150,0
 2010,2,Public and other transportation,Transportation,391,150,150,0
 2010,3,Public and other transportation,Transportation,348,150,150,0
 2010,4,Public and other transportation,Transportation,425,150,150,0
 2010,5,Public and other transportation,Transportation,303,150,150,0
 2010,1,"Vehicle purchases: Cars and trucks, used",Transportation,521,150,150,0
-2010,6,"Vehicle purchases: Cars and trucks, used",Transportation,1666,150,150,0
 2010,2,"Vehicle purchases: Cars and trucks, used",Transportation,1342,150,150,0
 2010,3,"Vehicle purchases: Cars and trucks, used",Transportation,1914,150,150,0
 2010,4,"Vehicle purchases: Cars and trucks, used",Transportation,1798,150,150,0
 2010,5,"Vehicle purchases: Cars and trucks, used",Transportation,2139,150,150,0
 2010,1,Other vehicle expenses,Transportation,1405,150,150,0
-2010,6,Other vehicle expenses,Transportation,2690,150,150,0
 2010,2,Other vehicle expenses,Transportation,2531,150,150,0
 2010,3,Other vehicle expenses,Transportation,2805,150,150,0
 2010,4,Other vehicle expenses,Transportation,2882,150,150,0
 2010,5,Other vehicle expenses,Transportation,2766,150,150,0
 2011,1,"Gasoline, other fuels, and motor oil",Transportation,1472,150,150,0
-2011,6,"Gasoline, other fuels, and motor oil",Transportation,3348,150,150,0
 2011,2,"Gasoline, other fuels, and motor oil",Transportation,2850,150,150,0
 2011,3,"Gasoline, other fuels, and motor oil",Transportation,3425,150,150,0
 2011,4,"Gasoline, other fuels, and motor oil",Transportation,3867,150,150,0
 2011,5,"Gasoline, other fuels, and motor oil",Transportation,4078,150,150,0
 2011,1,Public and other transportation,Transportation,205,150,150,0
-2011,6,Public and other transportation,Transportation,388,150,150,0
 2011,2,Public and other transportation,Transportation,397,150,150,0
 2011,3,Public and other transportation,Transportation,367,150,150,0
 2011,4,Public and other transportation,Transportation,451,150,150,0
 2011,5,Public and other transportation,Transportation,311,150,150,0
 2011,1,"Vehicle purchases: Cars and trucks, used",Transportation,659,150,150,0
-2011,6,"Vehicle purchases: Cars and trucks, used",Transportation,1714,150,150,0
 2011,2,"Vehicle purchases: Cars and trucks, used",Transportation,1223,150,150,0
 2011,3,"Vehicle purchases: Cars and trucks, used",Transportation,1860,150,150,0
 2011,4,"Vehicle purchases: Cars and trucks, used",Transportation,2433,150,150,0
 2011,5,"Vehicle purchases: Cars and trucks, used",Transportation,2074,150,150,0
 2011,1,Other vehicle expenses,Transportation,1387,150,150,0
-2011,6,Other vehicle expenses,Transportation,2816,150,150,0
 2011,2,Other vehicle expenses,Transportation,2619,150,150,0
 2011,3,Other vehicle expenses,Transportation,2954,150,150,0
 2011,4,Other vehicle expenses,Transportation,2994,150,150,0
 2011,5,Other vehicle expenses,Transportation,3e3,150,150,0
 2012,1,"Gasoline, other fuels, and motor oil",Transportation,1475,150,150,0
-2012,6,"Gasoline, other fuels, and motor oil",Transportation,3449,150,150,0
 2012,2,"Gasoline, other fuels, and motor oil",Transportation,2917,150,150,0
 2012,3,"Gasoline, other fuels, and motor oil",Transportation,3565,150,150,0
 2012,4,"Gasoline, other fuels, and motor oil",Transportation,3982,150,150,0
 2012,5,"Gasoline, other fuels, and motor oil",Transportation,4275,150,150,0
 2012,1,Public and other transportation,Transportation,226,150,150,0
-2012,6,Public and other transportation,Transportation,433,150,150,0
 2012,2,Public and other transportation,Transportation,448,150,150,0
 2012,3,Public and other transportation,Transportation,402,150,150,0
 2012,4,Public and other transportation,Transportation,503,150,150,0
 2012,5,Public and other transportation,Transportation,326,150,150,0
 2012,1,"Vehicle purchases: Cars and trucks, used",Transportation,782,150,150,0
-2012,6,"Vehicle purchases: Cars and trucks, used",Transportation,2034,150,150,0
 2012,2,"Vehicle purchases: Cars and trucks, used",Transportation,1591,150,150,0
 2012,3,"Vehicle purchases: Cars and trucks, used",Transportation,2017,150,150,0
 2012,4,"Vehicle purchases: Cars and trucks, used",Transportation,2469,150,150,0
 2012,5,"Vehicle purchases: Cars and trucks, used",Transportation,2916,150,150,0
 2012,1,Other vehicle expenses,Transportation,1439,150,150,0
-2012,6,Other vehicle expenses,Transportation,2846,150,150,0
 2012,2,Other vehicle expenses,Transportation,2741,150,150,0
 2012,3,Other vehicle expenses,Transportation,2948,150,150,0
 2012,4,Other vehicle expenses,Transportation,3004,150,150,0
 2012,5,Other vehicle expenses,Transportation,2801,150,150,0
 2013,1,"Gasoline, other fuels, and motor oil",Transportation,1433,150,150,0
-2013,6,"Gasoline, other fuels, and motor oil",Transportation,3281,150,150,0
 2013,2,"Gasoline, other fuels, and motor oil",Transportation,2804,150,150,0
 2013,3,"Gasoline, other fuels, and motor oil",Transportation,3282,150,150,0
 2013,4,"Gasoline, other fuels, and motor oil",Transportation,3832,150,150,0
 2013,5,"Gasoline, other fuels, and motor oil",Transportation,4116,150,150,0
 2013,1,Public and other transportation,Transportation,191,150,150,0
-2013,6,Public and other transportation,Transportation,390,150,150,0
 2013,2,Public and other transportation,Transportation,426,150,150,0
 2013,3,Public and other transportation,Transportation,340,150,150,0
 2013,4,Public and other transportation,Transportation,382,150,150,0
 2013,5,Public and other transportation,Transportation,360,150,150,0
 2013,1,"Vehicle purchases: Cars and trucks, used",Transportation,815,150,150,0
-2013,6,"Vehicle purchases: Cars and trucks, used",Transportation,1945,150,150,0
 2013,2,"Vehicle purchases: Cars and trucks, used",Transportation,1496,150,150,0
 2013,3,"Vehicle purchases: Cars and trucks, used",Transportation,2044,150,150,0
 2013,4,"Vehicle purchases: Cars and trucks, used",Transportation,2799,150,150,0
 2013,5,"Vehicle purchases: Cars and trucks, used",Transportation,2125,150,150,0
 2013,1,Other vehicle expenses,Transportation,1553,150,150,0
-2013,6,Other vehicle expenses,Transportation,2750,150,150,0
 2013,2,Other vehicle expenses,Transportation,2541,150,150,0
 2013,3,Other vehicle expenses,Transportation,2858,150,150,0
 2013,4,Other vehicle expenses,Transportation,2981,150,150,0
 2013,5,Other vehicle expenses,Transportation,2973,150,150,0
 2014,1,"Gasoline, other fuels, and motor oil",Transportation,1345,150,150,0
-2014,6,"Gasoline, other fuels, and motor oil",Transportation,3067,150,150,0
 2014,2,"Gasoline, other fuels, and motor oil",Transportation,2640,150,150,0
 2014,3,"Gasoline, other fuels, and motor oil",Transportation,3110,150,150,0
 2014,4,"Gasoline, other fuels, and motor oil",Transportation,3523,150,150,0
 2014,5,"Gasoline, other fuels, and motor oil",Transportation,3833,150,150,0
 2014,1,Public and other transportation,Transportation,240,150,150,0
-2014,6,Public and other transportation,Transportation,488,150,150,0
 2014,2,Public and other transportation,Transportation,527,150,150,0
 2014,3,Public and other transportation,Transportation,439,150,150,0
 2014,4,Public and other transportation,Transportation,505,150,150,0
 2014,5,Public and other transportation,Transportation,406,150,150,0
 2014,1,"Vehicle purchases: Cars and trucks, used",Transportation,841,150,150,0
-2014,6,"Vehicle purchases: Cars and trucks, used",Transportation,2095,150,150,0
 2014,2,"Vehicle purchases: Cars and trucks, used",Transportation,1616,150,150,0
 2014,3,"Vehicle purchases: Cars and trucks, used",Transportation,1946,150,150,0
 2014,4,"Vehicle purchases: Cars and trucks, used",Transportation,2859,150,150,0
 2014,5,"Vehicle purchases: Cars and trucks, used",Transportation,2923,150,150,0
 2014,1,Other vehicle expenses,Transportation,1393,150,150,0
-2014,6,Other vehicle expenses,Transportation,2977,150,150,0
 2014,2,Other vehicle expenses,Transportation,2762,150,150,0
 2014,3,Other vehicle expenses,Transportation,3087,150,150,0
 2014,4,Other vehicle expenses,Transportation,3244,150,150,0
 2014,5,Other vehicle expenses,Transportation,3189,150,150,0
 2015,1,"Gasoline, other fuels, and motor oil",Transportation,1102,150,150,0
-2015,6,"Gasoline, other fuels, and motor oil",Transportation,2543,150,150,0
 2015,2,"Gasoline, other fuels, and motor oil",Transportation,2118,150,150,0
 2015,3,"Gasoline, other fuels, and motor oil",Transportation,2630,150,150,0
 2015,4,"Gasoline, other fuels, and motor oil",Transportation,3091,150,150,0
 2015,5,"Gasoline, other fuels, and motor oil",Transportation,3170,150,150,0
 2015,1,Public and other transportation,Transportation,269,150,150,0
-2015,6,Public and other transportation,Transportation,528,150,150,0
 2015,2,Public and other transportation,Transportation,556,150,150,0
 2015,3,Public and other transportation,Transportation,511,150,150,0
 2015,4,Public and other transportation,Transportation,504,150,150,0
 2015,5,Public and other transportation,Transportation,489,150,150,0
 2015,1,"Vehicle purchases: Cars and trucks, used",Transportation,925,150,150,0
-2015,6,"Vehicle purchases: Cars and trucks, used",Transportation,2790,150,150,0
 2015,2,"Vehicle purchases: Cars and trucks, used",Transportation,1892,150,150,0
 2015,3,"Vehicle purchases: Cars and trucks, used",Transportation,3369,150,150,0
 2015,4,"Vehicle purchases: Cars and trucks, used",Transportation,3587,150,150,0
 2015,5,"Vehicle purchases: Cars and trucks, used",Transportation,3962,150,150,0
 2015,1,Other vehicle expenses,Transportation,1477,150,150,0
-2015,6,Other vehicle expenses,Transportation,2913,150,150,0
 2015,2,Other vehicle expenses,Transportation,2622,150,150,0
 2015,3,Other vehicle expenses,Transportation,3145,150,150,0
 2015,4,Other vehicle expenses,Transportation,3324,150,150,0
 2015,5,Other vehicle expenses,Transportation,3035,150,150,0
 2016,1,"Gasoline, other fuels, and motor oil",Transportation,1027,150,150,0
-2016,6,"Gasoline, other fuels, and motor oil",Transportation,2334,150,150,0
 2016,2,"Gasoline, other fuels, and motor oil",Transportation,1965,150,150,0
 2016,3,"Gasoline, other fuels, and motor oil",Transportation,2349,150,150,0
 2016,4,"Gasoline, other fuels, and motor oil",Transportation,2760,150,150,0
 2016,5,"Gasoline, other fuels, and motor oil",Transportation,3012,150,150,0
 2016,1,Public and other transportation,Transportation,270,150,150,0
-2016,6,Public and other transportation,Transportation,505,150,150,0
 2016,2,Public and other transportation,Transportation,504,150,150,0
 2016,3,Public and other transportation,Transportation,445,150,150,0
 2016,4,Public and other transportation,Transportation,642,150,150,0
 2016,5,Public and other transportation,Transportation,414,150,150,0
 2016,1,"Vehicle purchases: Cars and trucks, used",Transportation,804,150,150,0
-2016,6,"Vehicle purchases: Cars and trucks, used",Transportation,2520,150,150,0
 2016,2,"Vehicle purchases: Cars and trucks, used",Transportation,2297,150,150,0
 2016,3,"Vehicle purchases: Cars and trucks, used",Transportation,2270,150,150,0
 2016,4,"Vehicle purchases: Cars and trucks, used",Transportation,2921,150,150,0
 2016,5,"Vehicle purchases: Cars and trucks, used",Transportation,3140,150,150,0
 2016,1,Other vehicle expenses,Transportation,1648,150,150,0
-2016,6,Other vehicle expenses,Transportation,3206,150,150,0
 2016,2,Other vehicle expenses,Transportation,3045,150,150,0
 2016,3,Other vehicle expenses,Transportation,3174,150,150,0
 2016,4,Other vehicle expenses,Transportation,3540,150,150,0
 2016,5,Other vehicle expenses,Transportation,3379,150,150,0
 2017,1,"Gasoline, other fuels, and motor oil",Transportation,991,150,150,0
-2017,6,"Gasoline, other fuels, and motor oil",Transportation,2341,150,150,0
 2017,2,"Gasoline, other fuels, and motor oil",Transportation,1964,150,150,0
 2017,3,"Gasoline, other fuels, and motor oil",Transportation,2381,150,150,0
 2017,4,"Gasoline, other fuels, and motor oil",Transportation,2817,150,150,0
 2017,5,"Gasoline, other fuels, and motor oil",Transportation,2991,150,150,0
 2017,1,Public and other transportation,Transportation,323,150,150,0
-2017,6,Public and other transportation,Transportation,612,150,150,0
 2017,2,Public and other transportation,Transportation,620,150,150,0
 2017,3,Public and other transportation,Transportation,548,150,150,0
 2017,4,Public and other transportation,Transportation,695,150,150,0
 2017,5,Public and other transportation,Transportation,575,150,150,0
 2017,1,"Vehicle purchases: Cars and trucks, used",Transportation,912,150,150,0
-2017,6,"Vehicle purchases: Cars and trucks, used",Transportation,2634,150,150,0
 2017,2,"Vehicle purchases: Cars and trucks, used",Transportation,2087,150,150,0
 2017,3,"Vehicle purchases: Cars and trucks, used",Transportation,2587,150,150,0
 2017,4,"Vehicle purchases: Cars and trucks, used",Transportation,3265,150,150,0
 2017,5,"Vehicle purchases: Cars and trucks, used",Transportation,3814,150,150,0
 2017,1,Other vehicle expenses,Transportation,1811,150,150,0
-2017,6,Other vehicle expenses,Transportation,2953,150,150,0
 2017,2,Other vehicle expenses,Transportation,2729,150,150,0
 2017,3,Other vehicle expenses,Transportation,3248,150,150,0
 2017,4,Other vehicle expenses,Transportation,3377,150,150,0

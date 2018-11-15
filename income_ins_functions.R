@@ -268,8 +268,10 @@ create_economic_units <- function(con, year, state) {
   # import population data
   pop <- population %>%
     select(!!pop_vars) %>%
-    # need to collect now because cannot transform NA without collecting
-    filter(ST == !!state) %>%
+    # filter for state and PUMA
+    filter(ST == !!state,
+           # delete this to run full script
+           PUMA %IN% c(1801, 1802, 1803)) %>%
     # some years only have final two digits; add 2000 to these digits to make them four digits long
     mutate(year = ifelse(year < 2000, year + 2000, year)) %>%
     collect() %>%
@@ -283,24 +285,55 @@ create_economic_units <- function(con, year, state) {
   pop <- pop %>%
     # replace NA values for income with zero
     mutate(PINCP = replace_na(PINCP, 0),
+           # ESR is working status
+           # change coding to boolean TRUE = working or child, FALSE = not working
+           ESR = ifelse(ESR %in% c(3, 6), FALSE, TRUE),
            # create boolean of true or false based on whether person 
            # is in economic unit with reference person
            economic_unit = ifelse(RELP %in% !!economic_unit_vec, TRUE, FALSE),
            # if the year is 2017, remove the 2017 from the start of the SERIALNO
-           SERIALNO = if (!!year == 2017) as.integer(str_replace_all(.$SERIALNO, '^2017', '')) else .$SERIALNO)
+           SERIALNO = if (!!year == 2017) as.integer(str_replace_all(.$SERIALNO, '^2017', '')) else .$SERIALNO) %>%
+  # calculate number of working adults and number of 2 and 4 year olds in household
+  # needed to create table of expenses
+  group_by(year, SERIALNO, economic_unit) %>%
+  # create boolean value about whether person is an adult
+  mutate(adults = ifelse(AGEP > 18, TRUE, FALSE),
+         # calculate number of persons in unit
+         num_persons = n(),
+         # calcualte number of adults in economic unit
+         num_adults = sum(adults),
+         # calculate number of working adults
+         num_working = sum(adults == TRUE & ESR == TRUE))
   
   return(pop)
   
 }
 
-post_tax_income <- function(pop) {
+expense_groupings <- function(df, group_num) {
+  
+  # this function takes as input a filtered dataframe fo groups
+  # and outputs average expenses for the group
+  # the data comes from the dataset produced by income_ins_create_data.R
+  # and stored in population_expenses.Rda
+  
+  df %>%
+    distinct(year, SERIALNO, economic_unit, .keep_all = TRUE) %>%
+    group_by(year, cntyname) %>%
+    select(year, cntyname, economic_unit_rent:economic_unit_meps) %>%
+    mutate(expense_group = !!group_num) %>%
+    mutate_at(vars(economic_unit_rent:economic_unit_meps), funs(round(mean(.),0))) %>%
+    distinct()
+
+}
+
+tax_liability <- function(pop) {
 
   # This function calculates income for each economic unit
   # it incorporates, and subtracts, taxes
   
   print('taxes')
   
-  tax_liabilities <- readRDS('nc_tax_liab_ind.Rda')
+  tax_liabilities <- readRDS('nc_tax_liab_all.Rda')
   
   # merge taxes with population dataset
   pop %>%
@@ -316,7 +349,8 @@ post_tax_income <- function(pop) {
                                                   sum(income),
                                                   income)) %>%
     ungroup() %>%
-    select(-PINCP, -taxes, -income)
+    rename(tax_liability = taxes) %>%
+    select(-PINCP, -income)
 
 }
 
@@ -448,8 +482,8 @@ child_care <- function(pop) {
   # create labels for bins; these are the start ages
   age_labels <- age_breaks[-(length(age_breaks))]
   
-  pop <- pop %>% 
-    # create age labels based on food costs age bins
+  popA <- pop %>% 
+    # create age labels based on food costs age bins 1417191
     mutate(start_age = cut(AGEP, breaks = !!age_breaks, 
                            labels = !!age_labels, 
                            include.lowest = TRUE, right = FALSE),
@@ -462,13 +496,11 @@ child_care <- function(pop) {
     # missing values represent no child care costs
     mutate(child_care_costs = replace_na(child_care_costs, 0),
            # ESR represents employment, and is used to determine whether person is persent
-           # to watch kid; make NA's 0 so we can test whether it is 3
-           ESR = replace_na(ESR, 0),
            # if there is someone in economic not working make child care costs 0
-           economic_unit_child_care = ifelse(economic_unit == TRUE & ESR == 3,
+           economic_unit_child_care = ifelse(economic_unit == TRUE & ESR == FALSE,
                                              sum(child_care_costs, na.rm = TRUE) * 0,
                                              # sum child care costs for economic units with all people working
-                                             ifelse(economic_unit == TRUE & (ESR != 3 | is.na(ESR)),
+                                             ifelse(economic_unit == TRUE,
                                                     sum(child_care_costs, na.rm = TRUE),
                                                     child_care_costs))) %>%
 
@@ -499,13 +531,24 @@ ces <- function(pop) {
   ces_group <- ces %>%
     filter(# remove healthcare because we will calculate this later
       item != 'Health insurance') %>%
-    # group by year and consumer unit size, and sum
-    group_by(year, consumer_unit_size) %>%
+    # group by year, consumer unit size, category, and sum
+    group_by(year, consumer_unit_size, subcategory) %>%
     summarize(economic_unit_ces = sum(expense)) %>%
+    # convert to wide form where each expense is in a different column
+    # this is needed so that we can merge all expenses separately wit hteh population dataset
+    spread(subcategory, economic_unit_ces) %>%
     ungroup()
-
   
-  # Health insurance is calculated as follows:
+  # change colun names since they are multiword
+  colnames(ces_group) <- c('year', 'consumer_unit_size', 'ces_apparel', 'ces_housing_supplies',  
+                           'ces_misc', 'ces_personal_care', 'ces_reading', 'ces_trans')
+  
+  # combine all non-transportation CES expenses into one column
+  ces_group <- ces_group %>%
+    mutate(ces_other = ces_apparel + ces_housing_supplies + ces_misc + ces_personal_care + ces_reading) %>%
+    select(-ces_apparel:-ces_reading)
+    
+  # Health insurance is calculated as follows:ces_apparel + ces_housing_supplies + ces_misc + ces_personal_care + ces_reading
   # First, all economic unit members under 65 are grouped into one health insurance
   # unit and their health insurance costs are summed.
   # Then, health insurance costs for those over 65 are calculated using expenses by

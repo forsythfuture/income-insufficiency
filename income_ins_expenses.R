@@ -1,15 +1,13 @@
-###################################################################################
+########################################################################
 #
-# This script calculates income insufficiency for each person.
-# It calculates expenses for each individual and creates a column
-# that is a boolean representing whether the person is income
-# insufficient; with TRUE being yes and FALSE being no.
-# A person is income insufficient if they live in an economic unit
-# where unit average expenses are greater than unit income.
-# Then script also saves the output as an R object for quick import.
+# This script creates tables of average expenses for four family types:
+#   1) One adult,
+#   2) Two adults,
+#   3) Two adults, one working, with a 2 and 4 year old
+#   4) Two working adults with a 2 and 4 year old
+#   5) One adult wit ha 2 and 4 year old
 #
-####################################################################################
-
+########################################################################
 
 library(tidyverse)
 library(data.table)
@@ -17,31 +15,47 @@ library(DBI)
 
 source('income_ins_functions.R')
 
-con <- dbConnect(RSQLite::SQLite(), "pums_db.db")
+pop <- readRDS('population_expense.Rda') %>%
+  filter(year == 2016)
 
-# import needed PUMA data for all years
-pop <- data.frame()
+# One adult
+one <- pop %>%
+  filter(num_persons == 1 & AGEP > 18) %>%
+  expense_groupings(., 1)
 
-for (yr in seq(2006, 2017)) {
-  
-  print(yr)
-  pop <- create_economic_units(con, yr, 37) %>%
-    bind_rows(pop, .)
-  
-}
+# Two working adults
+two <- pop %>%
+  filter(num_persons == 2,
+         ESR == TRUE,
+         AGEP > 18) %>%
+  expense_groupings(., 2)
 
-pop <- pop %>%
-  post_tax_income() %>%
-  rent() %>%
-  food() %>%
-  child_care() %>%
-  ces() %>%
-  meps() %>%
-  # calculate income insufficiency
-  mutate(income_insufficient = economic_unit_income - rowSums(.[,15:20], na.rm = TRUE),
-         # true if income insufficienct false if income sufficient
-         income_insufficient = ifelse(income_insufficient < 0, TRUE, FALSE)) %>%
-  select(SERIALNO, SPORDER, year, PUMA, cntyname, AGEP, SEX, RAC1P, HISP, economic_unit, income_insufficient)
+# Two parents, one working, with a 2 and 4 year old
+three <- pop %>%
+  filter(num_persons == 4,
+         num_working == 1) %>%
+  filter(AGEP == 2 | AGEP == 4) %>%
+  group_by(year, cntyname, SERIALNO, economic_unit) %>%
+  mutate(age_sum = sum(AGEP)) %>%
+  filter(age_sum == 6) %>%
+  expense_groupings(., 3)
 
-# save intermediate output
-# saveRDS(pop, 'population_expense.Rda')
+# Two working adults, with a 2 and 4 year old
+four <- pop %>%
+  filter(num_persons == 4,
+         num_working == 2) %>%
+  filter(AGEP == 2 | AGEP == 4) %>%
+  group_by(year, cntyname, SERIALNO, economic_unit) %>%
+  mutate(age_sum = sum(AGEP)) %>%
+  filter(age_sum == 6) %>%
+  expense_groupings(., 3)
+
+# one working adult wit ha 2 and 4 year old
+five <- pop %>%
+  filter(num_persons == 3,
+         num_working == 1) %>%
+  filter(AGEP == 2 | AGEP == 4) %>%
+  group_by(year, cntyname, SERIALNO, economic_unit) %>%
+  mutate(age_sum = sum(AGEP)) %>%
+  filter(age_sum == 6) %>%
+  expense_groupings(., 3)  

@@ -21,7 +21,7 @@ source('../income_ins_functions.R')
 
 ## Consumer Expenditure Survey data
 
-All Consumer Expenditure Survey (CES) data was gathered from the BLS's CES website. The following expenses were collected from CES data: health insurance (by household size and age), transportation, appareal and services, housekeeping supplies personal care products and services, reading, and misc.
+All Consumer Expenditure Survey (CES) data was gathered from the BLS's CES website. The following expenses were collected from CES data: health insurance (by household size and age), transportation, apparel and services, housekeeping supplies personal care products and services, reading, and misc.
 
 The one screen data source application was used (https://data.bls.gov/PDQWeb/cx) for all CES expenses except for health insurance by age. From the one screen data source page, we selected the following items from boxes:
 
@@ -29,18 +29,18 @@ The one screen data source application was used (https://data.bls.gov/PDQWeb/cx)
 * The selections in the 'Select one or more items' box depend on the item selected in the 'Subcategory' box. For each of the following subcategories, the corresponding 'Select one or more items' lines were selected:
     + Healthcare: health insurance;
     + Transportation: Vehicle purchases: Cars and trucks (used); Other vehicle expenses; Gasoline, other fuels, and motor oil; and Public and other transportation;
-    + Apparel and services: all;
+    + Apparel and services: Apparel and services
     + Housing: Housekeeping supplies;
     + Personal care products and services: Personal care products and services;
     + Reading: Reading; and
     + Miscellaneous expenditures: Miscellaneous expenditures.
-* In the 'Select one or mre demographics' box, size of consumer unit and region of residence were selected.
+* In the 'Select one or more demographics' box, size of consumer unit and region of residence were selected.
 * Finally, the following items were selected from 'Select one or more characteristics: one person in consumer unit, two people in consumer unit, three people in consumer unit, four people in consumer unit, five or more people in consumer unit, all consumer units (LB1101), and region of residence: south.
 * We then clicked 'Add to selection' after selections were made, followed by 'Get data'.
 * From the next page we clicked 'More formatting options'.
 * To create the raw data, we selected the following options:
     + Specify year range: 2006 to most recent year;
-    + Selet view of the data > Multiseries table;
+    + Select view of the data > Multiseries table;
     + Output type > Text > tab delimited; and
     + click 'Retrieve data'.
 * This takes us to a page with the raw data for all years and a given expense. We copied the text of the data into a .txt file.
@@ -101,16 +101,16 @@ df_ces <- df_ces %>%
          consumer_unit_size = as.integer(consumer_unit_size)) %>%
   # some of the columns, but not all, have start and end years
   # extract these years and place in start_age and end_age columns
-  mutate(start_age = ifelse(str_detect(item, 'under 2'), 0, 
+  mutate(start_age = ifelse(str_detect(item, 'under 2'), 0,
                             ifelse(str_detect(item, '2 to 15'), 2,
                                    ifelse(str_detect(item, '16 and over'), 16,
                                                      # make age very old if no conditions are met
                                                      150))),
-         end_age = ifelse(str_detect(item, 'under 2'), 1, 
+         end_age = ifelse(str_detect(item, 'under 2'), 1,
                             ifelse(str_detect(item, '2 to 15'), 15,
                                                      150))) %>%
   # come items have gender categories
-  # extract gender and place in its own column, 
+  # extract gender and place in its own column,
   # with items not having gender labeled as 0
   mutate(gender = ifelse(str_detect(item, ' Men|Boys'), 1,
                          ifelse(str_detect(item, 'Women|Girls'), 2, 0)))
@@ -199,7 +199,7 @@ ces_health <- left_join(ces_health, ratio_one, by = c('year'='year')) %>%
 
 Two CES files are now cleaned and ready for export:
 
-1. A file containg all CES data except health insurance by age and consumer unit size. This includes the following:
+1. A file containing all CES data except health insurance by age and consumer unit size. This includes the following:
     + Health insurance by consumer unit,
     + Transportation,
     + Apparel and services,
@@ -215,13 +215,13 @@ These two files can be merged into one and written out.
 # merge ces files and write out
 df_ces %>%
   select(-region_ratio) %>%
-  bind_rows(ces_health) #%>%
-  #write_csv('cleaned_data/ces.csv')
+  bind_rows(ces_health) %>%
+  write_csv('cleaned_data/ces.csv')
 ```
 
 ## Medical Expenditure Panel Survey data
 
-Healthcare expenditures beyond insurance were gathered from the Medical Expenditure Panel Survey (MEPS). We used the MPESNet household compnent query tool (https://www.meps.ahrq.gov/mepsweb/data_stats/MEPSnetHC/startup) to collect the data. The following variables were used:
+Healthcare expenditures beyond insurance were gathered from the Medical Expenditure Panel Survey (MEPS). We used the MPESNet household component query tool (https://www.meps.ahrq.gov/mepsweb/data_stats/MEPSnetHC/startup) to collect the data. The following variables were used:
 
 * Geographic variables > Region,
 * Demographic variables > Age, and
