@@ -66,7 +66,7 @@ for (yr in years) {
     demo <- if (col == 'total') FALSE else TRUE
     
     # iterate through geo graphic areas
-    for(geo_area in c('PUMA', 'cntyname')) {
+    for(geo_area in c('cntyname')) {
       
       print(yr)
       print(col)
