@@ -318,9 +318,9 @@ expense_groupings <- function(df, group_num) {
   df %>%
     distinct(year, SERIALNO, economic_unit, .keep_all = TRUE) %>%
     group_by(year, cntyname) %>%
-    select(year, cntyname, economic_unit_child_care:economic_unit_meps) %>%
+    select(year, cntyname, economic_unit_taxes:economic_unit_meps) %>%
     mutate(expense_group = !!group_num) %>%
-    mutate_at(vars(economic_unit_rent:economic_unit_meps), funs(round(mean(.),0))) %>%
+    mutate_at(vars(economic_unit_taxes:economic_unit_meps), funs(round(mean(.),0))) %>%
     distinct()
 
 }
