@@ -41,7 +41,7 @@ pop <- pop %>%
   mutate(income_insufficient = economic_unit_income - rowSums(.[,19:25], na.rm = TRUE),
          # true if income insufficienct false if income sufficient
          income_insufficient = ifelse(income_insufficient < 0, TRUE, FALSE)) %>%
-  select(-SPORDER, -ST, -RELP)
+  select(-RELP)
 
 # save intermediate output
-# saveRDS(pop, 'population_expense.Rda')
+#saveRDS(pop, 'population_expense.Rda')
