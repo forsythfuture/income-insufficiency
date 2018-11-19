@@ -532,8 +532,8 @@ for (i in 2011:2014) {
 }
 
 # combine these years with all other years
-childA <- child %>%
-  bind_rows(., list(child_b, eight_ten, eleven_fourteen)) %>%
+child <- child %>%
+  bind_rows(., list(eight_ten, eleven_fourteen)) %>%
   arrange(year, start_age, county)
 
 ### next: create weighted average for NC

@@ -22,16 +22,15 @@ con <- dbConnect(RSQLite::SQLite(), "pums_db.db")
 # import needed PUMA data for all years
 pop <- data.frame()
 
-for (yr in seq(2006, 2017)) {
+for (yr in seq(2015, 2016)) {
   
   print(yr)
   pop <- create_economic_units(con, yr, 37) %>%
-    bind_rows(pop, .) %>%
-    filter(cntyname == 'Forsyth')
+    bind_rows(pop, .)
   
 }
 
-popA <- pop %>%
+pop <- pop %>%
   tax_liability() %>%
   child_care() %>%
   rent() %>%
@@ -45,8 +44,4 @@ popA <- pop %>%
   select(-RELP)
 
 # save intermediate output
-saveRDS(pop, 'population_expense.Rda')
-
-popA %>%
-  group_by(year) %>%
-  summarize(sum(income_insufficient) / n())
+#saveRDS(pop, 'population_expense.Rda')
