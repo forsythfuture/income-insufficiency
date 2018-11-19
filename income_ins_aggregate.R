@@ -91,11 +91,3 @@ for (yr in 2016) {
   }
   
 }
-
-income_ins <- readRDS('income_ins.Rda')
-
-expenses <- readRDS('population_expense.Rda') %>%
-  filter(year == 2016,
-         cntyname == 'Forsyth')
-
-sum(expenses$income_insufficient) / nrow(expenses)

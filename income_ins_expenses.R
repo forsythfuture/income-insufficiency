@@ -15,51 +15,24 @@ library(DBI)
 
 source('income_ins_functions.R')
 
-pop <- readRDS('population_expense.Rda') %>%
-  filter(year == 2016)
+expense_data <- data.frame(SERIALNO = c(1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5),
+                           SPORDER = c(1, 1, 2, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3),
+                           RELP = c(0, 0, 1, 0, 1, 2, 2, 0, 1, 2, 2, 0, 2, 2),
+                           year = rep(2016, 14),
+                           PINCP = c(40000, 40000, 40000, 40000, 0, 0, 0, 40000, 40000, 0, 0, 40000, 0, 0),
+                           AGEP = c(40, 40, 40, 40, 40, 2, 4, 40, 40, 2, 4, 40, 2, 4),
+                           SEX = c(1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 1),
+                           ESR = c(TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE),
+                           cntyname = rep('Forsyth', 14),
+                           economic_unit = rep(TRUE, 14))
 
-# One adult
-one <- pop %>%
-  filter(num_persons == 1 & AGEP > 18) %>%
-  expense_groupings(., 1)
-
-# Two working adults
-two <- pop %>%
-  filter(num_persons == 2,
-         ESR == TRUE,
-         AGEP > 18) %>%
-  expense_groupings(., 2)
-
-# Two parents, one working, with a 2 and 4 year old
-three <- pop %>%
-  filter(num_persons == 4,
-         num_working == 1) %>%
-  filter(AGEP == 2 | AGEP == 4) %>%
-  group_by(year, cntyname, SERIALNO, economic_unit) %>%
-  mutate(age_sum = sum(AGEP)) %>%
-  filter(age_sum == 6) %>%
-  expense_groupings(., 3)
-
-# Two working adults, with a 2 and 4 year old
-four <- pop %>%
-  filter(num_persons == 4,
-         num_working == 2) %>%
-  filter(AGEP == 2 | AGEP == 4) %>%
-  group_by(year, cntyname, SERIALNO, economic_unit) %>%
-  mutate(age_sum = sum(AGEP)) %>%
-  filter(age_sum == 6) %>%
-  expense_groupings(., 4)
-
-# one working adult wit ha 2 and 4 year old
-five <- pop %>%
-  filter(num_persons == 3,
-         num_working == 1) %>%
-  filter(AGEP == 2 | AGEP == 4) %>%
-  group_by(year, cntyname, SERIALNO, economic_unit) %>%
-  mutate(age_sum = sum(AGEP)) %>%
-  filter(age_sum == 6) %>%
-  expense_groupings(., 5) 
-
-expenses <- bind_rows(list(one,two,three,four,five))
+expenses <- expense_data %>% 
+  child_care() %>%
+  rent() %>%
+  food() %>%
+  ces() %>%
+  meps() %>%
+  select(-SPORDER:-economic_unit) %>%
+  distinct()
 
 write_csv(expenses, 'expenses.csv')

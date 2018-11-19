@@ -287,23 +287,22 @@ create_economic_units <- function(con, year, state) {
            # ESR is working status
            # change coding to boolean TRUE = working or child, FALSE = not working
            ESR = ifelse(ESR %in% c(3, 6), FALSE, TRUE),
-           # create boolean of true or false based on whether person 
-           # is in economic unit with reference person
-           economic_unit = ifelse(RELP %in% !!economic_unit_vec, TRUE, FALSE),
            # if the year is 2017, remove the 2017 from the start of the SERIALNO
-           SERIALNO = if (!!year == 2017) as.integer(str_replace_all(.$SERIALNO, '^2017', '')) else .$SERIALNO) %>%
-  # calculate number of working adults and number of 2 and 4 year olds in household
-  # needed to create table of expenses
-  group_by(year, SERIALNO, economic_unit) %>%
-  # create boolean value about whether person is an adult
-  mutate(adults = ifelse(AGEP > 18, TRUE, FALSE),
-         # calculate number of persons in unit
-         num_persons = n(),
-         # calcualte number of adults in economic unit
-         num_adults = sum(adults),
-         # calculate number of working adults
-         num_working = sum(adults == TRUE & ESR == TRUE))
-  
+           SERIALNO = if (!!year == 2017) as.integer(str_replace_all(.$SERIALNO, '^2017', '')) else .$SERIALNO,
+           # create boolean signifying if person is in economic unit
+           economic_unit = ifelse(RELP %in% !!economic_unit_vec, TRUE, FALSE)) %>%
+    # calculate number of working adults and number of 2 and 4 year olds in household
+    # needed to create table of expenses
+    group_by(year, SERIALNO, economic_unit) %>%
+    # create boolean value about whether person is an adult
+    mutate(adults = ifelse(AGEP > 18, TRUE, FALSE),
+           # calculate number of persons in unit
+           num_persons = n(),
+           # calcualte number of adults in economic unit
+           num_adults = sum(adults),
+           # calculate number of working adults
+           num_working = sum(adults == TRUE & ESR == TRUE))
+
   return(pop)
   
 }
@@ -335,7 +334,7 @@ tax_liability <- function(pop) {
   tax_liabilities <- readRDS('nc_tax_liab_all.Rda')
   
   # merge taxes with population dataset
-  a <- pop %>%
+  pop <- pop %>%
     left_join(tax_liabilities, by = c('year', 'SERIALNO', 'SPORDER')) %>%
     # replace NA for taxes with zero
     mutate(total_taxes = replace_na(total_taxes, 0)) %>%
@@ -343,14 +342,12 @@ tax_liability <- function(pop) {
     # create group to calculate economic unit post-tax income
     group_by(year, SERIALNO, economic_unit) %>%
     # if part of economic unit, add incomes and taxes, otherwise use individual's income
-    mutate(economic_unit_income = ifelse(economic_unit == TRUE,
-                                         sum(PINCP),
-                                         PINCP),
-          economic_unit_taxes = ifelse(economic_unit == TRUE,
-                                                      sum(total_taxes),
-                                                      total_taxes)) %>%
-    ungroup() %>%
-    select(-PINCP, -total_taxes)
+    mutate(economic_unit_income = sum(PINCP),
+          economic_unit_taxes = sum(total_taxes)) %>%
+    ungroup() #%>%
+    #select(-PINCP, -total_taxes)
+  
+  return(pop)
 
 }
 
@@ -385,7 +382,7 @@ rent <- function(pop) {
     mutate(bedrooms = ifelse(
       # since children share rooms, they need 0.5
       AGEP < 18, 0.5,
-      # spuse shares bedroom, so he/she does not have one
+      # spouse shares bedroom, so he/she does not have one
       ifelse(RELP == 1, 0,
              # all other adults get one
              1)
@@ -493,17 +490,13 @@ child_care <- function(pop) {
     left_join(child_costs, by = c('year', c('cntyname' = 'county'), 'start_age')) %>%
     # group by economic unit and sum across units
     group_by(year, SERIALNO, economic_unit) %>%
-    # missing values represent no child care costs
+    # NA values represent no child care costs
     mutate(child_care_costs = replace_na(child_care_costs, 0),
            # ESR represents employment, and is used to determine whether person is persent
            # if there is someone in economic not working make child care costs 0
-           economic_unit_child_care = ifelse(economic_unit == TRUE & ESR == FALSE,
-                                             sum(child_care_costs, na.rm = TRUE) * 0,
-                                             # sum child care costs for economic units with all people working
-                                             ifelse(economic_unit == TRUE,
-                                                    sum(child_care_costs, na.rm = TRUE),
-                                                    child_care_costs))) %>%
-
+           # this is accomplished by multiply child care costs by zero if someone in the unit is not working
+           # since ESR is boolean, min(ESR) will be 0 (FALSE) ifan adult is not working
+           economic_unit_child_care = (sum(child_care_costs, na.rm = TRUE)) * min(ESR)) %>%
     select(-start_age, -child_care_costs) %>%
     ungroup()
 
