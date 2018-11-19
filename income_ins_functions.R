@@ -269,8 +269,7 @@ create_economic_units <- function(con, year, state) {
   pop <- population %>%
     select(!!pop_vars) %>%
     # filter for state and PUMA
-    filter(ST == !!state,
-           PUMA %in% c(1801, 1802, 1803)) %>%
+    filter(ST == !!state) %>%
     # some years only have final two digits; add 2000 to these digits to make them four digits long
     mutate(year = ifelse(year < 2000, year + 2000, year)) %>%
     collect() %>%
@@ -284,44 +283,23 @@ create_economic_units <- function(con, year, state) {
   pop <- pop %>%
     # replace NA values for income with zero
     mutate(PINCP = replace_na(PINCP, 0),
-           # ESR is working status
-           # change coding to boolean TRUE = working or child, FALSE = not working
-           ESR = ifelse(ESR %in% c(3, 6), FALSE, TRUE),
+           # ESR represents employment, and is used to determine whether person is present to watch kid; 
+           # make NA's 0
+           ESR = replace_na(ESR, 0),
+           # convert employment status to boolean: TRUE = employed and FALSE == not working
+           # 3 and 6 represent not working
+           # use the following critera:
+           # if reference person or spouse is not working then status is FALSE
+           # if other person in economic unit is not working than status is FALSE only if person is 21 or over
+           ESR = ifelse(ESR %in% c(3, 6) & RELP %in% c(0,1), FALSE, 
+                        ifelse(ESR %in% c(3, 6) & AGEP >= 21, FALSE, TRUE)),
            # if the year is 2017, remove the 2017 from the start of the SERIALNO
            SERIALNO = if (!!year == 2017) as.integer(str_replace_all(.$SERIALNO, '^2017', '')) else .$SERIALNO,
            # create boolean signifying if person is in economic unit
-           economic_unit = ifelse(RELP %in% !!economic_unit_vec, TRUE, FALSE)) %>%
-    # calculate number of working adults and number of 2 and 4 year olds in household
-    # needed to create table of expenses
-    group_by(year, SERIALNO, economic_unit) %>%
-    # create boolean value about whether person is an adult
-    mutate(adults = ifelse(AGEP > 18, TRUE, FALSE),
-           # calculate number of persons in unit
-           num_persons = n(),
-           # calcualte number of adults in economic unit
-           num_adults = sum(adults),
-           # calculate number of working adults
-           num_working = sum(adults == TRUE & ESR == TRUE))
+           economic_unit = ifelse(RELP %in% !!economic_unit_vec, TRUE, FALSE))
 
   return(pop)
   
-}
-
-expense_groupings <- function(df, group_num) {
-  
-  # this function takes as input a filtered dataframe fo groups
-  # and outputs average expenses for the group
-  # the data comes from the dataset produced by income_ins_create_data.R
-  # and stored in population_expenses.Rda
-  
-  df %>%
-    distinct(year, SERIALNO, economic_unit, .keep_all = TRUE) %>%
-    group_by(year, cntyname) %>%
-    select(year, cntyname, economic_unit_taxes:economic_unit_meps) %>%
-    mutate(expense_group = !!group_num) %>%
-    mutate_at(vars(economic_unit_taxes:economic_unit_meps), funs(round(mean(.),0))) %>%
-    distinct()
-
 }
 
 tax_liability <- function(pop) {
@@ -331,7 +309,8 @@ tax_liability <- function(pop) {
   
   print('taxes')
   
-  tax_liabilities <- readRDS('nc_tax_liab_all.Rda')
+  tax_liabilities <- readRDS('nc_tax_liab_ind.Rda') %>%
+    rename(total_taxes = taxes)
   
   # merge taxes with population dataset
   pop <- pop %>%
@@ -342,10 +321,12 @@ tax_liability <- function(pop) {
     # create group to calculate economic unit post-tax income
     group_by(year, SERIALNO, economic_unit) %>%
     # if part of economic unit, add incomes and taxes, otherwise use individual's income
-    mutate(economic_unit_income = sum(PINCP),
-          economic_unit_taxes = sum(total_taxes)) %>%
-    ungroup() #%>%
-    #select(-PINCP, -total_taxes)
+    mutate(economic_unit_income = ifelse(economic_unit == TRUE,
+                                         sum(PINCP), PINCP),
+          economic_unit_taxes = ifelse(economic_unit == TRUE,
+                                       sum(total_taxes), total_taxes)) %>%
+    ungroup() %>%
+    select(-PINCP, -total_taxes)
   
   return(pop)
 
@@ -495,8 +476,10 @@ child_care <- function(pop) {
            # ESR represents employment, and is used to determine whether person is persent
            # if there is someone in economic not working make child care costs 0
            # this is accomplished by multiply child care costs by zero if someone in the unit is not working
-           # since ESR is boolean, min(ESR) will be 0 (FALSE) ifan adult is not working
-           economic_unit_child_care = (sum(child_care_costs, na.rm = TRUE)) * min(ESR)) %>%
+           # since ESR is boolean, min(ESR) will be 0 (FALSE) if an adult is not working
+           # only multi-person economic units can have child care costs; single person economic units cannot
+           economic_unit_child_care = ifelse(economic_unit == TRUE, sum(child_care_costs, na.rm = TRUE) * min(ESR),
+                                             0)) %>%
     select(-start_age, -child_care_costs) %>%
     ungroup()
 

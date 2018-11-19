@@ -1,0 +1,5 @@
+year,cntyname,economic_unit_taxes,economic_unit_child_care,economic_unit_rent,economic_unit_food,economic_unit_health_ins,ces_trans,ces_other,economic_unit_meps,expense_group
+2016,Forsyth,6162,0,6610,2228,2012,3749,2361,736,1
+2016,Forsyth,23449,313,7174,4436,3859,7761,3830,1438,2
+2016,Forsyth,12341,11772,8376,7376,3424,9863,5452,966,3
+2016,Forsyth,2281,11772,8376,7376,3424,9863,5452,966,4

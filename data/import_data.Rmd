@@ -428,7 +428,7 @@ The North Carolina Division of Child Development and Early Education produces ch
 
 North Carolina state-wide averages were calculated by created a weighted average of county rates by population.
 
-Child care costs are available for the following years: 2018, 2016, 2015, 2007 and 2006. 2017 data is listed, but it is not in text format. Additionally, there is a sharp increase in costs between 2016 and 2017; and this increase continues through 2018. Therefore, 2018 inflation adjusted rates were used to calculate costs in 2017.
+Child care costs are available for the following years: 2018, 2016, 2015, 2007 and 2006. 2017 data is listed, but it is not in text readable format. Additionally, there is a sharp increase in costs between 2016 and 2017; and this increase continues through 2018. Therefore, 2017 rates are the average of the inflation adjusted 2016 and 2018 rates..
 
 2008 to 2014 rates were calculated by inflation adjusting the rates of the nearest year. 2008 to 2010 use 2007 rates, while 2011 to 2014 use 2015 rates.
 
@@ -468,6 +468,17 @@ child_b <- child_b %>%
   mutate(year = as.integer(year),
          estimate = as.integer(estimate))
 
+# create 2017 rates by averaging 2016 and 2018
+# these two years are in same file, 
+# so group by age and county, and take mean
+# bind onto 2016 and 2018 dataset after creating
+child_b <- child_b %>%
+  group_by(age_group, county) %>%
+  summarize(estimate = round(mean(estimate), 0)) %>%
+  mutate(year = 2017,
+         estimate = as.integer(estimate)) %>%
+  bind_rows(child_b, .)
+
 # we only need four star estimates
 stars <- c('infant_Sfour', 'one_Sfour', 'two_Sfour', 'three_Sfour', 'school_Sfour')
 
@@ -506,8 +517,6 @@ inf_adj_child_care <- function(child_care_costs, year_create, year_inflate) {
     rename(estimate = estimate_adj)
 }
 
-seventeen <- inf_adj_child_care(child, 2017, 2018)
-
 # calculate 2008 to 2010 using 2007 rates
 eight_ten <- data.frame()
 for (i in 2008:2010) {
@@ -523,8 +532,8 @@ for (i in 2011:2014) {
 }
 
 # combine these years with all other years
-child <- child %>%
-  bind_rows(., list(seventeen, eight_ten, eleven_fourteen)) %>%
+childA <- child %>%
+  bind_rows(., list(child_b, eight_ten, eleven_fourteen)) %>%
   arrange(year, start_age, county)
 
 ### next: create weighted average for NC
