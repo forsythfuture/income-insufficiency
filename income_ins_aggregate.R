@@ -31,13 +31,13 @@ pop <- readRDS('population_expense.Rda') %>%
   as.data.table()
 
 ### iterate through each year calculating income insufficiency and standard errors
-years <- seq(2015, 2016)
+years <- seq(2013, 2016)
 state <- 37
 
 # initialize dataframe to store demographic income insufficiency for all demographics and years
 demo_income_ins <- data.frame()
 
-for (yr in 2016) {
+for (yr in years) {
 
   # create population weights table name based on year
   tbl_name <- as.character(yr) %>%
@@ -66,7 +66,7 @@ for (yr in 2016) {
     demo <- if (col == 'total') FALSE else TRUE
     
     # iterate through geo graphic areas
-    for(geo_area in c('PUMA', 'cntyname')) {
+    for(geo_area in c('cntyname')) {
       
       print(yr)
       print(col)

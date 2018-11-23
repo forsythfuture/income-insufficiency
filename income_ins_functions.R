@@ -309,8 +309,8 @@ tax_liability <- function(pop) {
   
   print('taxes')
   
-  tax_liabilities <- readRDS('nc_tax_liab_ind.Rda') %>%
-    rename(total_taxes = taxes)
+  tax_liabilities <- readRDS('nc_tax_liab_ind.Rda') #%>%
+    #rename(total_taxes = taxes)
   
   # merge taxes with population dataset
   pop <- pop %>%
