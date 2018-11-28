@@ -12,7 +12,7 @@ library(DBI)
 
 source('income_ins_functions.R')
 
-con <- dbConnect(RSQLite::SQLite(), "pums_db.db")
+con <- dbConnect(RSQLite::SQLite(), "../pums_db.db")
 
 # create age categories to be used when calculating income insufficiency rates for age groups
 age_bins <- c(0, 17, 24, 44, 64, 150)
@@ -21,7 +21,6 @@ age_labels <- age_bins[-1]
 
 # read dataset with expenses
 pop <- readRDS('population_expense.Rda') %>%
-  filter(cntyname == 'Forsyth') %>%
   # create age bins
   mutate(start_age = cut(AGEP, breaks = !!age_bins, 
                          labels = !!age_labels, 
@@ -31,7 +30,7 @@ pop <- readRDS('population_expense.Rda') %>%
   as.data.table()
 
 ### iterate through each year calculating income insufficiency and standard errors
-years <- seq(2013, 2016)
+years <- seq(2017, 2017)
 state <- 37
 
 # initialize dataframe to store demographic income insufficiency for all demographics and years
@@ -59,7 +58,7 @@ for (yr in years) {
   demo_cols <- c('RAC1P', 'HISP', 'SEX', 'start_age', 'total')
   
   # iterate through each demographic, calculating income insufficiency
-  for (col in 'total') {
+  for (col in demo_cols) {
     
     # if demographic column is 'total' then demo parameter is FALSE
     
@@ -86,7 +85,7 @@ for (yr in years) {
     
     # save file as R object (in case program or computer crashes);
     # after calculating for both geographic areas in a demographic
-    saveRDS(demo_income_ins, 'income_ins.Rda')
+    saveRDS(demo_income_ins, 'income_ins2.Rda')
       
   }
   

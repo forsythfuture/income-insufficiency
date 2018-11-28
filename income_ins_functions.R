@@ -700,6 +700,9 @@ replicate_weights <- function(pop, weights_tbl, weight) {
   wgt <- weights_tbl %>%
     select(SERIALNO, SPORDER, !!weight) %>%
     collect() %>%
+    # 2017 adds the numbers '2017' prior to serial number
+    # remove these numbers
+    mutate(SERIALNO = as.integer(str_replace_all(.$SERIALNO, '^2017', ''))) %>%
     # convert to data table
     as.data.table()
   
@@ -709,7 +712,6 @@ replicate_weights <- function(pop, weights_tbl, weight) {
   # change name of column so that it is the same of each iteration
   setnames(pop_wgt, weight, 'wgt')
   
-  #palmas[[weight]] <- 
   pop_wgt <- pop_wgt[
     # filter out replicate weight values less than 1
     wgt > 0][
@@ -720,14 +722,6 @@ replicate_weights <- function(pop, weights_tbl, weight) {
   
 }
 
-# popA <- pop
-# pop <- pop_year
-# geo_area <- 'PUMA'
-# weight <- 'pwgtp2'
-# col <- "RAC1P"
-# demo <- TRUE
-# state <- 37
-# yr <- 2008
 
 standard_errors <- function(pop, geo_area, weights_tbl, pop_weights, col, demo = TRUE) {
   
