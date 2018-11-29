@@ -221,7 +221,7 @@ create_economic_units <- function(con, year, state) {
   counties <- read_csv('puma_counties.csv')
   
   # select PUMA area code based on year
-  if (!!year < 2011) {
+  if (!!year < 2012) {
     
     counties <- counties %>%
       select(puma2k, cntyname) %>%

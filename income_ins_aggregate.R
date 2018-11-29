@@ -20,7 +20,7 @@ age_bins <- c(0, 17, 24, 44, 64, 150)
 age_labels <- age_bins[-1]
 
 # read dataset with expenses
-pop <- readRDS('population_expense.Rda') %>%
+pop <- readRDS('population_expense11.Rda') %>%
   # create age bins
   mutate(start_age = cut(AGEP, breaks = !!age_bins, 
                          labels = !!age_labels, 
@@ -40,7 +40,7 @@ race_recode <- c(1, 2, rep(4, 7), 3)
 pop$RAC1P <- plyr::mapvalues(pop$RAC1P, race_labels, race_recode)
 
 ### iterate through each year calculating income insufficiency and standard errors
-years <- seq(2006, 2017)
+years <- seq(2011, 2011)
 state <- 37
 
 # initialize dataframe to store demographic income insufficiency for all demographics and years
@@ -75,7 +75,7 @@ for (yr in years) {
     demo <- if (col == 'total') FALSE else TRUE
     
     # iterate through geo graphic areas
-    for(geo_area in c('cntyname', 'ST')) {
+    for(geo_area in c('cntyname')) {
       
       print(yr)
       print(col)
@@ -95,7 +95,7 @@ for (yr in years) {
     
     # save file as R object (in case program or computer crashes);
     # after calculating for both geographic areas in a demographic
-    saveRDS(demo_income_ins, 'income_ins_state.Rda')
+    saveRDS(demo_income_ins, 'income_ins_11.Rda')
       
   }
   
@@ -104,12 +104,18 @@ for (yr in years) {
 ######################################## This section cleans the raw output ##########################################################
 
 income_ins <- readRDS('income_ins_state.Rda')
+income_ins_11 <- readRDS('income_ins_11.Rda')
 
 ######################## This section cleans and creates the final dataset #################################
 
-# only keep needed grographic areas
+# only keep needed geographic areas
+# 37 is NC state code, and represents the NC rate
 income_ins <- income_ins %>%
-  filter(geo_area %in% c('North Carolina', 'Forsyth', 'Guilford', 'Durham')) %>%
+  bind_rows(., income_ins_11) %>%
+  filter(geo_area %in% c('37', 'Forsyth', 'Guilford', 'Durham')) %>%
+  # add 'County, NC' to county names and change NC state code to name
+  mutate(geo_area = recode(geo_area, `37` = 'North Carolina', Forsyth = 'Forsyth County, NC',
+                           Guilford = 'Guilford County, NC', Durham = 'Durham County, NC')) %>%
   # only keep needed races (white, AA, hispanic)
   # races not one of these three are labeld 4 and can be removed
   filter(!(sub_demographic == 4 & demographic == 'RAC1P'))
@@ -142,13 +148,16 @@ income_ins$sub_demographic <- ifelse(income_ins$demographic == 'RAC1P',
 # recode demographic names
 income_ins$demographic <- recode(income_ins$demographic, 
                                  RAC1P = 'Race / Ethnicity', SEX = 'Gender', 
-                                 start_age = 'Age', total = 'Total')
+                                 start_age = 'Age', total = 'Comparison Community')
 
-# calculate MOE and CV
 income_ins <- income_ins %>%
+  # calculate MOE and CV
   mutate(moe = se * 1.96,
          cv = (se / income_ins) * 100) %>%
   # rename columns to fit into shiny app
-  rename(year = year, geo_description = geo_area, subtype = sub_demographic, type = demographic, estimate = income_ins)
+  rename(year = year, geo_description = geo_area, subtype = sub_demographic, type = demographic, estimate = income_ins) %>%
+  # place columns in proper order for shiny app
+  select(geo_description, year, estimate, moe, se, cv, type, subtype) %>%
+  arrange(year, type, geo_description, subtype)
 
-#write_csv(income_ins, 'income_ins_cleaned.csv')
+# write_csv(income_ins, 'shiny_income_ins/income_ins_cleaned.csv')

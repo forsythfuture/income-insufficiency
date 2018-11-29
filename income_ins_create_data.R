@@ -17,12 +17,12 @@ library(DBI)
 
 source('income_ins_functions.R')
 
-con <- dbConnect(RSQLite::SQLite(), "pums_db.db")
+con <- dbConnect(RSQLite::SQLite(), "../pums_db.db")
 
 # import needed PUMA data for all years
 pop <- data.frame()
 
-for (yr in seq(2006, 2017)) {
+for (yr in seq(2011, 2011)) {
   
   print(yr)
   pop <- create_economic_units(con, yr, 37) %>%
@@ -44,4 +44,4 @@ pop <- pop %>%
   select(-RELP, -ESR, -economic_unit_income:-economic_unit_meps)
 
 # save intermediate output
-saveRDS(pop, 'population_expense.Rda')
+saveRDS(pop, 'population_expense11.Rda')
