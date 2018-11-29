@@ -103,7 +103,7 @@ taxsim_income <- expense_data %>%
          state = 34,
          mstatus = ifelse(SERIALNO %in% c(1,5), 1,2),
          page = 40,
-         sage = 40,
+         sage = ifelse(SERIALNO %in% c(1,5), 0,40),
          depx = kids,
          dep13 = kids,
          dep17 = kids,
