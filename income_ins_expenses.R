@@ -106,6 +106,7 @@ taxsim_income <- expense_data %>%
          sage = 40,
          depx = kids,
          dep13 = kids,
+         dep17 = kids,
          dep18 = kids) %>%
   select(-kids) %>%
   # combine iteration and serial number into one column so it can be the taxsim ID
@@ -121,4 +122,4 @@ zero_matrix <- matrix(0, nrow(taxsim_income), 27 - ncol(taxsim_income)) %>%
 # bind zero matrix with regular dataframe
 taxsim_income <- bind_cols(taxsim_income, zero_matrix)
 
-# write_csv(taxsim_income, 'to_taxsim.csv', col_names = FALSE)
+#write_csv(taxsim_income, 'to_taxsim.csv', col_names = FALSE)
