@@ -21,10 +21,9 @@ data_source <- c('US Census Public Use Microdata Sample (PUMS)')
 #   bold: <b>text</b>
 #   line break: <br>
 
-interpretation <- c('<i>Race and Ethnicity</i>',
-                    'This is some text. asdfasdfdsafdsaafsgfjhjhgfjhfgjhgjhgjhgfhjfgjhgf<br>',
-                    '<i>Gender</i>',
-                    'Here is more text. sfadfsdafdsafdsafadsfdasfdsfdsafadsfadsfdsafgjhjfhgjhgjhfgjhgf')
+interpretation <- c('<i>Race and Ethnicity</i><br>',
+                    'Hispanic / Latino residents had the highest income insufficiency rates in all years except 2017.<br>',
+                    'The 2017 difference between Hispanic / Latinos and African Americans is statistically significant.')
 
 ################### End section to edit ############################
 
@@ -34,7 +33,8 @@ source('global.R')
 #########################################
 
 # load file
-df <- read_csv(file_name)
+df <- read_csv(file_name) %>%
+  mutate_at(vars(estimate, moe, se, cv), funs(round(., 2)))
 #
 # crate tableau dataset
 tableau_df <- df %>%
@@ -45,7 +45,12 @@ tableau_df <- df %>%
   mutate(type = 'Total') %>%
   # bind these rows to the original dataframe
   bind_rows(df) %>%
+  arrange(year, type, subtype, geo_description) %>%
+  # change subtype from None to Total
+  mutate(subtype = recode(subtype, None = 'Total Population')) %>%
   select(year, geo_description, type, subtype, estimate) %>%
+  # only keep comparison community demographics for latest year
+  filter(!(year != 2017 & geo_description != 'Forsyth County, NC')) %>%
   rename(Year = year, `Geographic Area` = geo_description, Type = type,
          Subtype = subtype, Estimate = estimate)
 
@@ -74,7 +79,7 @@ ui <- dashboardPage(
     #uiOutput('demographic')#,
     selectInput("demographic", label = "Demographic:",
                 choices = unique_demo,
-                selected = unique_demo[1]),
+                selected = 'Comparison Community'),
     
     # download tableau data buttom
     downloadButton("download_tableau", "Download Tableau")
