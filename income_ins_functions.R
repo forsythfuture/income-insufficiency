@@ -635,7 +635,7 @@ income_ins <- function(df, geo_area, col, demo = TRUE) {
   
   # this function calculates income insufficiency for a given demographic
   # input is a data.table that has already been extended based on replicate weights
-  # geo_area: either 'PUMA' or 'cntyname'
+  # geo_area: either 'PUMA', 'cntyname', or 'ST'
   # col is a column name that is the grouping variable, as a string
   # demo is whether we are calculating income insufficiency by demographic
   
@@ -690,13 +690,14 @@ replicate_weights <- function(pop, weights_tbl, weight) {
   # This function takes a population data.table as input and extends the data.table 
   # based on weights for one weight column
   # Input:
-  #   dt: a data.table that we want extended based on replicate weights
+  #   pop: a data.table that we want extended based on replicate weights
   #       table must include SERIALNO and SPORDER
   #   weights_tbl: a table of replicate weights and SERIALNO and SPORDER
   #                the table should not be collected into RAM
   #   wgt: the replicate weight column used to extend data.table
   
   # bring into memory weights dataframe with serialno, sporder and just one weight column
+  
   wgt <- weights_tbl %>%
     select(SERIALNO, SPORDER, !!weight) %>%
     collect() %>%
@@ -726,10 +727,10 @@ replicate_weights <- function(pop, weights_tbl, weight) {
 standard_errors <- function(pop, geo_area, weights_tbl, pop_weights, col, demo = TRUE) {
   
   # This function calculates standard errors and also aggregates other functions,
-  # such as creating extended replicate weight dataset and calculatingincome insufficiency
+  # such as creating extended replicate weight dataset and calculating income insufficiency
   # Input:
   #   pop: data.table of population, not extended with replciate weights
-  #   geo_area: 'PUMA' or 'cntyname'
+  #   geo_area: 'PUMA', 'cntyname', or 'ST'
   #   weights_tbl: table of weights, uncollected
   #   pop_weights: vector of all weight column names
   #   col: demographic to use when calculating income insufficiency
