@@ -35,4 +35,4 @@ expenses <- expense_data %>%
   select(-SPORDER:-economic_unit) %>%
   distinct()
 
-write_csv(expenses, 'expenses.csv')
+#write_csv(expenses, 'expenses.csv')
