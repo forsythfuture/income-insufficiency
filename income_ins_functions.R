@@ -444,11 +444,11 @@ child_care <- function(pop) {
   
   print('child care')
   
-  child_costs <- readRDS('data/cleaned_data/child_care.Rda') %>%
+  child_costs <- read_csv('data/cleaned_data/child_care_nc_average.csv') %>%
     # rename child care costs column to ensure it does not conflict with the name
     # of another column
     rename(child_care_costs = estimate)
-  
+
   # create age breaks for differing costs of childcare
   age_breaks <- child_costs %>%
     select(start_age) %>%
@@ -456,19 +456,19 @@ child_care <- function(pop) {
     .[[1]] %>%
     append(., 13) %>%
     append(., 150)
-  
+
   # create labels for bins; these are the start ages
   age_labels <- age_breaks[-(length(age_breaks))]
-  
-  pop <- pop %>% 
-    # create age labels based on food costs age bins 1417191
-    mutate(start_age = cut(AGEP, breaks = !!age_breaks, 
-                           labels = !!age_labels, 
+
+  pop <- pop %>%
+    # create age labels based on child care costs age bins
+    mutate(start_age = cut(AGEP, breaks = !!age_breaks,
+                           labels = !!age_labels,
                            include.lowest = TRUE, right = FALSE),
            # convert to integer so it can be merged with population dataset
            start_age = as.integer(as.character(start_age))) %>%
-    # merge in child care costs, based on year, age, and county
-    left_join(child_costs, by = c('year', c('cntyname' = 'county'), 'start_age')) %>%
+    # merge in child care costs, based on year and age
+    left_join(child_costs, by = c('year', 'start_age')) %>%
     # group by economic unit and sum across units
     group_by(year, SERIALNO, economic_unit) %>%
     # NA values represent no child care costs
@@ -482,6 +482,46 @@ child_care <- function(pop) {
                                              0)) %>%
     select(-start_age, -child_care_costs) %>%
     ungroup()
+  ## Old child care function
+  #
+  # child_costs <- readRDS('data/cleaned_data/child_care.Rda') %>%
+  #   # rename child care costs column to ensure it does not conflict with the name
+  #   # of another column
+  #   rename(child_care_costs = estimate)
+  # 
+  # # create age breaks for differing costs of childcare
+  # age_breaks <- child_costs %>%
+  #   select(start_age) %>%
+  #   distinct() %>%
+  #   .[[1]] %>%
+  #   append(., 13) %>%
+  #   append(., 150)
+  # 
+  # # create labels for bins; these are the start ages
+  # age_labels <- age_breaks[-(length(age_breaks))]
+  # 
+  # pop <- pop %>% 
+  #   # create age labels based on food costs age bins 1417191
+  #   mutate(start_age = cut(AGEP, breaks = !!age_breaks, 
+  #                          labels = !!age_labels, 
+  #                          include.lowest = TRUE, right = FALSE),
+  #          # convert to integer so it can be merged with population dataset
+  #          start_age = as.integer(as.character(start_age))) %>%
+  #   # merge in child care costs, based on year, age, and county
+  #   left_join(child_costs, by = c('year', c('cntyname' = 'county'), 'start_age')) %>%
+  #   # group by economic unit and sum across units
+  #   group_by(year, SERIALNO, economic_unit) %>%
+  #   # NA values represent no child care costs
+  #   mutate(child_care_costs = replace_na(child_care_costs, 0),
+  #          # ESR represents employment, and is used to determine whether person is persent
+  #          # if there is someone in economic not working make child care costs 0
+  #          # this is accomplished by multiply child care costs by zero if someone in the unit is not working
+  #          # since ESR is boolean, min(ESR) will be 0 (FALSE) if an adult is not working
+  #          # only multi-person economic units can have child care costs; single person economic units cannot
+  #          economic_unit_child_care = ifelse(economic_unit == TRUE, sum(child_care_costs, na.rm = TRUE) * min(ESR),
+  #                                            0)) %>%
+  #   select(-start_age, -child_care_costs) %>%
+  #   ungroup()
 
   return(pop)
   
