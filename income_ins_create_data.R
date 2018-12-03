@@ -1,5 +1,7 @@
 ###################################################################################
 #
+# This is the first script to run!!
+#
 # This script calculates income insufficiency for each person.
 # It calculates expenses for each individual and creates a column
 # that is a boolean representing whether the person is income
@@ -44,4 +46,4 @@ pop <- pop %>%
   select(-RELP, -ESR, -economic_unit_income:-economic_unit_meps)
 
 # save intermediate output
-saveRDS(pop, 'population_expense11.Rda')
+saveRDS(pop, 'population_expense.Rda')

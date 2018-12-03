@@ -1,5 +1,7 @@
 ###################################################################################
 #
+# This is the second script to run!!
+#
 # This script takes as input the dataset showing whether each person is in an income
 # insufficient economic unit and calculates aggregate income insufficiency rates
 # for the total population and demographics.
@@ -40,7 +42,7 @@ race_recode <- c(1, 2, rep(4, 7), 3)
 pop$RAC1P <- plyr::mapvalues(pop$RAC1P, race_labels, race_recode)
 
 ### iterate through each year calculating income insufficiency and standard errors
-years <- seq(2011, 2011)
+years <- seq(2006, 2017)
 state <- 37
 
 # initialize dataframe to store demographic income insufficiency for all demographics and years
