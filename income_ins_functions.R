@@ -798,8 +798,6 @@ standard_errors <- function(pop, geo_area, weights_tbl, pop_weights, col, demo =
     # merge with point estimates
     inner_join(point_estimate, ., by = c('geo_area', 'sub_demographic', 'demographic'))
   
-  #point_estimate$se <- sqrt( sum_sq_diff * (4/80) )
-  
   return(sq_diff)
   
 }
