@@ -424,6 +424,12 @@ food <- read_delim("raw_data/food_costs.csv",
 
 ## Child Care Expenses
 
+Child care expenses were taken from Child Care Aware's annual High Cost of Child Care report for each year. The 2007 state-level report that reflects 2006 data did not contain any North Carolina data, so 2007 rates were inflation adjusted to 2006. The data was manually entered into a csv file from the reports, so no cleaning is necessary.
+
+## Old Child Care Expenses
+
+Note: This sections reflects child care expenses from the NC market rate study.  It was not used for 2017 income insifficiency calculations.
+
 The North Carolina Division of Child Development and Early Education produces child care market rates for each North Carolina county (https://ncchildcare.ncdhhs.gov/Home/DCDEE-Sections/Subsidy-Services/Market-Rates). These rates are the same as those found in the North Carolina Child Care Market Rate Study (https://ncchildcare.ncdhhs.gov/Portals/0/documents/pdf/M/market_rate_survey_report_2015.pdf).  The rates are in pdf files and were copy and pasted into csv files.
 
 North Carolina state-wide averages were calculated by created a weighted average of county rates by population.
@@ -433,134 +439,134 @@ Child care costs are available for the following years: 2018, 2016, 2015, 2007 a
 2008 to 2014 rates were calculated by inflation adjusting the rates of the nearest year. 2008 to 2010 use 2007 rates, while 2011 to 2014 use 2015 rates.
 
 ```{r}
-# 2006 data and 2007 and 2015 data are in two separate files. 
-# They have the same format, except their columns are in different orders.
-# these can be imported and bound by rows
-child_a <- read_excel('raw_data/child_care/child_06.xlsx') %>%
-   bind_rows(read_excel('raw_data/child_care/child_07_15.xlsx')) %>%
-  # currently each age group is in a different column
-  # convert to long form (each age group is a different row
-  gather('age_group', 'estimate', infant_Sone:school_Sfive)
-
-# 2016 and 2018 pasted in an odd format that needs cleaning
-child_b <- read_excel('raw_data/child_care/child_16_18.xlsx')
-
-# remove county names (this is any row with a letter) and convert to vector
-counties <- child_b %>%
-  # only keep rows that are the county name
-  filter(age_group == 'county') %>%
-  # convert to vector
-  .[[1]]
-
-# remove county names from child_b and create new row with previously created
-# vector of counties that displays the county name
-child_b <- child_b %>%
-  # remove county names
-  filter(age_group != 'county') %>%
-  # add vector of counties as column
-  mutate(county = rep(counties, each = nrow(.)/length(counties))) %>%
-  # there is a column for each year, convert to long form with years on different rows
-  gather('year', 'estimate', sixteen:eighteen) %>%
-  # replace sixteen with 2016 and eighteen with 2018
-  # must first replace with character so some rows and not character and others integer
-  mutate(year = str_replace_all(year, 'sixteen', '2016')) %>%
-  mutate(year = str_replace_all(year, 'eighteen', '2018')) %>%
-  mutate(year = as.integer(year),
-         estimate = as.integer(estimate))
-
-# create 2017 rates by averaging 2016 and 2018
-# these two years are in same file, 
-# so group by age and county, and take mean
-# bind onto 2016 and 2018 dataset after creating
-child_b <- child_b %>%
-  group_by(age_group, county) %>%
-  summarize(estimate = round(mean(estimate), 0)) %>%
-  mutate(year = 2017,
-         estimate = as.integer(estimate)) %>%
-  bind_rows(child_b, .)
-
-# we only need four star estimates
-stars <- c('infant_Sfour', 'one_Sfour', 'two_Sfour', 'three_Sfour', 'school_Sfour')
-
-# we will change age group values to integers representing start age
-start_age <- c(0, 1, 2, 3, 6)
-
-# bind child_a and child_b
-child <- bind_rows(child_a, child_b) %>%
-  # only keep four stars
-  filter(age_group %in% stars) %>%
-  # replace age group with integer representing start age
-  mutate(start_age = ifelse(age_group == !!stars[1], !!start_age[1],
-                      ifelse(age_group == !!stars[2], !!start_age[2],
-                        ifelse(age_group == !!stars[3], !!start_age[3],
-                         ifelse(age_group == !!stars[4], !!start_age[4],
-                          ifelse(age_group == !!stars[5], !!start_age[5], 7)))))) %>%
-  select(-age_group)
-
-# we need to calculate rates for missing years based on inflation adjusted rates in the nearest year
-# this requires the same manipulations for all inflation adjustments,
-# so a function will be used to
-
-inf_adj_child_care <- function(child_care_costs, year_create, year_inflate) {
-  
-  # inputs:
-  #   child_costs: dataframe of child care costs
-  #   year_create: the year we want to create a dataset for
-  #   year_adjust: the year's data we will use and inflation adjust
-  #                to create the missing year's data
-  
-  child_care_costs %>%
-    filter(year == !!year_inflate) %>%
-    ff_inflation_adjust(., wages_col = estimate, year_adjust = year_create, error = FALSE) %>%
-    mutate(year = !!year_create) %>%
-    select(-estimate) %>%
-    rename(estimate = estimate_adj)
-}
-
-# calculate 2008 to 2010 using 2007 rates
-eight_ten <- data.frame()
-for (i in 2008:2010) {
-  eight_ten <- inf_adj_child_care(child, i, 2007) %>%
-    bind_rows(eight_ten, .)
-}
-
-# calculate 2011 to 2014 using 2015 rates
-eleven_fourteen <- data.frame()
-for (i in 2011:2014) {
-  eleven_fourteen <- inf_adj_child_care(child, i, 2015) %>%
-    bind_rows(eleven_fourteen, .)
-}
-
-# combine these years with all other years
-child <- child %>%
-  bind_rows(., list(eight_ten, eleven_fourteen)) %>%
-  arrange(year, start_age, county)
-
-### next: create weighted average for NC
-
-# import county population percentages
-county_pop <- read_csv('county_perc_pop.csv') %>%
-  mutate(countyname = str_replace_all(countyname, ' County', '')) %>%
-  select(-pop)
-
-# bind county percentages
-# we do not have population percentage data for 2018
-child <- child %>%
-  left_join(., county_pop, by = c('year', 'county' = 'countyname')) %>%
-  # 2018 will have NAs in percentage, we can drop this year
-  drop_na() %>%
-  # create each county's weighted child care costs
-  mutate(weighted_costs = estimate * perc_pop) %>%
-  # sum these weighted costs by year to get state amounts
-  group_by(year, start_age) %>%
-  summarize(estimate = as.integer( sum(weighted_costs) )) %>%
-  mutate(county = 'NC') %>%
-  ungroup() %>%
-  # bind NC costs to county costs
-  bind_rows(child, .) %>%
-  # convert monthly amounts to year
-  mutate(estimate = estimate * 12)
-
-# save as R object because csvfile will not load properly
-#saveRDS(child, 'cleaned_data/child_care.Rda')
+# # 2006 data and 2007 and 2015 data are in two separate files. 
+# # They have the same format, except their columns are in different orders.
+# # these can be imported and bound by rows
+# child_a <- read_excel('raw_data/child_care/child_06.xlsx') %>%
+#    bind_rows(read_excel('raw_data/child_care/child_07_15.xlsx')) %>%
+#   # currently each age group is in a different column
+#   # convert to long form (each age group is a different row
+#   gather('age_group', 'estimate', infant_Sone:school_Sfive)
+# 
+# # 2016 and 2018 pasted in an odd format that needs cleaning
+# child_b <- read_excel('raw_data/child_care/child_16_18.xlsx')
+# 
+# # remove county names (this is any row with a letter) and convert to vector
+# counties <- child_b %>%
+#   # only keep rows that are the county name
+#   filter(age_group == 'county') %>%
+#   # convert to vector
+#   .[[1]]
+# 
+# # remove county names from child_b and create new row with previously created
+# # vector of counties that displays the county name
+# child_b <- child_b %>%
+#   # remove county names
+#   filter(age_group != 'county') %>%
+#   # add vector of counties as column
+#   mutate(county = rep(counties, each = nrow(.)/length(counties))) %>%
+#   # there is a column for each year, convert to long form with years on different rows
+#   gather('year', 'estimate', sixteen:eighteen) %>%
+#   # replace sixteen with 2016 and eighteen with 2018
+#   # must first replace with character so some rows and not character and others integer
+#   mutate(year = str_replace_all(year, 'sixteen', '2016')) %>%
+#   mutate(year = str_replace_all(year, 'eighteen', '2018')) %>%
+#   mutate(year = as.integer(year),
+#          estimate = as.integer(estimate))
+# 
+# # create 2017 rates by averaging 2016 and 2018
+# # these two years are in same file, 
+# # so group by age and county, and take mean
+# # bind onto 2016 and 2018 dataset after creating
+# child_b <- child_b %>%
+#   group_by(age_group, county) %>%
+#   summarize(estimate = round(mean(estimate), 0)) %>%
+#   mutate(year = 2017,
+#          estimate = as.integer(estimate)) %>%
+#   bind_rows(child_b, .)
+# 
+# # we only need four star estimates
+# stars <- c('infant_Sfour', 'one_Sfour', 'two_Sfour', 'three_Sfour', 'school_Sfour')
+# 
+# # we will change age group values to integers representing start age
+# start_age <- c(0, 1, 2, 3, 6)
+# 
+# # bind child_a and child_b
+# child <- bind_rows(child_a, child_b) %>%
+#   # only keep four stars
+#   filter(age_group %in% stars) %>%
+#   # replace age group with integer representing start age
+#   mutate(start_age = ifelse(age_group == !!stars[1], !!start_age[1],
+#                       ifelse(age_group == !!stars[2], !!start_age[2],
+#                         ifelse(age_group == !!stars[3], !!start_age[3],
+#                          ifelse(age_group == !!stars[4], !!start_age[4],
+#                           ifelse(age_group == !!stars[5], !!start_age[5], 7)))))) %>%
+#   select(-age_group)
+# 
+# # we need to calculate rates for missing years based on inflation adjusted rates in the nearest year
+# # this requires the same manipulations for all inflation adjustments,
+# # so a function will be used to
+# 
+# inf_adj_child_care <- function(child_care_costs, year_create, year_inflate) {
+#   
+#   # inputs:
+#   #   child_costs: dataframe of child care costs
+#   #   year_create: the year we want to create a dataset for
+#   #   year_adjust: the year's data we will use and inflation adjust
+#   #                to create the missing year's data
+#   
+#   child_care_costs %>%
+#     filter(year == !!year_inflate) %>%
+#     ff_inflation_adjust(., wages_col = estimate, year_adjust = year_create, error = FALSE) %>%
+#     mutate(year = !!year_create) %>%
+#     select(-estimate) %>%
+#     rename(estimate = estimate_adj)
+# }
+# 
+# # calculate 2008 to 2010 using 2007 rates
+# eight_ten <- data.frame()
+# for (i in 2008:2010) {
+#   eight_ten <- inf_adj_child_care(child, i, 2007) %>%
+#     bind_rows(eight_ten, .)
+# }
+# 
+# # calculate 2011 to 2014 using 2015 rates
+# eleven_fourteen <- data.frame()
+# for (i in 2011:2014) {
+#   eleven_fourteen <- inf_adj_child_care(child, i, 2015) %>%
+#     bind_rows(eleven_fourteen, .)
+# }
+# 
+# # combine these years with all other years
+# child <- child %>%
+#   bind_rows(., list(eight_ten, eleven_fourteen)) %>%
+#   arrange(year, start_age, county)
+# 
+# ### next: create weighted average for NC
+# 
+# # import county population percentages
+# county_pop <- read_csv('county_perc_pop.csv') %>%
+#   mutate(countyname = str_replace_all(countyname, ' County', '')) %>%
+#   select(-pop)
+# 
+# # bind county percentages
+# # we do not have population percentage data for 2018
+# child <- child %>%
+#   left_join(., county_pop, by = c('year', 'county' = 'countyname')) %>%
+#   # 2018 will have NAs in percentage, we can drop this year
+#   drop_na() %>%
+#   # create each county's weighted child care costs
+#   mutate(weighted_costs = estimate * perc_pop) %>%
+#   # sum these weighted costs by year to get state amounts
+#   group_by(year, start_age) %>%
+#   summarize(estimate = as.integer( sum(weighted_costs) )) %>%
+#   mutate(county = 'NC') %>%
+#   ungroup() %>%
+#   # bind NC costs to county costs
+#   bind_rows(child, .) %>%
+#   # convert monthly amounts to year
+#   mutate(estimate = estimate * 12)
+# 
+# # save as R object because csvfile will not load properly
+# #saveRDS(child, 'cleaned_data/child_care.Rda')
 ```
