@@ -22,7 +22,7 @@ age_bins <- c(0, 17, 24, 44, 64, 150)
 age_labels <- age_bins[-1]
 
 # read dataset with expenses
-pop <- readRDS('population_expense11.Rda') %>%
+pop <- readRDS('population_expense.Rda') %>%
   # create age bins
   mutate(start_age = cut(AGEP, breaks = !!age_bins, 
                          labels = !!age_labels, 
@@ -77,7 +77,7 @@ for (yr in years) {
     demo <- if (col == 'total') FALSE else TRUE
     
     # iterate through geo graphic areas
-    for(geo_area in c('cntyname')) {
+    for(geo_area in c('cntyname', 'ST')) {
       
       print(yr)
       print(col)
@@ -97,7 +97,7 @@ for (yr in years) {
     
     # save file as R object (in case program or computer crashes);
     # after calculating for both geographic areas in a demographic
-    saveRDS(demo_income_ins, 'income_ins_11.Rda')
+    saveRDS(demo_income_ins, 'income_ins.Rda')
       
   }
   
@@ -105,8 +105,8 @@ for (yr in years) {
 
 ######################################## This section cleans the raw output ##########################################################
 
-income_ins <- readRDS('income_ins_state.Rda')
-income_ins_11 <- readRDS('income_ins_11.Rda')
+income_ins <- readRDS('income_ins.Rda')
+#income_ins_11 <- readRDS('income_ins_11.Rda')
 
 ######################## This section cleans and creates the final dataset #################################
 

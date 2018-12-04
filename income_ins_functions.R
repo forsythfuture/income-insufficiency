@@ -469,6 +469,8 @@ child_care <- function(pop) {
            start_age = as.integer(as.character(start_age))) %>%
     # merge in child care costs, based on year and age
     left_join(child_costs, by = c('year', 'start_age')) %>%
+    # grop state column
+    select(-state) %>%
     # group by economic unit and sum across units
     group_by(year, SERIALNO, economic_unit) %>%
     # NA values represent no child care costs
