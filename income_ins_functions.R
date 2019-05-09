@@ -262,7 +262,7 @@ create_economic_units <- function(con, year, state) {
                 'RAC1P', # race
                 'AGEP', # age
                 'SEX', # sex
-                'ESR' # employment status
+                'ESR', # employment status
   )
   
   # import population data
