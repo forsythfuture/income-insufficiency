@@ -274,7 +274,19 @@ create_economic_units <- function(con, year, state) {
     mutate(year = ifelse(year < 2000, year + 2000, year)) %>%
     collect() %>%
     # add county names
-    left_join(counties, by = 'PUMA')
+    left_join(counties, by = 'PUMA') %>%
+    # filter for needed counties
+    filter(cntyname %in% c('Forsyth', 'Guilford', 'Durham'))
+  
+  under_5 <- pop %>%
+    filter(AGEP <= 4) %>%
+    select(SERIALNO) %>%
+    distinct() %>%
+    .[[1]]
+  
+  # filter dataset to only include households with children under 5
+  pop <- pop %>%
+    filter(SERIALNO %in% under_5)
   
   # change REL column name to RELP if REL is a column (less than 2010)
   # this allows us to use the same column names for all years
