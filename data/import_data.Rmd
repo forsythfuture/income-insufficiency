@@ -1,6 +1,7 @@
 ---
 title: "Import income insufficiency data"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 ---
@@ -69,7 +70,7 @@ data_files <- list.files(ces_path, pattern = 'raw_data.txt') %>%
   # sort alphabetically so that raw data order matches header order
   sort()
 # header files contain 'header'
-header_files <- list.files(ces_path, pattern = 'header') %>%
+header_files <- list.files(ces_path, pattern = 'headers') %>%
   sort()
 
 # initialize dataframe to contain all ces data
@@ -109,8 +110,8 @@ df_ces <- df_ces %>%
          end_age = ifelse(str_detect(item, 'under 2'), 1,
                             ifelse(str_detect(item, '2 to 15'), 15,
                                                      150))) %>%
-  # come items have gender categories
-  # extract gender and place in its own column,
+  # some items have gender categories
+  # ext   ract gender and place in its own column,
   # with items not having gender labeled as 0
   mutate(gender = ifelse(str_detect(item, ' Men|Boys'), 1,
                          ifelse(str_detect(item, 'Women|Girls'), 2, 0)))
@@ -119,7 +120,9 @@ df_ces <- df_ces %>%
 
 ### Import and clean CES data for health insurance by age and consumer unit size
 
-For health insurance by age and consumer unit size, each year is in a different file and all files share a common format. The year is represented in the final two digits of the file name. The block below loop through each file, importing and cleaning along the way.
+To get health insurance by age and consumer unit information, go to https://www.bls.gov/cex/tables.htm#crosstab and scroll down to the heading "Size of consumer unit by age of reference person."  Click the XLSX file for 'One Person' and add this dataset to the folder with the other health insurance by age excel files: `data/raw_data/ces/health_ins_age'.
+
+For health insurance by age and consumer unit size, each year is in a different file and all files share a common format. The year is represented in the final two digits of the file name. The block below loops through each file, importing and cleaning along the way.
 
 ```{r}
 # get list of all files

@@ -9,7 +9,7 @@ ff_clean_ces <- function(data_file, header_file) {
   #     health insurance, transportation, appareal and services, housekeeping supplies
   #     personal care products and services, reading, misc
   #
-  #  Input:
+  #    Input:
   #     data_file: txt file containing data of the individual expense
   #     header_file: txt data of header information (different file for each expenses)
   #
@@ -24,7 +24,8 @@ ff_clean_ces <- function(data_file, header_file) {
                    delim = '\t') %>%
     # convert from wide (each column is a different year) 
     # to long (each row is a different year and expense)
-    gather("Year", 'Expense', `Annual 2006`:`Annual 2017`) %>%
+    pivot_longer(cols = -`Series ID`,
+                 names_to = 'Year', values_to = 'Expense') %>%
     # remove word 'Annual' from year column
     mutate(Year = str_replace_all(Year, 'Annual ', '')) %>%
     # trim whitespace in all columns
@@ -32,6 +33,11 @@ ff_clean_ces <- function(data_file, header_file) {
     mutate_all(funs(str_trim(., side = 'both'))) %>%
     # convert years and expense estimtae to numeric
     mutate_at(c('Expense', 'Year'), as.numeric)
+  
+  ###
+  #header_file <- 'data/raw_data/ces/apparel_headers.txt'
+  #data_file <- 
+  ###
   
   # import headers
   df_headers <- read_delim(header_file,
@@ -43,11 +49,13 @@ ff_clean_ces <- function(data_file, header_file) {
            X1 != 'Series Id') %>%
     # separate columsn at ':', this puts header title and header value in different columns
     separate(X1, into = c('titles', 'values'), sep = ': ', extra = 'merge', remove = TRUE) %>%
+    drop_na() %>%
     # add column that adds an ID number to each series group
     # needed to spread columns
-    mutate(id = rep(1:(nrow(.)/6), each = 6)) %>%
+    mutate(id = rep(1:(nrow(.)/6), each = 6),
+           values = str_trim(values)) %>%
     # convert from long to wide where each header title is in a different row
-    spread(titles, values) %>%
+    pivot_wider(id_cols = 'id', names_from = 'titles', values_from = 'values') %>%
     # remove unneeded values
     select(-id, -Category) %>%
     # rename to match column name in dataframe containing data
