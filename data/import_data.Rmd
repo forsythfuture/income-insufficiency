@@ -318,6 +318,8 @@ To update, copy and paste the new year's link below. To find the link, go to htt
 
 ```{r}
 # vector of urls for each yearly dataset
+
+########## add most recent year's link here ###############3
 url <- c('https://www.huduser.gov/portal/datasets/fmr/fmr2018/FY18_4050_FMRs.xls',
 'https://www.huduser.gov/portal/datasets/fmr/fmr2017/FY2017-4050-County-Level_Data.xlsx',
 'https://www.huduser.gov/portal/datasets/fmr/fmr2016f/FY2016F_4050_Final.xlsx',
@@ -436,13 +438,13 @@ write_csv(fmr, 'cleaned_data/fmr.csv')
 
 ## Food Costs
 
-Food costs come from the USDA's low cost food plan (https://www.cnpp.usda.gov/USDAFoodPlansCostofFood/reports). This data is trapped in pdf files and we manually entered into a csv file. We then multiplies the values in the csv file by .93 to adjust prices to the South region. The code below minimally cleans the manually entered data.
+Food costs come from the USDA's low cost food plan (https://www.fns.usda.gov/cnpp/usda-food-plans-cost-food-reports-monthly-reports). This data is trapped in pdf files and we manually entered into a csv file at the location `data/raw_data/food_costs.csv`. We then multiplies the values in the csv file by .93 to adjust prices to the South region. Costs from January fo the given year are used. The code below minimally cleans the manually entered data.
 
 ```{r}
-food <- read_delim("raw_data/food_costs.csv", 
-    "\t", escape_double = FALSE, trim_ws = TRUE) %>%
+food <- read_csv("raw_data/food_costs.csv") %>%
   # convert from wide (each year is a column) to long (each row is a different year)
-  gather('year', 'estimate', `2017`:`2006`) %>%
+  pivot_longer(cols = matches("[0-9].*"), 
+               names_to='year', values_to='estimate') %>%
   mutate(estimate = as.integer(estimate),
          # change age labeling to match other datasets 
          Age = str_replace_all(Age, '-', ' to ')) %>%
@@ -451,7 +453,7 @@ food <- read_delim("raw_data/food_costs.csv",
   rename(age_group = Age, gender = Gender)
 
 # write out dataset
-#write_csv(food, 'cleaned_data/food.csv')
+write_csv(food, 'cleaned_data/food.csv')
 ```
 
 ## Child Care Expenses
