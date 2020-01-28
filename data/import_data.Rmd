@@ -16,6 +16,7 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 library(tidyverse)
 library(readxl)
 library(tabulizer)
+library(FFtools)
 
 source('../income_ins_functions.R')
 ```
@@ -254,30 +255,49 @@ meps <- read_csv('raw_data/meps_raw.csv') %>%
 2015 is the most recent year for MEPS data. 2016 and 2017 were estimated by using 2015 values and adjusting them for inflation.
 
 ```{r}
-# create table of adjustment factors
-inf_adj <- ff_inflation_adj_table(2015) %>%
-  # don't need cpi
-  select(-cpi)
-
 # create dataset of 2015
 meps_inflation <- meps %>%
   filter(year == 2015)
 
+# get length of each individual year vector
+year_length <- nrow(meps_inflation)
+
 # add this dataset to itself as additiona lrows
 # this creates the dataset twice, one for 2016 and one for 2017
 meps_inflation <- meps_inflation %>% 
-  bind_rows(meps_inflation) %>%
-  # add 2016 and 2017: this adds 2016 6 times and 2017 6 times
-  mutate(year = c(rep(2016, nrow(.)/2), 
-                  rep(2017, nrow(.)/2))) %>%
-  # add inflation adjustment factor
-  left_join(inf_adj, by = 'year') %>%
-  # divide by inflation adjustment factor to convert 2015 price to 2016 and 2017
-  mutate(mean = mean / adj_factor) %>%
-  select(-adj_factor)
+  bind_rows(list(meps_inflation, # for 2017
+                 meps_inflation # for 2018
+                 # add next year here
+                 )) %>%
+  # add new years
+  mutate(year_original = 2015,
+         year = c(rep(2016, year_length), 
+                  rep(2017, year_length),
+                  rep(2018, year_length)
+                  # add new year here
+                  ))
 
-# add 2016 and 2017 inflation adjusted estimates to data frame containing 2006-2015
-meps <- bind_rows(meps_inflation, meps) %>%
+# function that adjsut for inflation for specific year
+meps_adjust <- function(df, year) {
+  
+  # only keep a single year, as specified in parameter
+  df <- df %>%
+    filter(year == !!year)
+  
+  # adjsut for inflation in the specified year
+  df <- ff_inflation_adjust(df, wages_col = 'mean', se_col = NULL, 
+                            year_col = 'year_original', year_adjust = year)
+  
+  return(df)
+  
+}
+
+# adust 2016 and beyond for inflation
+meps_inflation_adj <- map_df(unique(meps_inflation$year), meps_adjust, df = meps_inflation) %>%
+  select(-year_original)
+
+# add new year inflation adjusted estimates to data frame containing 2006-2015
+meps <- bind_rows(meps_inflation_adj, meps) %>%
   mutate(mean = round(mean, 0)) %>%
   # add description variable
   mutate(item = 'Medical expenses') %>%
