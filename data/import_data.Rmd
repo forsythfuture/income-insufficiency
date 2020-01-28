@@ -252,7 +252,7 @@ meps <- read_csv('raw_data/meps_raw.csv') %>%
   select(-age)
 ```
 
-2015 is the most recent year for MEPS data. 2016 and 2017 were estimated by using 2015 values and adjusting them for inflation.
+2015 is the most recent year for MEPS data. 2016 and beyond were estimated by using 2015 values and adjusting them for inflation. The code below has two spots to update for current years, and then the code will automatically include the current year's inflation adjusted update.
 
 ```{r}
 # create dataset of 2015
@@ -307,16 +307,19 @@ meps <- bind_rows(meps_inflation_adj, meps) %>%
   select(item, year, start_age, expense)
 
 # write out data
-# write_csv(meps, 'cleaned_data/meps.csv')
+write_csv(meps, 'cleaned_data/meps.csv')
 ```
 
 ## Fair Market Rent (FMR)
 
 Housing expenses were gathered from HUD's Fair Market Rents (https://www.huduser.gov/portal/datasets/fmr.html). Yearly data was downloaded through a url. Each yearly dataset contains estimated rents by bedroom size for all counties in the United States.
 
+To update, copy and paste the new year's link below. To find the link, go to https://www.huduser.gov/portal/datasets/fmr.html, click on the `Data` tab, go to the tab for the current year, and then find the `County Level Data File` link and copy and paste this link's address.
+
 ```{r}
 # vector of urls for each yearly dataset
-url <- c( 'https://www.huduser.gov/portal/datasets/fmr/fmr2017/FY2017-4050-County-Level_Data.xlsx',
+url <- c('https://www.huduser.gov/portal/datasets/fmr/fmr2018/FY18_4050_FMRs.xls',
+'https://www.huduser.gov/portal/datasets/fmr/fmr2017/FY2017-4050-County-Level_Data.xlsx',
 'https://www.huduser.gov/portal/datasets/fmr/fmr2016f/FY2016F_4050_Final.xlsx',
 'https://www.huduser.gov/portal/datasets/fmr/fmr2015f/FY2015_4050_RevFinal.xls',
 'https://www.huduser.gov/portal/datasets/fmr/fmr2014f/FY2014_4050_RevFinal.xls',
@@ -343,16 +346,22 @@ for (yr in seq_along(url)) {
   # extract filename from url
   destfile <- str_extract(url[yr], 'FY.*|FMR.*')
   
+  # download excel file
   curl::curl_download(url[yr], destfile)
   
   # import yearly dataset
-  df <- read_excel(destfile) %>%
+  df <- read_excel(destfile)
+  
+  # remvoe underscore from column names, since some years have underscores and some don't
+  colnames(df) <- str_remove_all(colnames(df), "_")
+  
+  df <- df %>%
     # only selected needed rows
     # we are not using 0 bedroom apartments (fmr0)
     # need populations to create weighted average of rents for entire NC
-    select('state_alpha', 'countyname', 'fmr1', 'fmr2', 'fmr3', 'fmr4', starts_with('pop20')) %>%
+    select('statealpha', 'countyname', 'fmr1', 'fmr2', 'fmr3', 'fmr4', starts_with('pop20')) %>%
     # fitler for NC counties
-    filter(state_alpha == 'NC') %>%
+    filter(statealpha == 'NC') %>%
     # add year
     mutate(year = single_year)
   
@@ -363,7 +372,7 @@ for (yr in seq_along(url)) {
 # bind all yearly datasets into a single dataset
 fmr <- bind_rows(fmr_list) %>%
   # remove state; all counties are in NC so state is irrelevant
-  select(-state_alpha)
+  select(-statealpha)
 ```
 
 The block above imported rent data for all NC counties. To create an NC average we need to weight the county rents by county population.
@@ -422,7 +431,7 @@ fmr <- fmr_nc %>%
   select(-pop)
 
 # write out fmr dataset
-#write_csv(fmr, 'cleaned_data/fmr.csv')
+write_csv(fmr, 'cleaned_data/fmr.csv')
 ```
 
 ## Food Costs
