@@ -354,6 +354,9 @@ for (yr in seq_along(url)) {
   # import yearly dataset
   df <- read_excel(destfile)
   
+  # delete file
+  file.remove(destfile)
+  
   # remvoe underscore from column names, since some years have underscores and some don't
   colnames(df) <- str_remove_all(colnames(df), "_")
   
@@ -458,7 +461,32 @@ write_csv(food, 'cleaned_data/food.csv')
 
 ## Child Care Expenses
 
-Child care expenses were taken from Child Care Aware's annual High Cost of Child Care report for each year. The 2007 state-level report that reflects 2006 data did not contain any North Carolina data, so 2007 rates were inflation adjusted to 2006. The data was manually entered into a csv file from the reports, so no cleaning is necessary.
+Child care expenses were taken from Child Care Aware's annual High Cost of Child Care report for each year. The 2007 state-level report that reflects 2006 data did not contain any North Carolina data, so 2007 rates were inflation adjusted to 2006. The data was manually entered into the csv file `data/cleaned_data/child_care_nc_average.csv`, so no cleaning is necessary.
+
+Note that the rates have not been updated for North Carolina since 2015 because Child Care Aware relies on the NC State Market Rate Study and prior to 2018, the most recent study was in 2015. So, years after 2015 were adjusted for inflation.
+
+```{r}
+child_care <- read_csv('cleaned_data/child_care_nc_average.csv')
+
+# get years to inflation adjust
+child_care_adj <- child_care %>%
+  filter(year >= 2016) %>%
+  mutate(year_original = 2015) %>%
+  rename(mean = estimate)
+
+# remove the inflation adjusted years from the original dataset
+child_care <- filter(child_care, year < 2016)
+
+# adust 2016 and beyond for inflation
+child_care_adj <- map_df(unique(child_care_adj$year), meps_adjust, df = child_care_adj) %>%
+  select(-year_original) %>%
+  rename(estimate = mean)
+
+# add inflation adjsut amounts to original
+child_care <- bind_rows(child_care, child_care_adj)
+
+write_csv(child_care, 'cleaned_data/child_care_nc_average_adj.csv')
+```
 
 ## Old Child Care Expenses
 
