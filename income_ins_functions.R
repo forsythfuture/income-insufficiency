@@ -109,7 +109,7 @@ ff_clean_ces <- function(data_file, header_file) {
   return(df)
 }
 
-create_economic_units <- function(con, year, state) {
+create_economic_units <- function(file_path, state, year) {
   
   # this function imports population level PUMA data and creates economic units
   
@@ -154,14 +154,6 @@ create_economic_units <- function(con, year, state) {
     # remove ' NC' from county name
     mutate(cntyname = str_replace_all(cntyname, ' NC', ''))
   
-  # create table name by extracting last two digits from year
-  # and placing after 'p_'
-  yr <-str_extract(as.character(year), '[0-9][0-9]$')
-  table_name <- paste0('p_', yr)
-  
-  # connect to database table
-  population <- tbl(con, table_name)
-  
   pop_vars <- c('SERIALNO', # serial number grouped by household 
                 'SPORDER', # order of person in household
                 'ST', # state (needed to calculate state income taxes)
@@ -174,36 +166,36 @@ create_economic_units <- function(con, year, state) {
                 'RAC1P', # race
                 'AGEP', # age
                 'SEX', # sex
-                'ESR', # employment status
+                'ESR' # employment status
   )
   
   # import population data
-  pop <- population %>%
+  pop <- read_csv(file_path) %>%
+    mutate(year = !!year,
+           PUMA = as.numeric(PUMA)) %>%
     select(!!pop_vars) %>%
     # filter for state and PUMA
     filter(ST == !!state) %>%
-    # some years only have final two digits; add 2000 to these digits to make them four digits long
-    mutate(year = ifelse(year < 2000, year + 2000, year)) %>%
-    collect() %>%
     # add county names
     left_join(counties, by = 'PUMA') %>%
     # filter for needed counties
     filter(cntyname %in% c('Forsyth', 'Guilford', 'Durham'))
-  
+  print("1")
   under_5 <- pop %>%
+    mutate(AGEP = as.numeric(AGEP)) %>%
     filter(AGEP <= 4) %>%
     select(SERIALNO) %>%
     distinct() %>%
     .[[1]]
-  
+  print("2")
   # filter dataset to only include households with children under 5
   pop <- pop %>%
     filter(SERIALNO %in% under_5)
-  
+  print("3")
   # change REL column name to RELP if REL is a column (less than 2010)
   # this allows us to use the same column names for all years
   pop <- if ('REL' %in% colnames(pop)) rename(pop, RELP = REL) else pop
-  
+  print("4")
   pop <- pop %>%
     # replace NA values for income with zero
     mutate(PINCP = replace_na(PINCP, 0),
@@ -221,7 +213,7 @@ create_economic_units <- function(con, year, state) {
            SERIALNO = if (!!year == 2017) as.integer(str_replace_all(.$SERIALNO, '^2017', '')) else .$SERIALNO,
            # create boolean signifying if person is in economic unit
            economic_unit = ifelse(RELP %in% !!economic_unit_vec, TRUE, FALSE))
-
+  print("5")
   return(pop)
   
 }

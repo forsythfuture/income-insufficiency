@@ -12,22 +12,31 @@
 #
 ####################################################################################
 
+# df <- read_csv('https://censuspums.s3.amazonaws.com/oneyear/nc_pop/ss10pnc.csv.gz')
 
 library(tidyverse)
+library(glue)
 library(data.table)
-library(DBI)
 
 source('income_ins_functions.R')
 
-con <- dbConnect(RSQLite::SQLite(), "../pums_db.db")
+# update current year
+current_year <- 2018
+
+# create list of file names for s3 PUMS population files --------------------
+years <- seq(8, current_year - 2000)
+years <- str_pad(years, 2, "0", side = 'left')
+pop_files <- glue('https://censuspums.s3.amazonaws.com/oneyear/nc_pop/ss{years}pnc.csv.gz')
 
 # import needed PUMA data for all years
 pop <- data.frame()
 
-for (yr in seq(2013, 2017)) {
+for (i in seq_along(pop_files)) {
   
-  print(yr)
-  pop <- create_economic_units(con, yr, 37) %>%
+  print(pop_files[i])
+  year <- as.numeric(years[i]) + 2000
+  pop <- create_economic_units(pop_files[i], 37, year) %>%
+    mutate_all(~as.character(.)) %>%
     bind_rows(pop, .)
   
 }
