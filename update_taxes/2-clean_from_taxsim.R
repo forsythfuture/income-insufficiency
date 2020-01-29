@@ -12,11 +12,10 @@ current_year <- 2018
 file_year <- current_year - 2000
 from_taxsim_filepath <- glue('update_taxes/nc_from_taxsim_online/from_taxsim_{file_year}.txt')
 
-
-### take estimated tax liability from taxsim output and distill into estimate household tax liability
+### take estimated tax liability from taxsim output and distill into estimate tax liability
 
 # import all files into a list
-tax_liab <- read_delim('nc_from_taxsim_all.txt', delim = ' ',
+tax_liab <- read_delim(from_taxsim_filepath, delim = ' ',
                        col_types = cols(.default = "n")) %>%
   # payrool (FICA) taxes are employer's and employee's share
   # we only want employee's share, so cut in half
@@ -34,12 +33,9 @@ tax_liab <- read_delim('nc_from_taxsim_all.txt', delim = ' ',
   arrange(year, SERIALNO)
 
 # add current year's tax data to prior year's
-prior_taxes <- read_rds('update_taxes/nc_tax_liab_ind.Rda')
+prior_taxes <- read_csv('update_taxes/nc_tax_liab_ind.csv')
 
-prior_taxes <- prior_taxes %>%
-  mutate(key = glue('{SERIALNO}-{year}'))
-
-length(unique(tax_liab$taxsim_id))
+all_years <- bind_rows(prior_taxes, tax_liab)
 
 # write out tax liabilities
-#write_csv(tax_liab, 'tax_puma_cal/nc_tax_liabilities.csv')
+write_csv(all_years, 'update_taxes/nc_tax_liab_ind.csv')
