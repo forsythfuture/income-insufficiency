@@ -168,9 +168,14 @@ create_economic_units <- function(file_path, state, year) {
                 'SEX', # sex
                 'ESR' # employment status
   )
-  
+
   # import population data
-  pop <- read_csv(file_path) %>%
+  pop <- read_csv(file_path,
+                  col_types = cols(RT= col_character(),
+                                   NAICSP = col_character(),
+                                   SOCP = col_character(),
+                                   SERIALNO = col_character(),
+                                   .default = col_double())) %>%
     mutate(year = !!year,
            PUMA = as.numeric(PUMA)) %>%
     select(!!pop_vars) %>%
@@ -180,22 +185,22 @@ create_economic_units <- function(file_path, state, year) {
     left_join(counties, by = 'PUMA') %>%
     # filter for needed counties
     filter(cntyname %in% c('Forsyth', 'Guilford', 'Durham'))
-  print("1")
+
   under_5 <- pop %>%
-    mutate(AGEP = as.numeric(AGEP)) %>%
-    filter(AGEP <= 4) %>%
-    select(SERIALNO) %>%
-    distinct() %>%
-    .[[1]]
-  print("2")
+      mutate(AGEP = as.numeric(AGEP)) %>%
+      filter(AGEP <= 4) %>%
+      select(SERIALNO) %>%
+      distinct() %>%
+      .[[1]]
+
   # filter dataset to only include households with children under 5
   pop <- pop %>%
     filter(SERIALNO %in% under_5)
-  print("3")
+
   # change REL column name to RELP if REL is a column (less than 2010)
   # this allows us to use the same column names for all years
   pop <- if ('REL' %in% colnames(pop)) rename(pop, RELP = REL) else pop
-  print("4")
+
   pop <- pop %>%
     # replace NA values for income with zero
     mutate(PINCP = replace_na(PINCP, 0),
@@ -209,11 +214,9 @@ create_economic_units <- function(file_path, state, year) {
            # if other person in economic unit is not working than status is FALSE only if person is 21 or over
            ESR = ifelse(ESR %in% c(3, 6) & RELP %in% c(0,1), FALSE, 
                         ifelse(ESR %in% c(3, 6) & AGEP >= 21, FALSE, TRUE)),
-           # if the year is 2017, remove the 2017 from the start of the SERIALNO
-           SERIALNO = if (!!year == 2017) as.integer(str_replace_all(.$SERIALNO, '^2017', '')) else .$SERIALNO,
            # create boolean signifying if person is in economic unit
            economic_unit = ifelse(RELP %in% !!economic_unit_vec, TRUE, FALSE))
-  print("5")
+
   return(pop)
   
 }
@@ -225,8 +228,7 @@ tax_liability <- function(pop) {
   
   print('taxes')
   
-  tax_liabilities <- readRDS('nc_tax_liab_ind.Rda') #%>%
-    #rename(total_taxes = taxes)
+  tax_liabilities <- readRDS('nc_tax_liab_ind.Rda')
   
   # merge taxes with population dataset
   pop <- pop %>%

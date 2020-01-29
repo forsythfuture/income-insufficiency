@@ -12,8 +12,6 @@
 #
 ####################################################################################
 
-# df <- read_csv('https://censuspums.s3.amazonaws.com/oneyear/nc_pop/ss10pnc.csv.gz')
-
 library(tidyverse)
 library(glue)
 library(data.table)
@@ -31,17 +29,16 @@ pop_files <- glue('https://censuspums.s3.amazonaws.com/oneyear/nc_pop/ss{years}p
 # import needed PUMA data for all years
 pop <- data.frame()
 
-for (i in seq_along(pop_files)) {
+for (i in seq_along(pop_files[c(10,11)])) {
   
   print(pop_files[i])
   year <- as.numeric(years[i]) + 2000
   pop <- create_economic_units(pop_files[i], 37, year) %>%
-    mutate_all(~as.character(.)) %>%
     bind_rows(pop, .)
   
 }
 
-pop <- pop %>%
+pop1 <- pop %>%
   tax_liability() %>%
   child_care() %>%
   rent() %>%
