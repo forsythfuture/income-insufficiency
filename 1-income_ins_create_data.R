@@ -22,23 +22,15 @@ source('income_ins_functions.R')
 current_year <- 2018
 
 # create list of file names for s3 PUMS population files --------------------
-years <- seq(8, current_year - 2000)
-years <- str_pad(years, 2, "0", side = 'left')
-pop_files <- glue('https://censuspums.s3.amazonaws.com/oneyear/nc_pop/ss{years}pnc.csv.gz')
+year_file <- current_year - 2000
+year_file <- str_pad(year_file, 2, "0", side = 'left')
+pop_file <- glue('https://censuspums.s3.amazonaws.com/oneyear/nc_pop/ss{year_file}pnc.csv.gz')
 
-# import needed PUMA data for all years
-pop <- data.frame()
+# bin households in economic units
+pop <- create_economic_units(pop_file, 37, current_year)
 
-for (i in seq_along(pop_files[c(10,11)])) {
-  
-  print(pop_files[i])
-  year <- as.numeric(years[i]) + 2000
-  pop <- create_economic_units(pop_files[i], 37, year) %>%
-    bind_rows(pop, .)
-  
-}
-
-pop1 <- pop %>%
+# calculate expenses
+pop <- pop %>%
   tax_liability() %>%
   child_care() %>%
   rent() %>%
@@ -51,5 +43,10 @@ pop1 <- pop %>%
          income_insufficient = ifelse(income_insufficient < 0, TRUE, FALSE)) %>%
   select(-RELP, -ESR, -economic_unit_income:-economic_unit_meps)
 
+# load past expenses and add current year
+expenses <- read_csv('population_expense.csv')
+
+expenses <- bind_rows(expenses, pop)
+
 # save intermediate output
-saveRDS(pop, 'population_expense.Rda')
+write_csv(expenses, 'population_expense.csv')

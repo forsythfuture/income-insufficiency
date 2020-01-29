@@ -215,7 +215,10 @@ create_economic_units <- function(file_path, state, year) {
            ESR = ifelse(ESR %in% c(3, 6) & RELP %in% c(0,1), FALSE, 
                         ifelse(ESR %in% c(3, 6) & AGEP >= 21, FALSE, TRUE)),
            # create boolean signifying if person is in economic unit
-           economic_unit = ifelse(RELP %in% !!economic_unit_vec, TRUE, FALSE))
+           economic_unit = ifelse(RELP %in% !!economic_unit_vec, TRUE, FALSE)) %>%
+    mutate(SERIALNO = str_remove(SERIALNO, "[A-Z]{2}"),
+           SERIALNO = str_remove(SERIALNO, "^[0-9]{4}"),
+           SERIALNO = as.integer(SERIALNO))
 
   return(pop)
   
@@ -228,14 +231,15 @@ tax_liability <- function(pop) {
   
   print('taxes')
   
-  tax_liabilities <- readRDS('nc_tax_liab_ind.Rda')
+  tax_liabilities <- read_csv('update_taxes/nc_tax_liab_ind.csv')
   
   # merge taxes with population dataset
   pop <- pop %>%
     left_join(tax_liabilities, by = c('year', 'SERIALNO', 'SPORDER')) %>%
     # replace NA for taxes with zero
-    mutate(total_taxes = replace_na(total_taxes, 0)) %>%
-           # subtract taxes from income
+    replace_na(list(total_taxes = 0)) %>%
+    # mutate(total_taxes = replace_na(total_taxes, 0)) %>%
+    # subtract taxes from income
     # create group to calculate economic unit post-tax income
     group_by(year, SERIALNO, economic_unit) %>%
     # if part of economic unit, add incomes and taxes, otherwise use individual's income
