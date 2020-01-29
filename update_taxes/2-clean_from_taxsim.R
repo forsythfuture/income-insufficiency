@@ -1,29 +1,45 @@
 library(tidyverse)
-
-source('update_taxes/taxsim_functions.R')
+library(glue)
 
 ### take estimated tax liability from taxsim output and distill into estimate household tax liability
 
-# create list of all tax output files
-file_names <- list.files('tax_puma_cal/nc_from_taxsim_online', full.names = TRUE)
+# change to current year
+current_year <- 2018
+
+# import current year's tax libility dataset that was output from TAXSIM
+
+# create filepath to file that is the text file of output copied from TAXSIM
+file_year <- current_year - 2000
+from_taxsim_filepath <- glue('update_taxes/nc_from_taxsim_online/from_taxsim_{file_year}.txt')
+
+
+### take estimated tax liability from taxsim output and distill into estimate household tax liability
 
 # import all files into a list
-tax_liab <- lapply(file_names, read_delim, delim = ' ') %>%
-  # currently each year is in a separerate list element
-  # combine all years into a single datarame
-  # this is possible because there is a year column
-  bind_rows() %>%
-  # calculate total tax liability, which is the sum of
-  # federal income, state income, and payroll taxes (FICA)
-  mutate(total_taxes = fiitax + siitax + fica) %>%
-  # group by year and serial number to calculate household taxes
-  group_by(taxsim_id, year) %>%
-  summarize(tax_liability = sum(total_taxes)) %>%
-  ungroup() %>%
+tax_liab <- read_delim('nc_from_taxsim_all.txt', delim = ' ',
+                       col_types = cols(.default = "n")) %>%
+  # payrool (FICA) taxes are employer's and employee's share
+  # we only want employee's share, so cut in half
+  mutate(fica = round(fica / 2,0),
+         # calculate total tax liability, which is the sum of
+         # federal income, state income, and payroll taxes (FICA)
+         total_taxes = as.integer(fiitax + siitax + fica),
+         # remove last two letters in taxsim_id (SERIALNO) and make SPORDER
+         SPORDER = as.integer(str_extract(taxsim_id, '[0-9][0-9]$')),
+         taxsim_id = as.integer(str_replace(taxsim_id, '[0-9][0-9]$', ''))) %>%
   # change name of taxsim_id to SERIALNO so that it matches PUMA terminology
   rename(SERIALNO = taxsim_id) %>%
+  select(SERIALNO, SPORDER, year, total_taxes) %>%
   # sort by year and serial no
   arrange(year, SERIALNO)
+
+# add current year's tax data to prior year's
+prior_taxes <- read_rds('update_taxes/nc_tax_liab_ind.Rda')
+
+prior_taxes <- prior_taxes %>%
+  mutate(key = glue('{SERIALNO}-{year}'))
+
+length(unique(tax_liab$taxsim_id))
 
 # write out tax liabilities
 #write_csv(tax_liab, 'tax_puma_cal/nc_tax_liabilities.csv')
