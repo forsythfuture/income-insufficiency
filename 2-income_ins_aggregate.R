@@ -106,15 +106,14 @@ for (col in demo_cols) {
   }
   
 }
-
+  
 ######################## This section cleans and creates the final dataset #################################
 
 # only keep needed geographic areas
 # 37 is NC state code, and represents the NC rate
 demo_income_ins <- demo_income_ins %>%
-  # add 'County, NC' to county names and change NC state code to name
-  mutate(geo_area = recode(geo_area, `37` = 'North Carolina', Forsyth = 'Forsyth County, NC',
-                           Guilford = 'Guilford County, NC', Durham = 'Durham County, NC')) %>%
+  # change NC state code to name
+  mutate(geo_area = ifelse(geo_area == "37", "North Carolina", geo_area)) %>%
   # only keep needed races (white, AA, hispanic)
   # races not one of these three are labeld 4 and can be removed
   filter(!(sub_demographic == 4 & demographic == 'RAC1P'))

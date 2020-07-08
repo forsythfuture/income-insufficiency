@@ -75,4 +75,8 @@ The output will show on a new screen. Users will need to copy the text and paste
 
 ### Calculating income insufficiency rates
 
-The two files used to calculate income insufficiency rates are in the root directory. They are `1-income_ins_create_data.R` and `2-income_ins_aggregate.R`. These files should be ran in order. `2-income_ins_aggregate.R` produces the final csv file showing income insufficiency rates, which will be called `income_ins_cleaned-[current year].csv`.
+The two files used to calculate income insufficiency rates are in the root directory. They are `1-income_ins_create_data.R` and `2-income_ins_aggregate.R`. These files should be ran in order. `2-income_ins_aggregate.R` produces the final csv file showing income insufficiency rates, which is called `income_ins_cleaned-[current year].csv`. This file contains the income insufficiency rates for all counties in North Carolina and the overall North Carolina rate. The `geo_description` column of this file lists the county, or in the case of the overall NC rate it lists "North Carolina".
+
+### Calculating average expenses by hypothetical family type
+
+The files in the `average_family_expenses` folder are not used to calculate income insufficiency. They calculate average expenses for various hypotheical family types. More information about these files and their purpose can be found in the README in the `average_family_expenses` folder.

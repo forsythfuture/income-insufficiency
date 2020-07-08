@@ -5,7 +5,9 @@
 #   2) Two adults,
 #   3) Two adults, one working, with a 2 and 4 year old
 #   4) Two working adults with a 2 and 4 year old
-#   5) One adult wit ha 2 and 4 year old
+#   5) One adult with a 2 and 4 year old
+#
+# The numbers above align with the SERIALNO column in the datasets that are produced.
 #
 # The script adds income amounts iteratively to calcualte expenses at a 
 # variety of income levels. The same incomes will then be passed to the
@@ -21,7 +23,7 @@ source('income_ins_functions.R')
 # update current year
 current_year <- 2018
 
-# create initial 
+# create initial dataframe of families
 expense_data <- data.frame(SERIALNO = c(1,2,2,3,3,3,3,4,4,4,4,5,5,5),
                            SPORDER = c(1,1,2,1,2,3,4,1,2,3,4,1,2,3),
                            RELP = c(0,0,1,0,1,2,2,0,1,2,2,0,1,2),
@@ -86,6 +88,27 @@ for (i in seq_len(30)) {
   
 }
 
+# make family types more descriptive
+family_type <- c(
+  `1` = "One adult",
+  `2` = "Two adults",
+  `3` = "Two adults, one working, with a 2 and 4 year old",
+  `4` = "Two working adults with a 2 and 4 year old",
+  `5` = "One adult with a 2 and 4 year old"
+)
+
+# add income to expenses dataframe
+expenses <- expenses %>%
+  left_join(
+    expense_data %>%
+      group_by(SERIALNO, iteration) %>%
+      summarize(household_income = sum(PINCP)),
+    by = c('SERIALNO', 'iteration')) %>%
+  mutate(family_type = recode(SERIALNO, !!!family_type)) %>%
+  select(iteration, SERIALNO, family_type, everything())
+
+write_csv(expenses, glue("average_family_expenses/average_expenses_missing_taxes-{current_year}.csv"))
+
 # convert expense data to a format that is readable by TAXSIM
 # create incomes with each spouses income on differenct columns
 taxsim_income <- expense_data %>% 
@@ -123,4 +146,5 @@ zero_matrix <- matrix(0, nrow(taxsim_income), 27 - ncol(taxsim_income)) %>%
 # bind zero matrix with regular dataframe
 taxsim_income <- bind_cols(taxsim_income, zero_matrix)
 
-write_csv(taxsim_income, 'to_taxsim.csv', col_names = FALSE)
+# can be send to TAXSIM to calcualte taxes of prototypical families
+write_csv(taxsim_income, glue("average_family_expenses/to_taxsim-{current_year}.csv"), col_names = FALSE)
