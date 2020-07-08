@@ -10,21 +10,22 @@
 # The script adds income amounts iteratively to calcualte expenses at a 
 # variety of income levels. The same incomes will then be passed to the
 # TAXSIM calculator to calculate taxes. The goal is to find the income
-# level in each group that exquals estimated expenses.
+# level in each group that equals estimated expenses.
 #
 ########################################################################
 
 library(tidyverse)
-library(data.table)
-library(DBI)
 
 source('income_ins_functions.R')
+
+# update current year
+current_year <- 2018
 
 # create initial 
 expense_data <- data.frame(SERIALNO = c(1,2,2,3,3,3,3,4,4,4,4,5,5,5),
                            SPORDER = c(1,1,2,1,2,3,4,1,2,3,4,1,2,3),
                            RELP = c(0,0,1,0,1,2,2,0,1,2,2,0,1,2),
-                           year = rep(2017, 14),
+                           year = rep(current_year, 14),
                            PINCP = c(12000,12000,12000,26000,0,0,0,21000,21000,0,0,40000,0,0),
                            AGEP = c(40, 40, 40, 40, 40, 2, 4, 40, 40, 2, 4, 40, 2, 4),
                            SEX = c(1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 2, 1),
@@ -99,7 +100,7 @@ taxsim_income <- expense_data %>%
   rename(pwages = `1`, swages =`2`) %>%
   select(SERIALNO, iteration, pwages, swages, kids) %>%
   mutate(swages = ifelse(is.na(swages), 0 , swages),
-         year = 2017,
+         year = current_year,
          state = 34,
          mstatus = ifelse(SERIALNO %in% c(1,5), 1,2),
          page = 40,
@@ -122,4 +123,4 @@ zero_matrix <- matrix(0, nrow(taxsim_income), 27 - ncol(taxsim_income)) %>%
 # bind zero matrix with regular dataframe
 taxsim_income <- bind_cols(taxsim_income, zero_matrix)
 
-#write_csv(taxsim_income, 'to_taxsim.csv', col_names = FALSE)
+write_csv(taxsim_income, 'to_taxsim.csv', col_names = FALSE)

@@ -34,11 +34,6 @@ ff_clean_ces <- function(data_file, header_file) {
     # convert years and expense estimtae to numeric
     mutate_at(c('Expense', 'Year'), as.numeric)
   
-  ###
-  #header_file <- 'data/raw_data/ces/apparel_headers.txt'
-  #data_file <- 
-  ###
-  
   # import headers
   df_headers <- read_delim(header_file,
                            delim = '\t',
@@ -664,10 +659,6 @@ replicate_weights <- function(pop, weights_tbl, weight) {
   
   wgt <- weights_tbl %>%
     select(SERIALNO, SPORDER, !!weight) %>%
-    collect() %>%
-    # 2017 adds the numbers '2017' prior to serial number
-    # remove these numbers
-    mutate(SERIALNO = as.integer(str_replace_all(.$SERIALNO, '^2017', ''))) %>%
     # convert to data table
     as.data.table()
   

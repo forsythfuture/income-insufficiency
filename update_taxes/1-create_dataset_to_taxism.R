@@ -13,7 +13,7 @@ source('update_taxes/taxsim_functions.R')
 # update the year to the current year
 current_year <- 2018
 
-# create list of file names for s3 PUMS p opulation files --------------------
+# create list of file names for s3 PUMS population files --------------------
 year_file <- current_year - 2000
 year_file <- str_pad(year_file, 2, "0", side = 'left')
 pop_file <- glue('https://censuspums.s3.amazonaws.com/oneyear/nc_pop/ss{year_file}pnc.csv.gz')

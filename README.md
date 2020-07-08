@@ -54,3 +54,23 @@ Many estimates are based on average expenses across all individuals/households, 
   * Upon calculating the incomes and number of dependents in tax units, taxes are estiamted using the [NBER's TASIM model](https://users.nber.org/~taxsim/taxsim27/).
 
 * Expenses are summed for economic units, and compared to actual income to determine income insufficiency.
+
+## Running the repo
+
+Updating the yearly numbers requires updating three sections, in order: (1) expenses, (2) taxes, and (3) income insufficiency rates for aggregates and demographics.
+
+### Updating expenses
+
+Updating expenses is the first step. Expenses are updated in the Rmarkdown file `data/import_data.Rmd`. This file also contains instructions on how to update expenses, which require manual updates.
+
+### Updating taxes
+
+The two scripts to run to update taxes are found in the `updates_taxes` folder. They should be ran in order. The first script creates a data set that is in the format to manually send to the TAXSIM program. The file generated from this prgram, which is sent to TAXSIM, is located at `update_taxes/nc_to_taxsim_online/to_tasxim_[update year].csv`.
+
+With this csv file created, users go to https://users.nber.org/~taxsim/taxsim27/, scroll down to the 'OR...Upload a file with TAXSIM data:' section, input the csv file located at `update_taxes/nc_to_taxsim_online/`, and click "Calculate using this file's data".
+
+The output will show on a new screen. Users will need to copy the text and paste it into a text, `.txt`, file. This file should be saved at `update_taxes/nc_from_taxsim_online`. The filename should be `from_taxsim_[last two years of year].txt` (example: `from_taxsim_18.txt`)
+
+### Calculating income insifficiency rates
+
+The two files used to calculate income insufficiency rates are in the root directory. They are `1-income_ins_create_data.R` and `2-income_ins_aggregate.R`. These files should be ran in order. `2-income_ins_aggregate.R` produces the final csv file showing income insufficiency rates, which will be called `income_ins_cleaned-[current year].csv`.

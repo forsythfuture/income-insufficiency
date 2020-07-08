@@ -10,11 +10,12 @@
 
 library(tidyverse)
 library(data.table)
-library(DBI)
+library(glue)
 
 source('income_ins_functions.R')
 
-con <- dbConnect(RSQLite::SQLite(), "../pums_db.db")
+# year to update
+current_year <- 2018
 
 # create age categories to be used when calculating income insufficiency rates for age groups
 age_bins <- c(0, 17, 24, 44, 64, 150)
@@ -22,7 +23,7 @@ age_bins <- c(0, 17, 24, 44, 64, 150)
 age_labels <- age_bins[-1]
 
 # read dataset with expenses
-pop <- readRDS('population_expense.Rda') %>%
+pop <- read_csv(glue("population_expense-{current_year}.csv")) %>%
   # create age bins
   mutate(start_age = cut(AGEP, breaks = !!age_bins, 
                          labels = !!age_labels, 
@@ -42,79 +43,75 @@ race_recode <- c(1, 2, rep(4, 7), 3)
 pop$RAC1P <- plyr::mapvalues(pop$RAC1P, race_labels, race_recode)
 
 ### iterate through each year calculating income insufficiency and standard errors
-years <- seq(2006, 2017)
 state <- 37
 
 # initialize dataframe to store demographic income insufficiency for all demographics and years
 demo_income_ins <- data.frame()
+  
+state <- 37 # NC is 37
 
-for (yr in years) {
+year_file <- current_year - 2000
+year_file <- str_pad(year_file, 2, "0", side = 'left')
+pop_file <- glue('https://censuspums.s3.amazonaws.com/oneyear/nc_pop/ss{year_file}pnc.csv.gz')
 
-  # create population weights table name based on year
-  tbl_name <- as.character(yr) %>%
-    str_extract(., '[0-9][0-9]$') %>%
-    paste0('p_', .)
+# create connection with population replicate weights
+weights_tbl <- read_csv(pop_file,
+                        col_types = cols(RT= col_character(),
+                                         NAICSP = col_character(),
+                                         SOCP = col_character(),
+                                         SERIALNO = col_character(),
+                                         .default = col_double())) %>%
+  # 2017 adds the numbers '2017' prior to serial number
+  # remove these numbers
+  mutate(SERIALNO = str_remove(SERIALNO, "[A-Z]{2}"),
+         SERIALNO = str_remove(SERIALNO, "^[0-9]{4}"),
+         SERIALNO = as.integer(SERIALNO),
+         year = !!current_year) %>%
+  filter(ST == !!state)
+
+pop_year <- pop[year == current_year]
+
+# replciate weight variable names are lower case until 2017 and upper case starting in 2017
+weight_names <- ifelse(current_year >= 2017, 'PWGTP', 'pwgtp')
+# replicate weight variables
+pop_weights <- c('PWGTP', paste0(weight_names, seq(1, 80)))
+
+# demographic columns to create income insufficiency for
+demo_cols <- c('RAC1P', 'SEX', 'start_age', 'total')
+
+# iterate through each demographic, calculating income insufficiency
+for (col in demo_cols) {
   
-  # create connection with population replicate weights
-  weights_tbl <- tbl(con, tbl_name) %>%
-    filter(ST == !!state)
+  # if demographic column is 'total' then demo parameter is FALSE
   
-  pop_year <- pop[year == yr]
+  demo <- if (col == 'total') FALSE else TRUE
   
-  # replciate weight variable names are lower case until 2017 and upper case starting in 2017
-  weight_names <- ifelse(yr >= 2017, 'PWGTP', 'pwgtp')
-  # replicate weight variables
-  pop_weights <- c('PWGTP', paste0(weight_names, seq(1, 80)))
-  
-  # demographic columns to create income insufficiency for
-  demo_cols <- c('RAC1P', 'SEX', 'start_age', 'total')
-  
-  # iterate through each demographic, calculating income insufficiency
-  for (col in demo_cols) {
+  # iterate through geo graphic areas
+  for(geo_area in c('cntyname', 'ST')) {
     
-    # if demographic column is 'total' then demo parameter is FALSE
+    print(current_year)
+    print(col)
+    print(geo_area)
     
-    demo <- if (col == 'total') FALSE else TRUE
+    # calculate income insufficeincy for given year and demographic
+    demo_income_ins_single <- standard_errors(pop_year, geo_area, weights_tbl, pop_weights, col, demo) %>%
+      # geo_area for PUMA is integer, and for county is character
+      # convert PUMA to character so they can be combined
+      mutate(geo_area = as.character(geo_area),
+             year = current_year)
     
-    # iterate through geo graphic areas
-    for(geo_area in c('cntyname', 'ST')) {
-      
-      print(yr)
-      print(col)
-      print(geo_area)
-      
-      # calculate income insufficeincy for given year and demographic
-      demo_income_ins_single <- standard_errors(pop_year, geo_area, weights_tbl, pop_weights, col, demo) %>%
-        # geo_area for PUMA is integer, and for county is character
-        # convert PUMA to character so they can be combined
-        mutate(geo_area = as.character(geo_area),
-               year = yr)
-      
-      # add specific year and demographic to dataset of all years and demographics
-      demo_income_ins <- bind_rows(demo_income_ins, demo_income_ins_single)
-      
-    }
+    # add specific year and demographic to dataset of all years and demographics
+    demo_income_ins <- bind_rows(demo_income_ins, demo_income_ins_single)
     
-    # save file as R object (in case program or computer crashes);
-    # after calculating for both geographic areas in a demographic
-    saveRDS(demo_income_ins, 'income_ins.Rda')
-      
   }
   
 }
-
-######################################## This section cleans the raw output ##########################################################
-
-income_ins <- readRDS('income_ins.Rda')
-#income_ins_11 <- readRDS('income_ins_11.Rda')
 
 ######################## This section cleans and creates the final dataset #################################
 
 # only keep needed geographic areas
 # 37 is NC state code, and represents the NC rate
-income_ins <- income_ins %>%
-  bind_rows(., income_ins_11) %>%
-  filter(geo_area %in% c('37', 'Forsyth', 'Guilford', 'Durham')) %>%
+demo_income_ins <- demo_income_ins %>%
   # add 'County, NC' to county names and change NC state code to name
   mutate(geo_area = recode(geo_area, `37` = 'North Carolina', Forsyth = 'Forsyth County, NC',
                            Guilford = 'Guilford County, NC', Durham = 'Durham County, NC')) %>%
@@ -139,27 +136,25 @@ age_labels <- c(17, 24, 44, 64, 150)
 age_recode <- c('0 to 17', '18 to 24', '25 to 44', '45 to 64', '65 plus')
 
 # map recoding of sub demographics
-income_ins$sub_demographic <- ifelse(income_ins$demographic == 'RAC1P', 
-                                     plyr::mapvalues(income_ins$sub_demographic, race_labels, race_recode),
-                                           ifelse(income_ins$demographic == 'SEX', 
-                                                   plyr::mapvalues(income_ins$sub_demographic, sex_labels, sex_recode),
-                                                        ifelse(income_ins$demographic == 'start_age', 
-                                                               plyr::mapvalues(income_ins$sub_demographic, age_labels, age_recode),
+demo_income_ins$sub_demographic <- ifelse(demo_income_ins$demographic == 'RAC1P', 
+                                     plyr::mapvalues(demo_income_ins$sub_demographic, race_labels, race_recode),
+                                           ifelse(demo_income_ins$demographic == 'SEX', 
+                                                   plyr::mapvalues(demo_income_ins$sub_demographic, sex_labels, sex_recode),
+                                                        ifelse(demo_income_ins$demographic == 'start_age', 
+                                                               plyr::mapvalues(demo_income_ins$sub_demographic, age_labels, age_recode),
                                                                'None')))
 
 # recode demographic names
-income_ins$demographic <- recode(income_ins$demographic, 
+demo_income_ins$demographic <- recode(demo_income_ins$demographic, 
                                  RAC1P = 'Race / Ethnicity', SEX = 'Gender', 
                                  start_age = 'Age', total = 'Comparison Community')
 
-income_ins <- income_ins %>%
+demo_income_ins <- demo_income_ins %>%
   # calculate MOE and CV
   mutate(moe = se * 1.96,
          cv = (se / income_ins) * 100) %>%
-  # rename columns to fit into shiny app
   rename(year = year, geo_description = geo_area, subtype = sub_demographic, type = demographic, estimate = income_ins) %>%
-  # place columns in proper order for shiny app
   select(geo_description, year, estimate, moe, se, cv, type, subtype) %>%
   arrange(year, type, geo_description, subtype)
 
-# write_csv(income_ins, 'shiny_income_ins/income_ins_cleaned.csv')
+write_csv(demo_income_ins, glue("income_ins_cleaned-{current_year}.csv"))

@@ -42,11 +42,6 @@ pop <- pop %>%
          # true if income insufficienct false if income sufficient
          income_insufficient = ifelse(income_insufficient < 0, TRUE, FALSE)) %>%
   select(-RELP, -ESR, -economic_unit_income:-economic_unit_meps)
-
-# load past expenses and add current year
-expenses <- read_csv('population_expense.csv')
-
-expenses <- bind_rows(expenses, pop)
-
+  
 # save intermediate output
-write_csv(expenses, 'population_expense.csv')
+write_csv(pop, glue("population_expense-{current_year}.csv"))

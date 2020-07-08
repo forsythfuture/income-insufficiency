@@ -55,6 +55,8 @@ The one screen data source application was used (https://data.bls.gov/PDQWeb/cx)
 
 We used cross-tabulated tables for health insurance expenses by age and consumer unit size (https://www.bls.gov/cex/csxcross.htm). From this page we selected the excel file for each year under size of consumer unit by age of reference person > One person.
 
+This raw data was placed in `data/raw_data/ces`.
+
 ### Import and clean CES data (minus health insurance by age and consumer unit size)
 
 All data except for health insurance by size of consumer unit and age contain a common format. Therefore, we can import and clean these dataset with a single function and for loop, and combine these datasets into one dataset.
@@ -232,6 +234,8 @@ Healthcare expenditures beyond insurance were gathered from the Medical Expendit
 * Utilization, expenditure and SOP variables > All types of service > TOTAL AMT PAID BY SELF/FAMILY.
 
 Under the Descriptive Statistics tab we selected 'Minimums, Maximums, Sums, Means, and Medians'. Then, TOTSLF was selected for the variable statistic and the median and mean were checked. Final, we created a cross-tab of age and region. Clicking the 'Show Statistics' button reveals medical expenditures by age and region. The table labeled Standard Errors was copy and pasted into an Excel file, and the year was added as an additional column. Subsequent years were added to the same excel file.
+
+This raw data was placed in `data/raw_data/meps_raw.csv`.
 
 The following code block imports and cleans this data.
 
@@ -490,7 +494,7 @@ write_csv(child_care, 'cleaned_data/child_care_nc_average_adj.csv')
 
 ## Old Child Care Expenses
 
-Note: This sections reflects child care expenses from the NC market rate study.  It was not used for 2017 income insifficiency calculations.
+**Note: This sections reflects child care expenses from the NC market rate study.  It was not used for 2017 or income insufficiency calculations. It only remains as a reference**
 
 The North Carolina Division of Child Development and Early Education produces child care market rates for each North Carolina county (https://ncchildcare.ncdhhs.gov/Home/DCDEE-Sections/Subsidy-Services/Market-Rates). These rates are the same as those found in the North Carolina Child Care Market Rate Study (https://ncchildcare.ncdhhs.gov/Portals/0/documents/pdf/M/market_rate_survey_report_2015.pdf).  The rates are in pdf files and were copy and pasted into csv files.
 
