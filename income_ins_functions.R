@@ -219,14 +219,14 @@ create_economic_units <- function(file_path, state, year) {
   
 }
 
-tax_liability <- function(pop) {
+tax_liability <- function(pop, current_year) {
 
   # This function calculates income for each economic unit
   # it incorporates, and subtracts, taxes
   
   print('taxes')
   
-  tax_liabilities <- read_csv('update_taxes/nc_tax_liab_ind.csv')
+  tax_liabilities <- read_csv(glue('update_taxes/nc_tax_liab_ind-{current_year}.csv'))
   
   # merge taxes with population dataset
   pop <- pop %>%

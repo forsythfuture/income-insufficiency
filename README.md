@@ -59,6 +59,8 @@ Many estimates are based on average expenses across all individuals/households, 
 
 Updating the yearly numbers requires updating three sections, in order: (1) expenses, (2) taxes, and (3) income insufficiency rates for aggregates and demographics.
 
+Many of the files that are ran have a object defined near the top of the script that signifies the year. This represents the current year of the data. This should be the only items that changes yearly in the scripts.
+
 ### Updating expenses
 
 Updating expenses is the first step. Expenses are updated in the Rmarkdown file `data/import_data.Rmd`. This file also contains instructions on how to update expenses, which require manual updates.
@@ -71,6 +73,6 @@ With this csv file created, users go to https://users.nber.org/~taxsim/taxsim27/
 
 The output will show on a new screen. Users will need to copy the text and paste it into a text, `.txt`, file. This file should be saved at `update_taxes/nc_from_taxsim_online`. The filename should be `from_taxsim_[last two years of year].txt` (example: `from_taxsim_18.txt`)
 
-### Calculating income insifficiency rates
+### Calculating income insufficiency rates
 
 The two files used to calculate income insufficiency rates are in the root directory. They are `1-income_ins_create_data.R` and `2-income_ins_aggregate.R`. These files should be ran in order. `2-income_ins_aggregate.R` produces the final csv file showing income insufficiency rates, which will be called `income_ins_cleaned-[current year].csv`.

@@ -31,7 +31,7 @@ pop <- create_economic_units(pop_file, 37, current_year)
 
 # calculate expenses
 pop <- pop %>%
-  tax_liability() %>%
+  tax_liability(current_year) %>%
   child_care() %>%
   rent() %>%
   food() %>%
@@ -42,6 +42,6 @@ pop <- pop %>%
          # true if income insufficienct false if income sufficient
          income_insufficient = ifelse(income_insufficient < 0, TRUE, FALSE)) %>%
   select(-RELP, -ESR, -economic_unit_income:-economic_unit_meps)
-  
+
 # save intermediate output
 write_csv(pop, glue("population_expense-{current_year}.csv"))

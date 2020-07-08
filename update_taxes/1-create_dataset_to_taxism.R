@@ -23,4 +23,5 @@ tax_df <- pop_taxes(pop_file, current_year, household = FALSE)
 
 # create file name of output based on year
 file_name <- glue('update_taxes/nc_to_taxsim_online/to_tasxim_{year_file}.csv')
+
 write_csv(tax_df, file_name, col_names = FALSE)

@@ -32,10 +32,5 @@ tax_liab <- read_delim(from_taxsim_filepath, delim = ' ',
   # sort by year and serial no
   arrange(year, SERIALNO)
 
-# add current year's tax data to prior year's
-prior_taxes <- read_csv('update_taxes/nc_tax_liab_ind.csv')
-
-all_years <- bind_rows(prior_taxes, tax_liab)
-
 # write out tax liabilities
-write_csv(all_years, 'update_taxes/nc_tax_liab_ind.csv')
+write_csv(tax_liab, glue('update_taxes/nc_tax_liab_ind-{current_year}.csv'))
