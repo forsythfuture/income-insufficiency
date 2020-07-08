@@ -17,12 +17,8 @@ from_taxsim_filepath <- glue('update_taxes/nc_from_taxsim_online/from_taxsim_{fi
 # import all files into a list
 tax_liab <- read_delim(from_taxsim_filepath, delim = ' ',
                        col_types = cols(.default = "n")) %>%
-  # payrool (FICA) taxes are employer's and employee's share
-  # we only want employee's share, so cut in half
-  mutate(fica = round(fica / 2,0),
-         # calculate total tax liability, which is the sum of
-         # federal income, state income, and payroll taxes (FICA)
-         total_taxes = as.integer(fiitax + siitax + fica),
+  mutate(# calculate total tax liability, which is the sum of federal income and state income taxes
+         total_taxes = as.integer(fiitax + siitax),
          # remove last two letters in taxsim_id (SERIALNO) and make SPORDER
          SPORDER = as.integer(str_extract(taxsim_id, '[0-9][0-9]$')),
          taxsim_id = as.integer(str_replace(taxsim_id, '[0-9][0-9]$', ''))) %>%

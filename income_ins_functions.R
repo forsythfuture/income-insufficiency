@@ -177,20 +177,9 @@ create_economic_units <- function(file_path, state, year) {
     # filter for state and PUMA
     filter(ST == !!state) %>%
     # add county names
-    left_join(counties, by = 'PUMA') %>%
+    left_join(counties, by = 'PUMA') #%>%
     # filter for needed counties
-    filter(cntyname %in% c('Forsyth', 'Guilford', 'Durham'))
-
-  under_5 <- pop %>%
-      mutate(AGEP = as.numeric(AGEP)) %>%
-      filter(AGEP <= 4) %>%
-      select(SERIALNO) %>%
-      distinct() %>%
-      .[[1]]
-
-  # filter dataset to only include households with children under 5
-  pop <- pop %>%
-    filter(SERIALNO %in% under_5)
+    #filter(cntyname %in% c('Forsyth', 'Guilford', 'Durham'))
 
   # change REL column name to RELP if REL is a column (less than 2010)
   # this allows us to use the same column names for all years
@@ -233,7 +222,6 @@ tax_liability <- function(pop, current_year) {
     left_join(tax_liabilities, by = c('year', 'SERIALNO', 'SPORDER')) %>%
     # replace NA for taxes with zero
     replace_na(list(total_taxes = 0)) %>%
-    # mutate(total_taxes = replace_na(total_taxes, 0)) %>%
     # subtract taxes from income
     # create group to calculate economic unit post-tax income
     group_by(year, SERIALNO, economic_unit) %>%
