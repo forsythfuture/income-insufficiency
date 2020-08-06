@@ -165,7 +165,7 @@ create_economic_units <- function(file_path, state, year) {
   )
 
   # import population data
-  pop <- read_csv(file_path,
+  pop <- vroom(file_path,
                   col_types = cols(RT= col_character(),
                                    NAICSP = col_character(),
                                    SOCP = col_character(),

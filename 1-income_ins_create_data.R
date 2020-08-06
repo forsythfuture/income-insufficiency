@@ -8,13 +8,13 @@
 # insufficient; with TRUE being yes and FALSE being no.
 # A person is income insufficient if they live in an economic unit
 # where unit average expenses are greater than unit income.
-# Then script also saves the output as an R object for quick import.
 #
 ####################################################################################
 
 library(tidyverse)
 library(glue)
 library(data.table)
+library(vroom)
 
 source('income_ins_functions.R')
 
