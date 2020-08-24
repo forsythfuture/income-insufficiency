@@ -16,7 +16,7 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 library(tidyverse)
 library(readxl)
 library(tabulizer)
-library(FFtools)
+library(FFtools)  #Unable to install package after install devtools (https://github.com/forsythfuture/FFtools)
 
 source('../income_ins_functions.R')
 ```
@@ -298,7 +298,7 @@ meps_adjust <- function(df, year) {
 
 # adust 2016 and beyond for inflation
 meps_inflation_adj <- map_df(unique(meps_inflation$year), meps_adjust, df = meps_inflation) %>%
-  select(-year_original)
+  select(-year_original) ##Error here: Error in ff_inflation_adjust(df, wages_col = "mean", se_col = NULL, year_col = "year_original", : could not find function "ff_inflation_adjust"
 
 # add new year inflation adjusted estimates to data frame containing 2006-2015
 meps <- bind_rows(meps_inflation_adj, meps) %>%
