@@ -245,6 +245,8 @@ demo_income_ins1 <- demo_income_ins1 %>%
   select(geo_description, year, estimate, moe, se, cv, type, subtype) %>%
   arrange(year, type, geo_description, subtype)
 
+
+
 write_csv(demo_income_ins1, glue("income_ins_WF2018-{current_year}.csv"))
 
 ###########################################################################################
@@ -252,15 +254,12 @@ write_csv(demo_income_ins1, glue("income_ins_WF2018-{current_year}.csv"))
 #Formatting for Shiny 
 #
 ############################################################################################
-Sincomeinsufftotal <- mutate(demo_income_ins1) %>%
+Sincomeinsuff <- mutate(demo_income_ins1) %>%
   mutate(year = "2018") %>%
-  mutate(suptype = Adult) %>%
   mutate(success = " ") %>%
   mutate(trials = " ") %>%
   mutate(geo_description = "Forsyth County, NC") %>%
   select(year, geo_description, type, subtype, estimate, success, trials, se)
-
-Sincomeinsuff <- rbind(Sincomeinsufftotal,)
 
 write.csv(Sincomeinsuff, "Shiny_IncomeInsuffiency.csv")
 
@@ -270,10 +269,10 @@ write.csv(Sincomeinsuff, "Shiny_IncomeInsuffiency.csv")
 #
 ############################################################################################
 
-ttotalchildren <- totalchildren %>%
+Tincomeinsuff <- demo_income_ins1 %>%
   mutate(Year = "2018") %>%
-  mutate(Type = "Age of Child") %>%
-  mutate(Subtype = children) %>%
-  mutate(Estimate = total) %>%
-  mutate(Percent = proportion) %>%
-  select(Year, Type, Subtype, Estimate, Percent)
+  mutate(MoE = moe) %>%
+  mutate(Percent = estimate) %>%
+  select(Year, type, subtype, Percent, moe)
+
+write.csv(Tincomeinsuff, "Tableau_IncomeInsuffiency.csv")
