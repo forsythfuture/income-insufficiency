@@ -1,0 +1,19 @@
+"","Year","type","subtype","Percent","moe"
+"1","2018","Age","Adult",0.310150478423248,0.0284385312961695
+"2","2018","Age","Child",0.462087627382118,0.0615854164417137
+"3","2018","Age by Sex","Female Adult",0.33012240351388,0.0339150775332475
+"4","2018","Age by Sex","Female Child",0.49965736430445,0.0741383602559971
+"5","2018","Age by Sex","Male Adult",0.286855354269094,0.0313572071235121
+"6","2018","Age by Sex","Male Child",0.426380092530207,0.069440656407056
+"7","2018","Forsyth County Total","None",0.344845901622102,0.0303745250650934
+"8","2018","Gender","Female",0.365937670039586,0.0355870401985682
+"9","2018","Gender","Male",0.321371424761651,0.0315923523904861
+"10","2018","Race/Ethnicity","Black, non-Hispanic",0.497229488948854,0.0796354117865597
+"11","2018","Race/Ethnicity","Hispanic/Latino",0.616605443143304,0.115021290462745
+"12","2018","Race/Ethnicity","White, non-Hispanic",0.220932151056177,0.0300296325218811
+"13","2018","Race/Ethnicity by Sex","Black Female Child",0.730420168067227,0.161255489723235
+"14","2018","Race/Ethnicity by Sex","Black Male Child",0.587720098531156,0.180476796823557
+"15","2018","Race/Ethnicity by Sex","Hispanic/Latino Female Child",0.756643089275473,0.151459370335506
+"16","2018","Race/Ethnicity by Sex","Hispanic/Latino Male Child",0.768110312682074,0.142709681879579
+"17","2018","Race/Ethnicity by Sex","White Female Child",0.212515215226292,0.0876785402632656
+"18","2018","Race/Ethnicity by Sex","White Male Child",0.189993020883663,0.0774254622771211
