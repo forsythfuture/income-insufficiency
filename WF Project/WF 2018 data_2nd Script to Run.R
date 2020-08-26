@@ -30,7 +30,7 @@ pop <- vroom(glue("population_expense-{current_year}.csv")) %>%
          # make race 100 for Hispanic and persons of hispanic origin
          RAC1P = ifelse(.$HISP != 1, 100, .$RAC1P))
 
-###Creating Sex x Age variable with 4 categorties, 18+ Male/Female; Under 18 Male/Female
+###Creating Sex x Age variable with 4 categories, 18+ Male/Female; Under 18 Male/Female
 ###Labels will be attached after income insufficiency calculations (needs to be numeric)
 
 pop$Agesex <- do.call(paste, c(pop[c("SEX", "start_age")], sep = ""))
@@ -58,7 +58,7 @@ pop <- pop %>%
   mutate(RAC1P = ifelse(RAC1P %in% !!dont_need_race, 4, RAC1P),
          RAC1P = ifelse(RAC1P == 100, 3, RAC1P))
 
-##Creating Race x Sex and Age Variable (Race x Sex for 18+, Race x Sex for Under 18--3 categories~
+##Creating Race x Sex and Age Variable (Race x Sex for 18+, Race x Sex for Under 18~
 # White, Black, Hispanic)
 ##Labels will be attached after income insufficiency calculations (needs to numeric)
 
@@ -117,7 +117,7 @@ weight_names <- ifelse(current_year >= 2017, 'PWGTP', 'pwgtp')
 pop_weights <- c('PWGTP', paste0(weight_names, seq(1, 80)))
 
 # demographic columns to create income insufficiency for
-demo_cols <- c('RAC1P', 'SEX', 'start_age', 'Agesex', 'RaceSex', 'total')
+demo_cols <- c('Agesex', 'RaceSex', 'total')
 
 # iterate through each demographic, calculating income insufficiency
 for (col in demo_cols) {
@@ -152,38 +152,15 @@ for (col in demo_cols) {
 #Filtering out needed Geography: Forsyth County
 demo_income_ins1 <- demo_income_ins %>%
   filter(geo_area == 'Forsyth') %>%
-  # only keep needed races (White, Black, Hispanic)
-  # races not one of these three are labeled 4 and can be removed
-  filter(!(sub_demographic == 4 & demographic == 'RAC1P')) %>%
   #Removing all RaceSex that includes label 4 from RAC1P variable (42150, 41150, 4117, 4217)
-  filter(!(sub_demographic >= 4117 & demographic == 'RaceSex'))
-
-
-######################################################################################
-#
-# Income insufficiency is calculated per demographic, but the demographic labels are 
-# just numbers. This script recodes the labels to more descriptive labels.
-#
-#######################################################################################
-
-# mappings of demographic integer in dataset to description
-# race was recoded earlier in script
-
-sex_recode <- c(`1` = 'Male', `2` = 'Female')
+  filter(!(sub_demographic >= 41150 & demographic == 'RaceSex')) %>% #Only need White, Black, Hispanic
+  #Only filtered 41150:42150, need to remove 4117 & 4217 (Children)
+  filter(!(sub_demographic == 4117 & demographic == 'RaceSex')) %>% 
+  filter(!(sub_demographic == 4217 & demographic == 'RaceSex')) 
+  
+#Adding labels to demographics 
 
 dont_keep <- 'Do not keep'
-
-race_recode <- c(
-  `1` = 'White, non-Hispanic',
-  `2` = 'Black, non-Hispanic',
-  `3` = 'Hispanic/Latino',
-  `4` = 'Do not keep'
-)
-
-age_recode <- c(
-  `17` = 'Child',
-  `150` = 'Adult'
-)
 
 AgeSex_recode <- c(
   `1150` = 'Male Adult',
@@ -215,26 +192,17 @@ RaceSex_recode <- c(
 # if this phrase is spotted in the final dataset then check these values because the row did not recode
 default_recode <- 'did not recode - check'
 
-demo_income_ins1$sub_demographic <- ifelse(demo_income_ins1$demographic == 'RAC1P',
-                                   recode(demo_income_ins1$sub_demographic, !!!race_recode, .default = default_recode),
-                                   ifelse(demo_income_ins1$demographic == 'SEX',
-                                   recode(demo_income_ins1$sub_demographic, !!!sex_recode, .default = default_recode),
-                                   ifelse(demo_income_ins1$demographic == 'start_age',
-                                   recode(demo_income_ins1$sub_demographic, !!!age_recode, .default = default_recode),
-                                   ifelse(demo_income_ins1$demographic == 'Agesex',
+demo_income_ins1$sub_demographic <-ifelse(demo_income_ins1$demographic == 'Agesex',
                                    recode(demo_income_ins1$sub_demographic, !!!AgeSex_recode, .default = default_recode),
                                    ifelse(demo_income_ins1$demographic == 'RaceSex',
                                    recode(demo_income_ins1$sub_demographic, !!!RaceSex_recode, .default = default_recode),
-                                          'None'))))) 
+                                          'None'))
                                                              
                                     
 # recode demographic names
 demo_income_ins1$demographic <- recode(demo_income_ins1$demographic, 
-                                      RAC1P = 'Race/Ethnicity', 
-                                      SEX = 'Gender',
                                       Agesex = 'Age by Sex',
-                                      RaceSex = 'Race/Ethnicity by Sex',
-                                      start_age = 'Age', 
+                                      RaceSex = 'Race/Ethnicity by Sex and Age',
                                       total = 'Forsyth County Total')
 
 demo_income_ins1 <- demo_income_ins1 %>%
@@ -246,8 +214,10 @@ demo_income_ins1 <- demo_income_ins1 %>%
   arrange(year, type, geo_description, subtype)
 
 
+write_csv(demo_income_ins1, glue("income_ins_WF-{current_year}.csv"))
 
-write_csv(demo_income_ins1, glue("income_ins_WF2018-{current_year}.csv"))
+##Note 6 CVs between 12-21 with MoEs b/w 8-18% for those high CVs; other high CVs b/w 12-16% ~
+#For a couple CVs below 12 (Race/Ethnicity by Sex and Age)
 
 ###########################################################################################
 # 
@@ -263,6 +233,7 @@ Sincomeinsuff <- mutate(demo_income_ins1) %>%
 
 write.csv(Sincomeinsuff, "Shiny_IncomeInsuffiency.csv")
 
+
 ###########################################################################################
 # 
 #Formatting for Tableau 
@@ -271,7 +242,7 @@ write.csv(Sincomeinsuff, "Shiny_IncomeInsuffiency.csv")
 
 Tincomeinsuff <- demo_income_ins1 %>%
   mutate(Year = "2018") %>%
-  mutate(MoE = moe) %>%
+  mutate(moe = moe ) %>%
   mutate(Percent = estimate) %>%
   select(Year, type, subtype, Percent, moe)
 
