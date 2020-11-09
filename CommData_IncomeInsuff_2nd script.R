@@ -172,6 +172,16 @@ demo_income_ins$demographic <- recode(demo_income_ins$demographic,
                                       RAC1P = 'Race / Ethnicity', SEX = 'Gender', 
                                       start_age = 'Age', total = 'Comparison Community')
 
+# Relabeling county names to match previous files/years
+demo_income_ins$geo_area <-if_else(demo_income_ins$geo_area=="Durham", "Durham County, NC",
+                                   if_else(demo_income_ins$geo_area=="Forsyth", "Forsyth County, NC",
+                                   if_else(demo_income_ins$geo_area=="Guilford", "Guilford County, NC",
+                                   if_else(demo_income_ins$geo_area=="North Carolina", "North Carolina", NA_character_)))) 
+
+# Relabeling county names to match previous files/years, sub demo = none, relabeling total
+demo_income_ins <- demo_income_ins %>%
+mutate(sub_demographic = ifelse(sub_demographic == 'None', "Total", sub_demographic))
+  
 demo_income_ins <- demo_income_ins %>%
   # calculate MOE and CV
   mutate(moe = se * 1.96,
@@ -190,6 +200,14 @@ all_years_income_ins <- read_csv(all_years_path) %>%
   bind_rows(
     read_csv(recent_years_path)
   )
+
+#Need to Match 2018 format with previous formats still. Type needs to be Comparison Community
+#Subtype needs to be Total for NC, FC, GC, DC totals
+all_years_income_ins <- all_years_income_ins %>%
+mutate(type = ifelse(type == 'Total', "Comparison Community", type)) %>%
+mutate(subtype = ifelse(subtype == 'None', "Total", subtype)) 
+  
+
 
 write_csv(all_years_income_ins, "IncomeInsuff2006_2018_CommData.csv")
 
