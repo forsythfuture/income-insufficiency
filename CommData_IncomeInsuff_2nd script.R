@@ -224,3 +224,20 @@ Sincomeinsuff <- mutate(all_years_income_ins) %>%
 
 write.csv(Sincomeinsuff, "Shiny_IncomeInsuffiencyCommData.csv")
 
+###########################################################################################
+# 
+#Formatting for Tableau 
+#
+############################################################################################
+tincomeinsuff <- mutate(all_years_income_ins) %>%
+  mutate(Type = type) %>%
+  mutate(Year = year) %>%
+  mutate(Subtype = subtype) %>%
+  mutate(Percent = estimate) %>%
+  mutate(Geography = geo_description) %>%
+  mutate(MoE = moe) %>%
+  select(Year, Geography, Type, Subtype, Percent, MoE) 
+
+write.csv(tincomeinsuff, "Tableau_IncomeInsuffiencyCommData.csv")
+
+
