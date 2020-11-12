@@ -1,0 +1,540 @@
+"","year","geo_description","type","subtype","estimate","success","trials","se"
+"1",2006,"Durham County, NC","Race / Ethnicity","White, non-Hispanic",0.150111195176193," "," ",0.0126718733199487
+"2",2006,"Durham County, NC","Race / Ethnicity","African American",0.429067761040899," "," ",0.0273451958466593
+"3",2006,"Durham County, NC","Race / Ethnicity","Hispanic / Latino",0.535454607617441," "," ",0.0548064359770636
+"4",2006,"Forsyth County, NC","Race / Ethnicity","White, non-Hispanic",0.190406159435962," "," ",0.0151112014763531
+"5",2006,"Forsyth County, NC","Race / Ethnicity","African American",0.529750782596035," "," ",0.0334575285440007
+"6",2006,"Forsyth County, NC","Race / Ethnicity","Hispanic / Latino",0.638074019061765," "," ",0.0728380695118746
+"7",2006,"Guilford County, NC","Race / Ethnicity","White, non-Hispanic",0.221219087374242," "," ",0.0114004413909834
+"8",2006,"Guilford County, NC","Race / Ethnicity","African American",0.549878542510121," "," ",0.0266824216190848
+"9",2006,"Guilford County, NC","Race / Ethnicity","Hispanic / Latino",0.59558136701458," "," ",0.0455093236656884
+"10",2006,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.252961085592607," "," ",0.00329900663671059
+"11",2006,"North Carolina","Race / Ethnicity","African American",0.515228168831493," "," ",0.00686454830816429
+"12",2006,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.573570315229368," "," ",0.0128870311453566
+"13",2006,"Durham County, NC","Gender","Male",0.26776949645519," "," ",0.0142041273128404
+"14",2006,"Durham County, NC","Gender","Female",0.296291052559547," "," ",0.0140104867573914
+"15",2006,"Forsyth County, NC","Gender","Male",0.30940000875991," "," ",0.0158837417623728
+"16",2006,"Forsyth County, NC","Gender","Female",0.334568201845926," "," ",0.0172717838980712
+"17",2006,"Guilford County, NC","Gender","Male",0.320196344436908," "," ",0.0129940916564101
+"18",2006,"Guilford County, NC","Gender","Female",0.37522676707171," "," ",0.0146553810174918
+"19",2006,"North Carolina","Gender","Male",0.31520233171759," "," ",0.00371134589731647
+"20",2006,"North Carolina","Gender","Female",0.354977133693651," "," ",0.00330121652846516
+"21",2006,"Durham County, NC","Age","0 to 17",0.383133251562183," "," ",0.0315587596588441
+"22",2006,"Durham County, NC","Age","18 to 24",0.457783274856753," "," ",0.029193244741868
+"23",2006,"Durham County, NC","Age","25 to 44",0.232502420648663," "," ",0.0151072915607848
+"24",2006,"Durham County, NC","Age","45 to 64",0.178320423798569," "," ",0.0179199131737308
+"25",2006,"Durham County, NC","Age","65 plus",0.268802576418002," "," ",0.0240538842370336
+"26",2006,"Forsyth County, NC","Age","0 to 17",0.439329972434003," "," ",0.025909673045968
+"27",2006,"Forsyth County, NC","Age","18 to 24",0.531269289496767," "," ",0.0344281559762124
+"28",2006,"Forsyth County, NC","Age","25 to 44",0.320660684809752," "," ",0.0204730462575938
+"29",2006,"Forsyth County, NC","Age","45 to 64",0.165062521043527," "," ",0.016803043345009
+"30",2006,"Forsyth County, NC","Age","65 plus",0.270141005625356," "," ",0.0221090146474342
+"31",2006,"Guilford County, NC","Age","0 to 17",0.4357013374699," "," ",0.0230107500169388
+"32",2006,"Guilford County, NC","Age","18 to 24",0.641144557227861," "," ",0.0259785804863217
+"33",2006,"Guilford County, NC","Age","25 to 44",0.27805087576958," "," ",0.0173315846709449
+"34",2006,"Guilford County, NC","Age","45 to 64",0.215350055509298," "," ",0.0161852237693512
+"35",2006,"Guilford County, NC","Age","65 plus",0.371208633358502," "," ",0.0193905041067497
+"36",2006,"North Carolina","Age","0 to 17",0.419880493433906," "," ",0.00682801364916906
+"37",2006,"North Carolina","Age","18 to 24",0.479261858627515," "," ",0.00660097567347332
+"38",2006,"North Carolina","Age","25 to 44",0.29270360736554," "," ",0.00427598175079868
+"39",2006,"North Carolina","Age","45 to 64",0.225024889025278," "," ",0.0033271818164322
+"40",2006,"North Carolina","Age","65 plus",0.381980687655475," "," ",0.00532999028821393
+"41",2006,"Durham County, NC","Comparison Community","Total",0.282317117203861," "," ",0.0120421649526765
+"42",2006,"Forsyth County, NC","Comparison Community","Total",0.322463866244166," "," ",0.0143240733337906
+"43",2006,"Guilford County, NC","Comparison Community","Total",0.348657248820556," "," ",0.0125129766419243
+"44",2006,"North Carolina","Comparison Community","Total",0.335470230008123," "," ",0.00312736645875388
+"45",2007,"Durham County, NC","Race / Ethnicity","White, non-Hispanic",0.146329038598516," "," ",0.0110946817170781
+"46",2007,"Durham County, NC","Race / Ethnicity","African American",0.470587795728655," "," ",0.0329563188615319
+"47",2007,"Durham County, NC","Race / Ethnicity","Hispanic / Latino",0.54696474708005," "," ",0.0559009856312312
+"48",2007,"Forsyth County, NC","Race / Ethnicity","White, non-Hispanic",0.200144519112653," "," ",0.017322074886988
+"49",2007,"Forsyth County, NC","Race / Ethnicity","African American",0.481493998368488," "," ",0.0323170598932873
+"50",2007,"Forsyth County, NC","Race / Ethnicity","Hispanic / Latino",0.572051425377306," "," ",0.072416143993213
+"51",2007,"Guilford County, NC","Race / Ethnicity","White, non-Hispanic",0.22306584194073," "," ",0.0163177031289537
+"52",2007,"Guilford County, NC","Race / Ethnicity","African American",0.501283300621749," "," ",0.0270542349995275
+"53",2007,"Guilford County, NC","Race / Ethnicity","Hispanic / Latino",0.604875889794564," "," ",0.0620944599958352
+"54",2007,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.24189211008357," "," ",0.00378460173415781
+"55",2007,"North Carolina","Race / Ethnicity","African American",0.499904881779779," "," ",0.00747592683771672
+"56",2007,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.538619387155467," "," ",0.0129475384696378
+"57",2007,"Durham County, NC","Gender","Male",0.312296731128838," "," ",0.0182108174147668
+"58",2007,"Durham County, NC","Gender","Female",0.296499212797915," "," ",0.0172011748903193
+"59",2007,"Forsyth County, NC","Gender","Male",0.277408842157044," "," ",0.0174350530584323
+"60",2007,"Forsyth County, NC","Gender","Female",0.349597371422734," "," ",0.0166242016849707
+"61",2007,"Guilford County, NC","Gender","Male",0.307296427204575," "," ",0.0155525862145533
+"62",2007,"Guilford County, NC","Gender","Female",0.37941556444171," "," ",0.0158423410141596
+"63",2007,"North Carolina","Gender","Male",0.302309668972613," "," ",0.00332425389016593
+"64",2007,"North Carolina","Gender","Female",0.34324604633438," "," ",0.00406740404579085
+"65",2007,"Durham County, NC","Age","0 to 17",0.41842188559801," "," ",0.0298629486314166
+"66",2007,"Durham County, NC","Age","18 to 24",0.446181229034982," "," ",0.0308494810067595
+"67",2007,"Durham County, NC","Age","25 to 44",0.284043430456295," "," ",0.0189451257037439
+"68",2007,"Durham County, NC","Age","45 to 64",0.15112657044959," "," ",0.0151419788463052
+"69",2007,"Durham County, NC","Age","65 plus",0.271786477263269," "," ",0.02424024885435
+"70",2007,"Forsyth County, NC","Age","0 to 17",0.438471644405518," "," ",0.0270700313774572
+"71",2007,"Forsyth County, NC","Age","18 to 24",0.510492096262287," "," ",0.0340463854133801
+"72",2007,"Forsyth County, NC","Age","25 to 44",0.271461057418988," "," ",0.0229866903755243
+"73",2007,"Forsyth County, NC","Age","45 to 64",0.182639750126315," "," ",0.0169316605699514
+"74",2007,"Forsyth County, NC","Age","65 plus",0.294838311410798," "," ",0.0234162827690994
+"75",2007,"Guilford County, NC","Age","0 to 17",0.447149132537605," "," ",0.0271634812339919
+"76",2007,"Guilford County, NC","Age","18 to 24",0.604045073678128," "," ",0.0301327016628916
+"77",2007,"Guilford County, NC","Age","25 to 44",0.27344964451704," "," ",0.0185769059455038
+"78",2007,"Guilford County, NC","Age","45 to 64",0.200719213882501," "," ",0.0144717003243041
+"79",2007,"Guilford County, NC","Age","65 plus",0.370055983713829," "," ",0.0203442964554663
+"80",2007,"North Carolina","Age","0 to 17",0.399225224457299," "," ",0.00620333918483586
+"81",2007,"North Carolina","Age","18 to 24",0.468528072905388," "," ",0.00685769917833942
+"82",2007,"North Carolina","Age","25 to 44",0.277053740188351," "," ",0.00429153410568057
+"83",2007,"North Carolina","Age","45 to 64",0.216699906259151," "," ",0.00372311394775954
+"84",2007,"North Carolina","Age","65 plus",0.382781151718902," "," ",0.00609569020691946
+"85",2007,"Durham County, NC","Comparison Community","Total",0.304218881211092," "," ",0.014936249245003
+"86",2007,"Forsyth County, NC","Comparison Community","Total",0.314950405345185," "," ",0.0149209525069045
+"87",2007,"Guilford County, NC","Comparison Community","Total",0.345037774725275," "," ",0.0140625558769535
+"88",2007,"North Carolina","Comparison Community","Total",0.323258685286573," "," ",0.00335513182370174
+"89",2008,"Durham County, NC","Race / Ethnicity","White, non-Hispanic",0.147548429486755," "," ",0.0230236902774342
+"90",2008,"Durham County, NC","Race / Ethnicity","African American",0.460546566919608," "," ",0.0323183778322479
+"91",2008,"Durham County, NC","Race / Ethnicity","Hispanic / Latino",0.586308700064582," "," ",0.0516931582012045
+"92",2008,"Forsyth County, NC","Race / Ethnicity","White, non-Hispanic",0.184643057683706," "," ",0.0145084576414622
+"93",2008,"Forsyth County, NC","Race / Ethnicity","African American",0.499801883274287," "," ",0.0333454200237902
+"94",2008,"Forsyth County, NC","Race / Ethnicity","Hispanic / Latino",0.595259877637372," "," ",0.0659050488114827
+"95",2008,"Guilford County, NC","Race / Ethnicity","White, non-Hispanic",0.190299347703303," "," ",0.0128323498934979
+"96",2008,"Guilford County, NC","Race / Ethnicity","African American",0.465831074666703," "," ",0.021262133505587
+"97",2008,"Guilford County, NC","Race / Ethnicity","Hispanic / Latino",0.579497907949791," "," ",0.0589145082752234
+"98",2008,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.234838478456597," "," ",0.00315639339509026
+"99",2008,"North Carolina","Race / Ethnicity","African American",0.483207242259552," "," ",0.00701831745912281
+"100",2008,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.571809510886799," "," ",0.0145728593068053
+"101",2008,"Durham County, NC","Gender","Male",0.294446906266763," "," ",0.0201349757100955
+"102",2008,"Durham County, NC","Gender","Female",0.312520088568265," "," ",0.0195307363208307
+"103",2008,"Forsyth County, NC","Gender","Male",0.303057428856564," "," ",0.0186912942516684
+"104",2008,"Forsyth County, NC","Gender","Female",0.329591767805273," "," ",0.0183604858705167
+"105",2008,"Guilford County, NC","Gender","Male",0.279326492242273," "," ",0.0137264902687043
+"106",2008,"Guilford County, NC","Gender","Female",0.337253651537263," "," ",0.0125272763862445
+"107",2008,"North Carolina","Gender","Male",0.297210644863791," "," ",0.00370005530424795
+"108",2008,"North Carolina","Gender","Female",0.33629494879597," "," ",0.00346976231152994
+"109",2008,"Durham County, NC","Age","0 to 17",0.407075409712966," "," ",0.0273170500598651
+"110",2008,"Durham County, NC","Age","18 to 24",0.6095522252084," "," ",0.0763647475373384
+"111",2008,"Durham County, NC","Age","25 to 44",0.276467787781621," "," ",0.0202045431826716
+"112",2008,"Durham County, NC","Age","45 to 64",0.143867947109907," "," ",0.0158810774391497
+"113",2008,"Durham County, NC","Age","65 plus",0.208620180959874," "," ",0.0225109934685591
+"114",2008,"Forsyth County, NC","Age","0 to 17",0.427958184527329," "," ",0.0305682656207444
+"115",2008,"Forsyth County, NC","Age","18 to 24",0.515459822792545," "," ",0.0413572218235398
+"116",2008,"Forsyth County, NC","Age","25 to 44",0.296091410055532," "," ",0.0211249875172146
+"117",2008,"Forsyth County, NC","Age","45 to 64",0.183117592623563," "," ",0.0199830312356934
+"118",2008,"Forsyth County, NC","Age","65 plus",0.270123527040804," "," ",0.0217808325574234
+"119",2008,"Guilford County, NC","Age","0 to 17",0.358248017175606," "," ",0.0223959145852218
+"120",2008,"Guilford County, NC","Age","18 to 24",0.548807504241094," "," ",0.0317338079650294
+"121",2008,"Guilford County, NC","Age","25 to 44",0.263882384553376," "," ",0.0165107659675923
+"122",2008,"Guilford County, NC","Age","45 to 64",0.206246321780702," "," ",0.0151231758437568
+"123",2008,"Guilford County, NC","Age","65 plus",0.330982084572423," "," ",0.026038387806882
+"124",2008,"North Carolina","Age","0 to 17",0.388077533773911," "," ",0.00546058502031544
+"125",2008,"North Carolina","Age","18 to 24",0.4676198307825," "," ",0.00786613894574551
+"126",2008,"North Carolina","Age","25 to 44",0.280039838689777," "," ",0.00473452570500653
+"127",2008,"North Carolina","Age","45 to 64",0.213082339188399," "," ",0.00321792193653536
+"128",2008,"North Carolina","Age","65 plus",0.359719886725353," "," ",0.00488740742493283
+"129",2008,"Durham County, NC","Comparison Community","Total",0.303681856234018," "," ",0.018393586295042
+"130",2008,"Forsyth County, NC","Comparison Community","Total",0.316800737071366," "," ",0.0165039474724404
+"131",2008,"Guilford County, NC","Comparison Community","Total",0.309331373989713," "," ",0.0112618901453962
+"132",2008,"North Carolina","Comparison Community","Total",0.317177332997172," "," ",0.00304635116919355
+"133",2009,"Durham County, NC","Race / Ethnicity","White, non-Hispanic",0.120479749023302," "," ",0.012110846972456
+"134",2009,"Durham County, NC","Race / Ethnicity","African American",0.450631109001646," "," ",0.0246398563704189
+"135",2009,"Durham County, NC","Race / Ethnicity","Hispanic / Latino",0.573766690498734," "," ",0.05767657651835
+"136",2009,"Forsyth County, NC","Race / Ethnicity","White, non-Hispanic",0.216711050415386," "," ",0.0163138409940153
+"137",2009,"Forsyth County, NC","Race / Ethnicity","African American",0.377585853758449," "," ",0.0359622794516514
+"138",2009,"Forsyth County, NC","Race / Ethnicity","Hispanic / Latino",0.596190959878111," "," ",0.0579132490709318
+"139",2009,"Guilford County, NC","Race / Ethnicity","White, non-Hispanic",0.198600563000323," "," ",0.0132553139008824
+"140",2009,"Guilford County, NC","Race / Ethnicity","African American",0.475041295677048," "," ",0.0252520880084385
+"141",2009,"Guilford County, NC","Race / Ethnicity","Hispanic / Latino",0.552789128575501," "," ",0.0629781547074237
+"142",2009,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.225485764555342," "," ",0.00334597584038048
+"143",2009,"North Carolina","Race / Ethnicity","African American",0.45805639948345," "," ",0.00588966169068418
+"144",2009,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.554913738054805," "," ",0.0124917578457355
+"145",2009,"Durham County, NC","Gender","Male",0.289127360079025," "," ",0.0181037052273238
+"146",2009,"Durham County, NC","Gender","Female",0.290486219916266," "," ",0.0126151838899949
+"147",2009,"Forsyth County, NC","Gender","Male",0.288010941819425," "," ",0.0161301017588173
+"148",2009,"Forsyth County, NC","Gender","Female",0.311714899667518," "," ",0.0180345531817306
+"149",2009,"Guilford County, NC","Gender","Male",0.298418482491118," "," ",0.0195774988628258
+"150",2009,"Guilford County, NC","Gender","Female",0.332585657370518," "," ",0.0130281810885575
+"151",2009,"North Carolina","Gender","Male",0.288594547495945," "," ",0.00357404635803659
+"152",2009,"North Carolina","Gender","Female",0.321958572930038," "," ",0.00298790560978057
+"153",2009,"Durham County, NC","Age","0 to 17",0.372286590024539," "," ",0.0246546994149906
+"154",2009,"Durham County, NC","Age","18 to 24",0.59126616355532," "," ",0.0548653103800117
+"155",2009,"Durham County, NC","Age","25 to 44",0.244315479633414," "," ",0.0171750976428338
+"156",2009,"Durham County, NC","Age","45 to 64",0.168249299166897," "," ",0.0142010886321722
+"157",2009,"Durham County, NC","Age","65 plus",0.20956671958166," "," ",0.0217914153243031
+"158",2009,"Forsyth County, NC","Age","0 to 17",0.375485765928604," "," ",0.0294406901183435
+"159",2009,"Forsyth County, NC","Age","18 to 24",0.498231804699977," "," ",0.0391752974846465
+"160",2009,"Forsyth County, NC","Age","25 to 44",0.265869549200602," "," ",0.0194017135937621
+"161",2009,"Forsyth County, NC","Age","45 to 64",0.210828504539243," "," ",0.0186921304326789
+"162",2009,"Forsyth County, NC","Age","65 plus",0.260340945641685," "," ",0.0280574953610324
+"163",2009,"Guilford County, NC","Age","0 to 17",0.391610532761788," "," ",0.020429950337685
+"164",2009,"Guilford County, NC","Age","18 to 24",0.534285714285714," "," ",0.0351189466419629
+"165",2009,"Guilford County, NC","Age","25 to 44",0.26368935846097," "," ",0.0172967559927018
+"166",2009,"Guilford County, NC","Age","45 to 64",0.220063660215655," "," ",0.033123112014612
+"167",2009,"Guilford County, NC","Age","65 plus",0.294348755864264," "," ",0.023498193857179
+"168",2009,"North Carolina","Age","0 to 17",0.374571800772288," "," ",0.00583517896738147
+"169",2009,"North Carolina","Age","18 to 24",0.455434815390263," "," ",0.00725208596611265
+"170",2009,"North Carolina","Age","25 to 44",0.268442874921387," "," ",0.00432361299491323
+"171",2009,"North Carolina","Age","45 to 64",0.210128845670041," "," ",0.00383498323739046
+"172",2009,"North Carolina","Age","65 plus",0.326063465400029," "," ",0.00417394682945903
+"173",2009,"Durham County, NC","Comparison Community","Total",0.289822994304348," "," ",0.013932439138741
+"174",2009,"Forsyth County, NC","Comparison Community","Total",0.30034174297258," "," ",0.0151118218064055
+"175",2009,"Guilford County, NC","Comparison Community","Total",0.316249072185525," "," ",0.0139805498156285
+"176",2009,"North Carolina","Comparison Community","Total",0.30566185787491," "," ",0.00287948628076346
+"177",2010,"Durham County, NC","Race / Ethnicity","White, non-Hispanic",0.170128852875027," "," ",0.0148744687096832
+"178",2010,"Durham County, NC","Race / Ethnicity","African American",0.473964879920865," "," ",0.0297149325683833
+"179",2010,"Durham County, NC","Race / Ethnicity","Hispanic / Latino",0.512347450331685," "," ",0.0531221331502573
+"180",2010,"Forsyth County, NC","Race / Ethnicity","White, non-Hispanic",0.187354451470832," "," ",0.0138724799881541
+"181",2010,"Forsyth County, NC","Race / Ethnicity","African American",0.432472570098637," "," ",0.0322526065250592
+"182",2010,"Forsyth County, NC","Race / Ethnicity","Hispanic / Latino",0.482702908192359," "," ",0.0620399085944696
+"183",2010,"Guilford County, NC","Race / Ethnicity","White, non-Hispanic",0.210631216742192," "," ",0.0105553737885289
+"184",2010,"Guilford County, NC","Race / Ethnicity","African American",0.519788257940327," "," ",0.0298773693201805
+"185",2010,"Guilford County, NC","Race / Ethnicity","Hispanic / Latino",0.466662870807949," "," ",0.0584748521548432
+"186",2010,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.232987031164627," "," ",0.00292840261414836
+"187",2010,"North Carolina","Race / Ethnicity","African American",0.476236819234436," "," ",0.00678429323852256
+"188",2010,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.514412135907858," "," ",0.0143767210922281
+"189",2010,"Durham County, NC","Gender","Male",0.313587320879937," "," ",0.0181609286594246
+"190",2010,"Durham County, NC","Gender","Female",0.326439853565474," "," ",0.0151826231480456
+"191",2010,"Forsyth County, NC","Gender","Male",0.262083155867762," "," ",0.0157851275289268
+"192",2010,"Forsyth County, NC","Gender","Female",0.312166506120594," "," ",0.0156235496578326
+"193",2010,"Guilford County, NC","Gender","Male",0.300421280019967," "," ",0.0160425676116238
+"194",2010,"Guilford County, NC","Gender","Female",0.359372751002688," "," ",0.0135640031882967
+"195",2010,"North Carolina","Gender","Male",0.299492403229634," "," ",0.00303385328587186
+"196",2010,"North Carolina","Gender","Female",0.327866676697229," "," ",0.00335434583484023
+"197",2010,"Durham County, NC","Age","0 to 17",0.427904378018119," "," ",0.0268694251823157
+"198",2010,"Durham County, NC","Age","18 to 24",0.55049134727194," "," ",0.038435810102142
+"199",2010,"Durham County, NC","Age","25 to 44",0.291335855310074," "," ",0.0189406975290172
+"200",2010,"Durham County, NC","Age","45 to 64",0.187060169733956," "," ",0.016217379769225
+"201",2010,"Durham County, NC","Age","65 plus",0.260890378171374," "," ",0.0240838952198639
+"202",2010,"Forsyth County, NC","Age","0 to 17",0.381095887210756," "," ",0.0282626153338279
+"203",2010,"Forsyth County, NC","Age","18 to 24",0.439093403452612," "," ",0.033422260895891
+"204",2010,"Forsyth County, NC","Age","25 to 44",0.271915601962946," "," ",0.0207346627055795
+"205",2010,"Forsyth County, NC","Age","45 to 64",0.174988597615273," "," ",0.0163738382967686
+"206",2010,"Forsyth County, NC","Age","65 plus",0.261720606662922," "," ",0.0202969847374253
+"207",2010,"Guilford County, NC","Age","0 to 17",0.417537467043892," "," ",0.0231773488488837
+"208",2010,"Guilford County, NC","Age","18 to 24",0.599007926184158," "," ",0.035003683984432
+"209",2010,"Guilford County, NC","Age","25 to 44",0.267338506807336," "," ",0.0187150687352885
+"210",2010,"Guilford County, NC","Age","45 to 64",0.227191441548371," "," ",0.0158117420629293
+"211",2010,"Guilford County, NC","Age","65 plus",0.269821184775732," "," ",0.0186326323921763
+"212",2010,"North Carolina","Age","0 to 17",0.377463040432254," "," ",0.00506111379737299
+"213",2010,"North Carolina","Age","18 to 24",0.479299548818131," "," ",0.00898973336915677
+"214",2010,"North Carolina","Age","25 to 44",0.279229884794849," "," ",0.00462860569236971
+"215",2010,"North Carolina","Age","45 to 64",0.223308530818563," "," ",0.00316906426213032
+"216",2010,"North Carolina","Age","65 plus",0.326142135046418," "," ",0.004211318655828
+"217",2010,"Durham County, NC","Comparison Community","Total",0.320384488655085," "," ",0.014504475244679
+"218",2010,"Forsyth County, NC","Comparison Community","Total",0.288413445808498," "," ",0.0136294526369548
+"219",2010,"Guilford County, NC","Comparison Community","Total",0.331382828749239," "," ",0.0129374757312632
+"220",2010,"North Carolina","Comparison Community","Total",0.314048644614352," "," ",0.00279060039648556
+"221",2011,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.21898421081699," "," ",0.00337478266090023
+"222",2011,"North Carolina","Race / Ethnicity","African American",0.416278667314935," "," ",0.00675016284270696
+"223",2011,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.424063945134688," "," ",0.0127199669035706
+"224",2011,"North Carolina","Gender","Male",0.270472225125474," "," ",0.00305107974653105
+"225",2011,"North Carolina","Gender","Female",0.29736174344824," "," ",0.00306559502362503
+"226",2011,"North Carolina","Age","0 to 17",0.339234386877699," "," ",0.00509950464670168
+"227",2011,"North Carolina","Age","18 to 24",0.448638508387204," "," ",0.00699535038966227
+"228",2011,"North Carolina","Age","25 to 44",0.251055874414758," "," ",0.00396462661319711
+"229",2011,"North Carolina","Age","45 to 64",0.206736009631823," "," ",0.00348670519737709
+"230",2011,"North Carolina","Age","65 plus",0.284087464073003," "," ",0.00546737232427419
+"231",2011,"North Carolina","Comparison Community","Total",0.284306386863808," "," ",0.00274774427162543
+"232",2012,"Durham County, NC","Race / Ethnicity","White, non-Hispanic",0.191761521317747," "," ",0.019049644404876
+"233",2012,"Durham County, NC","Race / Ethnicity","African American",0.43872772025936," "," ",0.026920798327988
+"234",2012,"Durham County, NC","Race / Ethnicity","Hispanic / Latino",0.586828257056291," "," ",0.0607566872936822
+"235",2012,"Forsyth County, NC","Race / Ethnicity","White, non-Hispanic",0.211030394161563," "," ",0.0172941606340068
+"236",2012,"Forsyth County, NC","Race / Ethnicity","African American",0.549194236984036," "," ",0.0292466177856825
+"237",2012,"Forsyth County, NC","Race / Ethnicity","Hispanic / Latino",0.720581584659913," "," ",0.0541962491401591
+"238",2012,"Guilford County, NC","Race / Ethnicity","White, non-Hispanic",0.193818128085537," "," ",0.0142408593852381
+"239",2012,"Guilford County, NC","Race / Ethnicity","African American",0.491654782816258," "," ",0.0280297650397091
+"240",2012,"Guilford County, NC","Race / Ethnicity","Hispanic / Latino",0.656154491115138," "," ",0.0682660439593694
+"241",2012,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.253335510033832," "," ",0.00341910180909613
+"242",2012,"North Carolina","Race / Ethnicity","African American",0.501651207258765," "," ",0.00759395546783734
+"243",2012,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.571132691443306," "," ",0.014614733660428
+"244",2012,"Durham County, NC","Gender","Male",0.351479733273395," "," ",0.0182138015627792
+"245",2012,"Durham County, NC","Gender","Female",0.336743263895582," "," ",0.0181224398214132
+"246",2012,"Forsyth County, NC","Gender","Male",0.361374595474008," "," ",0.016270753607818
+"247",2012,"Forsyth County, NC","Gender","Female",0.375283519151519," "," ",0.0152224875640546
+"248",2012,"Guilford County, NC","Gender","Male",0.318520549310869," "," ",0.0144106788885167
+"249",2012,"Guilford County, NC","Gender","Female",0.362277673213784," "," ",0.016306174040409
+"250",2012,"North Carolina","Gender","Male",0.325567523104629," "," ",0.00309196773324707
+"251",2012,"North Carolina","Gender","Female",0.356161191101466," "," ",0.00393826017329358
+"252",2012,"Durham County, NC","Age","0 to 17",0.42308726105586," "," ",0.0333441722815179
+"253",2012,"Durham County, NC","Age","18 to 24",0.615003445673219," "," ",0.0445559100815996
+"254",2012,"Durham County, NC","Age","25 to 44",0.301786714400237," "," ",0.0240794856747337
+"255",2012,"Durham County, NC","Age","45 to 64",0.202211294515614," "," ",0.0218005296949973
+"256",2012,"Durham County, NC","Age","65 plus",0.330099345449713," "," ",0.0319623353377004
+"257",2012,"Forsyth County, NC","Age","0 to 17",0.478246650860206," "," ",0.0242177929278743
+"258",2012,"Forsyth County, NC","Age","18 to 24",0.578353216635076," "," ",0.03235314573395
+"259",2012,"Forsyth County, NC","Age","25 to 44",0.356917748545245," "," ",0.0221962592278414
+"260",2012,"Forsyth County, NC","Age","45 to 64",0.242055550261021," "," ",0.0190416281208936
+"261",2012,"Forsyth County, NC","Age","65 plus",0.290283878314625," "," ",0.0233406917025845
+"262",2012,"Guilford County, NC","Age","0 to 17",0.415271613589764," "," ",0.0276679062860862
+"263",2012,"Guilford County, NC","Age","18 to 24",0.58633662670089," "," ",0.0313834104585306
+"264",2012,"Guilford County, NC","Age","25 to 44",0.315382688397041," "," ",0.020218249260739
+"265",2012,"Guilford County, NC","Age","45 to 64",0.218734041968151," "," ",0.0158587705361615
+"266",2012,"Guilford County, NC","Age","65 plus",0.288994421135138," "," ",0.0201492990454622
+"267",2012,"North Carolina","Age","0 to 17",0.420840367373044," "," ",0.00589117036349157
+"268",2012,"North Carolina","Age","18 to 24",0.491230463421289," "," ",0.00647325407560411
+"269",2012,"North Carolina","Age","25 to 44",0.31524660823281," "," ",0.00411177645005303
+"270",2012,"North Carolina","Age","45 to 64",0.245800447113173," "," ",0.0042516938241089
+"271",2012,"North Carolina","Age","65 plus",0.329219700461602," "," ",0.00607232178087732
+"272",2012,"Durham County, NC","Comparison Community","Total",0.343799778999182," "," ",0.0158200200853647
+"273",2012,"Forsyth County, NC","Comparison Community","Total",0.368670042085685," "," ",0.013817988907305
+"274",2012,"Guilford County, NC","Comparison Community","Total",0.34123269143557," "," ",0.0132562430756207
+"275",2012,"North Carolina","Comparison Community","Total",0.341253354382369," "," ",0.00314706142404289
+"276",2013,"Durham County, NC","Race / Ethnicity","White, non-Hispanic",0.145081527347781," "," ",0.0159065069826605
+"277",2013,"Durham County, NC","Race / Ethnicity","African American",0.404827355634391," "," ",0.0282989258850923
+"278",2013,"Durham County, NC","Race / Ethnicity","Hispanic / Latino",0.71865982277382," "," ",0.0483749933813595
+"279",2013,"Forsyth County, NC","Race / Ethnicity","White, non-Hispanic",0.179029487546522," "," ",0.0141223870290289
+"280",2013,"Forsyth County, NC","Race / Ethnicity","African American",0.552644378185202," "," ",0.0313605006009191
+"281",2013,"Forsyth County, NC","Race / Ethnicity","Hispanic / Latino",0.716325305223831," "," ",0.052527595855876
+"282",2013,"Guilford County, NC","Race / Ethnicity","White, non-Hispanic",0.221823327480936," "," ",0.0129422057268856
+"283",2013,"Guilford County, NC","Race / Ethnicity","African American",0.488437189965512," "," ",0.0239774229309835
+"284",2013,"Guilford County, NC","Race / Ethnicity","Hispanic / Latino",0.57969860978457," "," ",0.0551797156109925
+"285",2013,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.24850448216504," "," ",0.00319850457788947
+"286",2013,"North Carolina","Race / Ethnicity","African American",0.502302400352513," "," ",0.00684258936141843
+"287",2013,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.551755838954663," "," ",0.0132064145200517
+"288",2013,"Durham County, NC","Gender","Male",0.341927695259448," "," ",0.0182502273673705
+"289",2013,"Durham County, NC","Gender","Female",0.336894644002566," "," ",0.0177708503039201
+"290",2013,"Forsyth County, NC","Gender","Male",0.329662189143985," "," ",0.018581956756589
+"291",2013,"Forsyth County, NC","Gender","Female",0.360082968669803," "," ",0.015501530357353
+"292",2013,"Guilford County, NC","Gender","Male",0.325396825396825," "," ",0.0139133284319658
+"293",2013,"Guilford County, NC","Gender","Female",0.375985686082811," "," ",0.0140869627096281
+"294",2013,"North Carolina","Gender","Male",0.321389924451932," "," ",0.00338266289917211
+"295",2013,"North Carolina","Gender","Female",0.351212447380957," "," ",0.00350049185442781
+"296",2013,"Durham County, NC","Age","0 to 17",0.468981298824272," "," ",0.0315697801794002
+"297",2013,"Durham County, NC","Age","18 to 24",0.586722124460086," "," ",0.0392625074395142
+"298",2013,"Durham County, NC","Age","25 to 44",0.320351627166237," "," ",0.0190502597244336
+"299",2013,"Durham County, NC","Age","45 to 64",0.20176801735765," "," ",0.0188144670017745
+"300",2013,"Durham County, NC","Age","65 plus",0.18366010932539," "," ",0.0264108186566207
+"301",2013,"Forsyth County, NC","Age","0 to 17",0.486001993093699," "," ",0.0257285310076988
+"302",2013,"Forsyth County, NC","Age","18 to 24",0.58021467943139," "," ",0.0382526035647376
+"303",2013,"Forsyth County, NC","Age","25 to 44",0.323698221294181," "," ",0.0223750802347568
+"304",2013,"Forsyth County, NC","Age","45 to 64",0.201011983466772," "," ",0.0165537205510411
+"305",2013,"Forsyth County, NC","Age","65 plus",0.242920804939949," "," ",0.0190015587539562
+"306",2013,"Guilford County, NC","Age","0 to 17",0.447579634893345," "," ",0.0209705147103879
+"307",2013,"Guilford County, NC","Age","18 to 24",0.555039028620989," "," ",0.0339478744586544
+"308",2013,"Guilford County, NC","Age","25 to 44",0.332570905763952," "," ",0.020842793679754
+"309",2013,"Guilford County, NC","Age","45 to 64",0.22684037497807," "," ",0.0147611174476917
+"310",2013,"Guilford County, NC","Age","65 plus",0.295283004878627," "," ",0.0215430298941859
+"311",2013,"North Carolina","Age","0 to 17",0.421180781288058," "," ",0.00581337424923858
+"312",2013,"North Carolina","Age","18 to 24",0.493836190873174," "," ",0.00691232088833992
+"313",2013,"North Carolina","Age","25 to 44",0.313112650419971," "," ",0.00478215098050531
+"314",2013,"North Carolina","Age","45 to 64",0.24290680164382," "," ",0.00346711041656102
+"315",2013,"North Carolina","Age","65 plus",0.302866244760605," "," ",0.004805080844117
+"316",2013,"Durham County, NC","Comparison Community","Total",0.339319657231888," "," ",0.0141233204279099
+"317",2013,"Forsyth County, NC","Comparison Community","Total",0.345553602229004," "," ",0.0151756608705951
+"318",2013,"Guilford County, NC","Comparison Community","Total",0.351806127294977," "," ",0.0123909666792935
+"319",2013,"North Carolina","Comparison Community","Total",0.336674923399255," "," ",0.00308158709262763
+"320",2014,"Durham County, NC","Race / Ethnicity","White, non-Hispanic",0.150814528780017," "," ",0.0150591819363086
+"321",2014,"Durham County, NC","Race / Ethnicity","African American",0.402454476342179," "," ",0.029787851317877
+"322",2014,"Durham County, NC","Race / Ethnicity","Hispanic / Latino",0.570014325181623," "," ",0.0620060643395593
+"323",2014,"Forsyth County, NC","Race / Ethnicity","White, non-Hispanic",0.222778508897408," "," ",0.0184727983936831
+"324",2014,"Forsyth County, NC","Race / Ethnicity","African American",0.483460121112859," "," ",0.0333285580239449
+"325",2014,"Forsyth County, NC","Race / Ethnicity","Hispanic / Latino",0.654817383765037," "," ",0.0596407518132728
+"326",2014,"Guilford County, NC","Race / Ethnicity","White, non-Hispanic",0.197259478954291," "," ",0.0134785460226336
+"327",2014,"Guilford County, NC","Race / Ethnicity","African American",0.473834370624846," "," ",0.0264372547218098
+"328",2014,"Guilford County, NC","Race / Ethnicity","Hispanic / Latino",0.643190561682483," "," ",0.0570612123323464
+"329",2014,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.25596828443027," "," ",0.00342115345839811
+"330",2014,"North Carolina","Race / Ethnicity","African American",0.500945853632904," "," ",0.0065214527393199
+"331",2014,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.595830628696181," "," ",0.0145156015193209
+"332",2014,"Durham County, NC","Gender","Male",0.307691212888902," "," ",0.0210808173312062
+"333",2014,"Durham County, NC","Gender","Female",0.318381115185364," "," ",0.0176419698408257
+"334",2014,"Forsyth County, NC","Gender","Male",0.32667151582326," "," ",0.0181404501006948
+"335",2014,"Forsyth County, NC","Gender","Female",0.368317679875469," "," ",0.0173896218176149
+"336",2014,"Guilford County, NC","Gender","Male",0.30953143739629," "," ",0.0159365936045076
+"337",2014,"Guilford County, NC","Gender","Female",0.367869941764969," "," ",0.0147619710585652
+"338",2014,"North Carolina","Gender","Male",0.328309322306307," "," ",0.00375746775355345
+"339",2014,"North Carolina","Gender","Female",0.36217105005445," "," ",0.00341957482093081
+"340",2014,"Durham County, NC","Age","0 to 17",0.407544037627963," "," ",0.032263886184049
+"341",2014,"Durham County, NC","Age","18 to 24",0.581745369597864," "," ",0.0453571828640574
+"342",2014,"Durham County, NC","Age","25 to 44",0.278227673564306," "," ",0.0209538729406839
+"343",2014,"Durham County, NC","Age","45 to 64",0.209941375849177," "," ",0.0225544862799975
+"344",2014,"Durham County, NC","Age","65 plus",0.201516397186444," "," ",0.0278929018740279
+"345",2014,"Forsyth County, NC","Age","0 to 17",0.475939475904798," "," ",0.031742641788424
+"346",2014,"Forsyth County, NC","Age","18 to 24",0.533797947349794," "," ",0.0392227777617815
+"347",2014,"Forsyth County, NC","Age","25 to 44",0.328867964904772," "," ",0.0239593175776627
+"348",2014,"Forsyth County, NC","Age","45 to 64",0.228534947213254," "," ",0.0189163451923331
+"349",2014,"Forsyth County, NC","Age","65 plus",0.262739932983401," "," ",0.021704900593572
+"350",2014,"Guilford County, NC","Age","0 to 17",0.439351573891414," "," ",0.0245962047454618
+"351",2014,"Guilford County, NC","Age","18 to 24",0.583231505079775," "," ",0.0321792906393572
+"352",2014,"Guilford County, NC","Age","25 to 44",0.30593722425312," "," ",0.0157115320491211
+"353",2014,"Guilford County, NC","Age","45 to 64",0.230699104176241," "," ",0.0174483583844391
+"354",2014,"Guilford County, NC","Age","65 plus",0.248869555263007," "," ",0.0234184464735989
+"355",2014,"North Carolina","Age","0 to 17",0.446319266994526," "," ",0.00640837523463611
+"356",2014,"North Carolina","Age","18 to 24",0.502154843109815," "," ",0.00626194528551166
+"357",2014,"North Carolina","Age","25 to 44",0.326128786157691," "," ",0.00469918295761554
+"358",2014,"North Carolina","Age","45 to 64",0.247507359809668," "," ",0.00377814600181758
+"359",2014,"North Carolina","Age","65 plus",0.291803880149741," "," ",0.00439129382846164
+"360",2014,"Durham County, NC","Comparison Community","Total",0.313267980530311," "," ",0.0158922291013383
+"361",2014,"Forsyth County, NC","Comparison Community","Total",0.348534541386043," "," ",0.016229137143176
+"362",2014,"Guilford County, NC","Comparison Community","Total",0.340093243740075," "," ",0.013633996815718
+"363",2014,"North Carolina","Comparison Community","Total",0.345696645821284," "," ",0.00307185666755609
+"364",2015,"Durham County, NC","Race / Ethnicity","White, non-Hispanic",0.181296105712198," "," ",0.0201026130977496
+"365",2015,"Durham County, NC","Race / Ethnicity","African American",0.439031036268018," "," ",0.0349404826532351
+"366",2015,"Durham County, NC","Race / Ethnicity","Hispanic / Latino",0.679615974662246," "," ",0.0653914509452631
+"367",2015,"Forsyth County, NC","Race / Ethnicity","White, non-Hispanic",0.21922453191803," "," ",0.0171688251183615
+"368",2015,"Forsyth County, NC","Race / Ethnicity","African American",0.41853790841428," "," ",0.0357022981413032
+"369",2015,"Forsyth County, NC","Race / Ethnicity","Hispanic / Latino",0.665908993438264," "," ",0.0598415022973334
+"370",2015,"Guilford County, NC","Race / Ethnicity","White, non-Hispanic",0.207377431438328," "," ",0.0188775405466026
+"371",2015,"Guilford County, NC","Race / Ethnicity","African American",0.472373630819919," "," ",0.026049550243467
+"372",2015,"Guilford County, NC","Race / Ethnicity","Hispanic / Latino",0.51698714755405," "," ",0.050984521209745
+"373",2015,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.25124568485312," "," ",0.00325715517571572
+"374",2015,"North Carolina","Race / Ethnicity","African American",0.483658331670047," "," ",0.00791902438111796
+"375",2015,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.582242778670822," "," ",0.0107494209064442
+"376",2015,"Durham County, NC","Gender","Male",0.340610655167617," "," ",0.0195116100319629
+"377",2015,"Durham County, NC","Gender","Female",0.366027206138821," "," ",0.0237141700270926
+"378",2015,"Forsyth County, NC","Gender","Male",0.313496213018435," "," ",0.0180174392014289
+"379",2015,"Forsyth County, NC","Gender","Female",0.358217651749024," "," ",0.0172651771880993
+"380",2015,"Guilford County, NC","Gender","Male",0.306142257639588," "," ",0.0155574140568374
+"381",2015,"Guilford County, NC","Gender","Female",0.353888643393725," "," ",0.0154004182791635
+"382",2015,"North Carolina","Gender","Male",0.322280482692514," "," ",0.0033202022414053
+"383",2015,"North Carolina","Gender","Female",0.352516845210552," "," ",0.00344614056411135
+"384",2015,"Durham County, NC","Age","0 to 17",0.452449833805244," "," ",0.0340247003757418
+"385",2015,"Durham County, NC","Age","18 to 24",0.624939176695754," "," ",0.0363258405479737
+"386",2015,"Durham County, NC","Age","25 to 44",0.328158916658369," "," ",0.0259331337555759
+"387",2015,"Durham County, NC","Age","45 to 64",0.218175904057475," "," ",0.0207237912333352
+"388",2015,"Durham County, NC","Age","65 plus",0.279269882659713," "," ",0.032689760300414
+"389",2015,"Forsyth County, NC","Age","0 to 17",0.479884202576836," "," ",0.0305912817258163
+"390",2015,"Forsyth County, NC","Age","18 to 24",0.510502454596668," "," ",0.0346839058178673
+"391",2015,"Forsyth County, NC","Age","25 to 44",0.313452021338132," "," ",0.0241108886547001
+"392",2015,"Forsyth County, NC","Age","45 to 64",0.209472635990208," "," ",0.0160577189951865
+"393",2015,"Forsyth County, NC","Age","65 plus",0.256370130348332," "," ",0.0213976385990435
+"394",2015,"Guilford County, NC","Age","0 to 17",0.449643964430513," "," ",0.027328115628095
+"395",2015,"Guilford County, NC","Age","18 to 24",0.532087146615288," "," ",0.0329374291855531
+"396",2015,"Guilford County, NC","Age","25 to 44",0.324741637839898," "," ",0.0207754764181534
+"397",2015,"Guilford County, NC","Age","45 to 64",0.1963972376814," "," ",0.0156889935458426
+"398",2015,"Guilford County, NC","Age","65 plus",0.250513291182269," "," ",0.0193526935902861
+"399",2015,"North Carolina","Age","0 to 17",0.433407874934559," "," ",0.00580768987074581
+"400",2015,"North Carolina","Age","18 to 24",0.492205308620558," "," ",0.00840910532440851
+"401",2015,"North Carolina","Age","25 to 44",0.315867979342499," "," ",0.00457554803258267
+"402",2015,"North Carolina","Age","45 to 64",0.240940514676768," "," ",0.00375384103055593
+"403",2015,"North Carolina","Age","65 plus",0.298726230281985," "," ",0.00441263792165854
+"404",2015,"Durham County, NC","Comparison Community","Total",0.353905096777404," "," ",0.0193621215316567
+"405",2015,"Forsyth County, NC","Comparison Community","Total",0.337224911524224," "," ",0.0154770944064365
+"406",2015,"Guilford County, NC","Comparison Community","Total",0.331233079767708," "," ",0.0140139080910169
+"407",2015,"North Carolina","Comparison Community","Total",0.337779346645251," "," ",0.0029289140485615
+"408",2016,"Durham County, NC","Race / Ethnicity","White, non-Hispanic",0.194758840207978," "," ",0.0173448921510723
+"409",2016,"Durham County, NC","Race / Ethnicity","African American",0.472368726869648," "," ",0.0253322515609485
+"410",2016,"Durham County, NC","Race / Ethnicity","Hispanic / Latino",0.500451627078095," "," ",0.0577335925443842
+"411",2016,"Forsyth County, NC","Race / Ethnicity","White, non-Hispanic",0.23154551435888," "," ",0.018071107881085
+"412",2016,"Forsyth County, NC","Race / Ethnicity","African American",0.528583595318956," "," ",0.033787647829848
+"413",2016,"Forsyth County, NC","Race / Ethnicity","Hispanic / Latino",0.500666483295601," "," ",0.0600079763465289
+"414",2016,"Guilford County, NC","Race / Ethnicity","White, non-Hispanic",0.221332024267679," "," ",0.0161459294045974
+"415",2016,"Guilford County, NC","Race / Ethnicity","African American",0.512745435756114," "," ",0.0267545028035989
+"416",2016,"Guilford County, NC","Race / Ethnicity","Hispanic / Latino",0.598112792431613," "," ",0.0502408888432084
+"417",2016,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.24030834056157," "," ",0.00330776252542329
+"418",2016,"North Carolina","Race / Ethnicity","African American",0.47564303013581," "," ",0.00670563365326683
+"419",2016,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.505694396086674," "," ",0.0124037600748987
+"420",2016,"Durham County, NC","Gender","Male",0.341779524290888," "," ",0.01758220109603
+"421",2016,"Durham County, NC","Gender","Female",0.358845448255286," "," ",0.0154945617512817
+"422",2016,"Forsyth County, NC","Gender","Male",0.314965322315175," "," ",0.0166763551788727
+"423",2016,"Forsyth County, NC","Gender","Female",0.374363680171428," "," ",0.018766860886725
+"424",2016,"Guilford County, NC","Gender","Male",0.329451192943735," "," ",0.0136252808986237
+"425",2016,"Guilford County, NC","Gender","Female",0.391180350205833," "," ",0.0153832475445834
+"426",2016,"North Carolina","Gender","Male",0.30362936467161," "," ",0.00321150397223539
+"427",2016,"North Carolina","Gender","Female",0.335953171228626," "," ",0.00296681877490525
+"428",2016,"Durham County, NC","Age","0 to 17",0.514681707813655," "," ",0.02964485492732
+"429",2016,"Durham County, NC","Age","18 to 24",0.555894590846047," "," ",0.0452687123526595
+"430",2016,"Durham County, NC","Age","25 to 44",0.309714750779125," "," ",0.0189140609333921
+"431",2016,"Durham County, NC","Age","45 to 64",0.250693281532588," "," ",0.0232689109023642
+"432",2016,"Durham County, NC","Age","65 plus",0.206440435595644," "," ",0.023069550636179
+"433",2016,"Forsyth County, NC","Age","0 to 17",0.463228063756317," "," ",0.0334428337686883
+"434",2016,"Forsyth County, NC","Age","18 to 24",0.542194676553594," "," ",0.047247074999935
+"435",2016,"Forsyth County, NC","Age","25 to 44",0.327035977720909," "," ",0.0246810566288943
+"436",2016,"Forsyth County, NC","Age","45 to 64",0.234380885481884," "," ",0.017165729758217
+"437",2016,"Forsyth County, NC","Age","65 plus",0.265355307460571," "," ",0.0204146698619989
+"438",2016,"Guilford County, NC","Age","0 to 17",0.474644019098323," "," ",0.0251289681613186
+"439",2016,"Guilford County, NC","Age","18 to 24",0.551625031632985," "," ",0.0310786348637086
+"440",2016,"Guilford County, NC","Age","25 to 44",0.314737650900601," "," ",0.0190185085658353
+"441",2016,"Guilford County, NC","Age","45 to 64",0.265337356246447," "," ",0.0201577316209665
+"442",2016,"Guilford County, NC","Age","65 plus",0.30754621759456," "," ",0.0208292878575806
+"443",2016,"North Carolina","Age","0 to 17",0.407467140449786," "," ",0.00556139186637615
+"444",2016,"North Carolina","Age","18 to 24",0.465670620437956," "," ",0.00740520831454079
+"445",2016,"North Carolina","Age","25 to 44",0.296236547873283," "," ",0.00422738882011
+"446",2016,"North Carolina","Age","45 to 64",0.232647386046491," "," ",0.00334292891039419
+"447",2016,"North Carolina","Age","65 plus",0.292686134555716," "," ",0.00371279608770514
+"448",2016,"Durham County, NC","Comparison Community","Total",0.350539246033039," "," ",0.0132977293218626
+"449",2016,"Forsyth County, NC","Comparison Community","Total",0.346174254769556," "," ",0.0159437932326566
+"450",2016,"Guilford County, NC","Comparison Community","Total",0.362113893783759," "," ",0.0129305180158636
+"451",2016,"North Carolina","Comparison Community","Total",0.320241102305866," "," ",0.00276215054108603
+"452",2017,"Durham County, NC","Race / Ethnicity","White, non-Hispanic",0.157973736413761," "," ",0.0162358094049455
+"453",2017,"Durham County, NC","Race / Ethnicity","African American",0.497157453148974," "," ",0.0374247861208523
+"454",2017,"Durham County, NC","Race / Ethnicity","Hispanic / Latino",0.586030984789712," "," ",0.0611038820970922
+"455",2017,"Forsyth County, NC","Race / Ethnicity","White, non-Hispanic",0.224120997839324," "," ",0.0149205698485807
+"456",2017,"Forsyth County, NC","Race / Ethnicity","African American",0.439814084566285," "," ",0.0277144493115543
+"457",2017,"Forsyth County, NC","Race / Ethnicity","Hispanic / Latino",0.612078858922863," "," ",0.0523853854181107
+"458",2017,"Guilford County, NC","Race / Ethnicity","White, non-Hispanic",0.204659359196906," "," ",0.0137491366481504
+"459",2017,"Guilford County, NC","Race / Ethnicity","African American",0.467083959272242," "," ",0.0290414164460242
+"460",2017,"Guilford County, NC","Race / Ethnicity","Hispanic / Latino",0.433563457537356," "," ",0.0590150097082839
+"461",2017,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.233475943939961," "," ",0.00326734650710335
+"462",2017,"North Carolina","Race / Ethnicity","African American",0.452232102331244," "," ",0.00775096821114415
+"463",2017,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.525933018930698," "," ",0.012592254253493
+"464",2017,"Durham County, NC","Gender","Male",0.36109034600598," "," ",0.02011965142661
+"465",2017,"Durham County, NC","Gender","Female",0.348997017911056," "," ",0.0206704758162936
+"466",2017,"Forsyth County, NC","Gender","Male",0.322040352341007," "," ",0.0173806674576094
+"467",2017,"Forsyth County, NC","Gender","Female",0.348810185419088," "," ",0.0158414152116815
+"468",2017,"Guilford County, NC","Gender","Male",0.306043477218034," "," ",0.0156166567614266
+"469",2017,"Guilford County, NC","Gender","Female",0.348479428841895," "," ",0.0162968752601271
+"470",2017,"North Carolina","Gender","Male",0.300309494119612," "," ",0.00367896923653515
+"471",2017,"North Carolina","Gender","Female",0.327016318360108," "," ",0.00322397680372242
+"472",2017,"Durham County, NC","Age","0 to 17",0.506115556637357," "," ",0.0343950481945947
+"473",2017,"Durham County, NC","Age","18 to 24",0.571869276005013," "," ",0.0445461480088218
+"474",2017,"Durham County, NC","Age","25 to 44",0.294279000816853," "," ",0.0239075704127455
+"475",2017,"Durham County, NC","Age","45 to 64",0.252627982760433," "," ",0.0257431590817893
+"476",2017,"Durham County, NC","Age","65 plus",0.281148388072493," "," ",0.0330710871532488
+"477",2017,"Forsyth County, NC","Age","0 to 17",0.470876903320492," "," ",0.0282715411889196
+"478",2017,"Forsyth County, NC","Age","18 to 24",0.485071000485935," "," ",0.0428572211922128
+"479",2017,"Forsyth County, NC","Age","25 to 44",0.326058263908687," "," ",0.0188584810960008
+"480",2017,"Forsyth County, NC","Age","45 to 64",0.203561315288261," "," ",0.0192726179614543
+"481",2017,"Forsyth County, NC","Age","65 plus",0.281826133186987," "," ",0.0195414644964866
+"482",2017,"Guilford County, NC","Age","0 to 17",0.404711425206125," "," ",0.028457185578424
+"483",2017,"Guilford County, NC","Age","18 to 24",0.521812898218508," "," ",0.0293696997067605
+"484",2017,"Guilford County, NC","Age","25 to 44",0.315853738785836," "," ",0.023782169457462
+"485",2017,"Guilford County, NC","Age","45 to 64",0.229381236359389," "," ",0.0170316112573408
+"486",2017,"Guilford County, NC","Age","65 plus",0.270857099399194," "," ",0.0212493040976052
+"487",2017,"North Carolina","Age","0 to 17",0.3948407084377," "," ",0.00706053318863224
+"488",2017,"North Carolina","Age","18 to 24",0.457709854432059," "," ",0.00743281822999738
+"489",2017,"North Carolina","Age","25 to 44",0.284153414899085," "," ",0.00459749491389479
+"490",2017,"North Carolina","Age","45 to 64",0.23243504649677," "," ",0.00326558628404741
+"491",2017,"North Carolina","Age","65 plus",0.297251656767817," "," ",0.00460525051216828
+"492",2017,"Durham County, NC","Comparison Community","Total",0.354808188818792," "," ",0.0186590416555533
+"493",2017,"Forsyth County, NC","Comparison Community","Total",0.336113272794397," "," ",0.0142782857823894
+"494",2017,"Guilford County, NC","Comparison Community","Total",0.328333254258196," "," ",0.0142888962244226
+"495",2017,"North Carolina","Comparison Community","Total",0.314018049881933," "," ",0.00311839759633747
+"496",2018,"Durham County, NC","Age","0 to 17",0.42158595678542," "," ",0.0364847446868237
+"497",2018,"Durham County, NC","Age","18 to 24",0.633623453962437," "," ",0.0333939558554632
+"498",2018,"Durham County, NC","Age","25 to 44",0.268399942009375," "," ",0.023968517982851
+"499",2018,"Durham County, NC","Age","45 to 64",0.23214453245413," "," ",0.0217113379061624
+"500",2018,"Durham County, NC","Age","65 plus",0.281866235427578," "," ",0.031049935280274
+"501",2018,"Forsyth County, NC","Age","0 to 17",0.462087627382118," "," ",0.031421130837609
+"502",2018,"Forsyth County, NC","Age","18 to 24",0.518692225888256," "," ",0.0419660083154038
+"503",2018,"Forsyth County, NC","Age","25 to 44",0.317464090110571," "," ",0.0206795901899745
+"504",2018,"Forsyth County, NC","Age","45 to 64",0.226532398418559," "," ",0.0195624648569361
+"505",2018,"Forsyth County, NC","Age","65 plus",0.309429542380151," "," ",0.0245416126357021
+"506",2018,"Guilford County, NC","Age","0 to 17",0.383465340713428," "," ",0.0296099565665489
+"507",2018,"Guilford County, NC","Age","18 to 24",0.607314068846128," "," ",0.0290486589239305
+"508",2018,"Guilford County, NC","Age","25 to 44",0.278114285714286," "," ",0.017330382628512
+"509",2018,"Guilford County, NC","Age","45 to 64",0.232322788517868," "," ",0.0161425196114228
+"510",2018,"Guilford County, NC","Age","65 plus",0.329507489366948," "," ",0.0207888699887685
+"511",2018,"North Carolina","Age","0 to 17",0.365984414788719," "," ",0.00551755609336734
+"512",2018,"North Carolina","Age","18 to 24",0.435692753143279," "," ",0.00661065381871351
+"513",2018,"North Carolina","Age","25 to 44",0.263537278058526," "," ",0.00370511308498909
+"514",2018,"North Carolina","Age","45 to 64",0.235956112288684," "," ",0.00305218600555302
+"515",2018,"North Carolina","Age","65 plus",0.340405870329548," "," ",0.00493087798685242
+"516",2018,"Durham County, NC","Comparison Community","Total",0.330892160563735," "," ",0.0159147138218334
+"517",2018,"Forsyth County, NC","Comparison Community","Total",0.344845901622102," "," ",0.015497206665864
+"518",2018,"Guilford County, NC","Comparison Community","Total",0.33443862819247," "," ",0.0133688389855048
+"519",2018,"North Carolina","Comparison Community","Total",0.307792911797482," "," ",0.00268466972435813
+"520",2018,"Durham County, NC","Gender","Female",0.334771088418913," "," ",0.0185264524374401
+"521",2018,"Durham County, NC","Gender","Male",0.326689649748322," "," ",0.018854440585358
+"522",2018,"Forsyth County, NC","Gender","Female",0.365937670039586," "," ",0.0181566531625348
+"523",2018,"Forsyth County, NC","Gender","Male",0.321371424761651," "," ",0.0161185471380031
+"524",2018,"Guilford County, NC","Gender","Female",0.372133369284478," "," ",0.0159120627723791
+"525",2018,"Guilford County, NC","Gender","Male",0.292763957857742," "," ",0.0153171725356697
+"526",2018,"North Carolina","Gender","Female",0.323766474637507," "," ",0.00300972855789292
+"527",2018,"North Carolina","Gender","Male",0.290960003247955," "," ",0.00316831505364961
+"528",2018,"Durham County, NC","Race / Ethnicity","African American",0.388673939133394," "," ",0.0274131522560281
+"529",2018,"Durham County, NC","Race / Ethnicity","Hispanic / Latino",0.618313440700099," "," ",0.0583699860568996
+"530",2018,"Durham County, NC","Race / Ethnicity","White, non-Hispanic",0.174882725089768," "," ",0.0135300160495901
+"531",2018,"Forsyth County, NC","Race / Ethnicity","African American",0.497229488948854," "," ",0.0406303121359998
+"532",2018,"Forsyth County, NC","Race / Ethnicity","Hispanic / Latino",0.616605443143304," "," ",0.0586843318687474
+"533",2018,"Forsyth County, NC","Race / Ethnicity","White, non-Hispanic",0.220932151056177," "," ",0.0153212410825924
+"534",2018,"Guilford County, NC","Race / Ethnicity","African American",0.456872608836291," "," ",0.027753859356312
+"535",2018,"Guilford County, NC","Race / Ethnicity","Hispanic / Latino",0.558351675781161," "," ",0.0627198762771834
+"536",2018,"Guilford County, NC","Race / Ethnicity","White, non-Hispanic",0.188878451157029," "," ",0.0132045153104524
+"537",2018,"North Carolina","Race / Ethnicity","African American",0.450265461577067," "," ",0.00683183075534516
+"538",2018,"North Carolina","Race / Ethnicity","Hispanic / Latino",0.491717680589286," "," ",0.0102804329626614
+"539",2018,"North Carolina","Race / Ethnicity","White, non-Hispanic",0.230483296994542," "," ",0.00282327290134707
