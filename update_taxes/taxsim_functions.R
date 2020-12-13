@@ -1,14 +1,7 @@
 ###############################################################################
 #
 #   This script contains functions that creates datasets that can be run 
-#   through the taxsim cli program
-#
-###############################################################################
-
-###############################################################################
-#
-#   This script contains functions that creates datasets that can be run 
-#   through the taxsim cli program
+#   through the NBER's online TAXSIM program
 #
 ###############################################################################
 
